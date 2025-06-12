@@ -1,0 +1,64 @@
+title: "Pakati: Regional Control for AI Image Generation"
+description: "Revolutionary AI image generation system with regional control, metacognitive orchestration, and reference understanding."
+baseurl: ""
+url: "https://fullscreen-triangle.github.io"
+repository: "fullscreen-triangle/pakati"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# Kramdown settings for scientific notation
+kramdown:
+  math_engine: mathjax
+  syntax_highlighter: rouge
+  input: GFM
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  smart_quotes: lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+# Collections
+collections:
+  research:
+    output: true
+    permalink: /:collection/:name/
+  examples:
+    output: true
+    permalink: /:collection/:name/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Navigation
+header_pages:
+  - index.md
+  - architecture.md
+  - reference_understanding.md
+  - fuzzy_logic.md
+  - research.md
+  - api.md
+  - examples.md
+
+# Scientific formatting
+mathjax: true
+
+# Exclude from processing
+exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - README.md 
