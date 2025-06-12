@@ -1,9 +1,27 @@
 """
-Model interface package for Pakati.
+Hugging Face model integrations for Pakati.
 
-This package provides a unified interface to different AI image generation models,
-allowing them to be used interchangeably for regional generation.
+This package provides pre-trained models for:
+- Image analysis and understanding
+- Quality assessment and aesthetic scoring
+- Color and composition analysis  
+- Style detection and comparison
+- Semantic content analysis
 """
+
+from .image_analyzer import ImageAnalyzer
+from .quality_assessor import QualityAssessor
+from .style_analyzer import StyleAnalyzer
+from .semantic_analyzer import SemanticAnalyzer
+from .aesthetic_scorer import AestheticScorer
+
+__all__ = [
+    'ImageAnalyzer',
+    'QualityAssessor', 
+    'StyleAnalyzer',
+    'SemanticAnalyzer',
+    'AestheticScorer'
+]
 
 import os
 from typing import Dict, List, Optional, Type

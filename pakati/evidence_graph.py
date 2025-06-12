@@ -16,6 +16,7 @@ from uuid import UUID, uuid4
 from enum import Enum
 import networkx as nx
 import numpy as np
+from PIL import Image
 
 from .references import ReferenceImage
 from .delta_analysis import Delta, DeltaType
@@ -43,60 +44,121 @@ class EvidenceType(Enum):
     CONSTRAINT = "constraint"        # Constraint satisfaction
 
 
-@dataclass
+@dataclass 
 class Objective:
     """
-    Represents a measurable objective with success criteria.
+    Represents a measurable objective in the optimization process.
     
-    This is a key component that provides tangible optimization targets
-    instead of vague goals like "make it better".
+    Unlike vague goals, objectives are specific, measurable, and have
+    clear criteria for satisfaction using fuzzy logic.
     """
     
     id: UUID = field(default_factory=uuid4)
     name: str = ""
     objective_type: ObjectiveType = ObjectiveType.VISUAL_SIMILARITY
     description: str = ""
-    target_value: float = 1.0  # What score we're trying to achieve (0.0 to 1.0)
-    current_value: float = 0.0  # Current achievement score
-    weight: float = 1.0  # Importance in global optimization
+    target_value: float = 0.8  # What we're trying to achieve (0.0 to 1.0)
+    tolerance: float = 0.1  # Acceptable range for fuzzy satisfaction
+    weight: float = 1.0  # Importance weight in global objective function
     is_critical: bool = False  # Must be satisfied for success
     measurement_function: Optional[Callable] = None  # How to measure this
-    progress_history: List[float] = field(default_factory=list)
+    
+    # Fuzzy satisfaction tracking
+    current_value: float = 0.0  # Current measured value
+    satisfaction_degree: float = 0.0  # Fuzzy satisfaction (0.0 to 1.0)
+    satisfaction_history: List[float] = field(default_factory=list)  # Track changes over time
+    
+    # Evidence collection
+    evidence: List[Evidence] = field(default_factory=list)
+    evidence_sources: Set[str] = field(default_factory=set)
+    
+    # Progress tracking
+    baseline_value: float = 0.0  # Starting point
+    best_value_achieved: float = 0.0  # Best value seen so far
+    improvement_velocity: float = 0.0  # Rate of improvement
+    stagnation_count: int = 0  # How many steps without improvement
+    
+    # Legacy fields for compatibility
     region_id: Optional[UUID] = None  # Which region this applies to
     reference_ids: List[UUID] = field(default_factory=list)  # Relevant references
-    
-    @property
-    def satisfaction_score(self) -> float:
-        """Calculate how well this objective is satisfied (0.0 to 1.0)."""
-        if self.target_value == 0:
-            return 1.0 if self.current_value == 0 else 0.0
-        return min(self.current_value / self.target_value, 1.0)
+    dependencies: Set[UUID] = field(default_factory=set)  # Dependencies on other objectives
     
     @property
     def is_satisfied(self) -> bool:
-        """Check if objective is satisfied (>= 80% of target)."""
-        return self.satisfaction_score >= 0.8
+        """Legacy binary satisfaction check (fuzzy satisfaction > 0.7)."""
+        return self.satisfaction_degree > 0.7
     
     @property
-    def improvement_velocity(self) -> float:
-        """Calculate recent improvement rate."""
-        if len(self.progress_history) < 2:
-            return 0.0
-        
-        # Calculate average improvement over last 3 steps
-        recent = self.progress_history[-3:]
-        if len(recent) < 2:
-            return 0.0
-        
-        improvements = [recent[i] - recent[i-1] for i in range(1, len(recent))]
-        return np.mean(improvements)
+    def satisfaction_score(self) -> float:
+        """Get the current fuzzy satisfaction score."""
+        return self.satisfaction_degree
     
-    def update_progress(self, new_value: float) -> float:
-        """Update progress and return improvement delta."""
+    def update_value(self, new_value: float) -> float:
+        """Update current value and recalculate fuzzy satisfaction."""
         old_value = self.current_value
         self.current_value = new_value
-        self.progress_history.append(new_value)
+        
+        # Update fuzzy satisfaction
+        self._update_fuzzy_satisfaction()
+        
         return new_value - old_value
+    
+    def add_evidence(self, evidence: Evidence):
+        """Add evidence and update satisfaction using fuzzy logic."""
+        self.evidence.append(evidence)
+        self.evidence_sources.add(evidence.source)
+        
+        # Update current value with confidence weighting
+        if self.evidence:
+            # Weighted average of recent evidence
+            recent_evidence = self.evidence[-5:]  # Last 5 pieces of evidence
+            weighted_sum = sum(e.value * e.confidence for e in recent_evidence)
+            total_confidence = sum(e.confidence for e in recent_evidence)
+            
+            if total_confidence > 0:
+                self.current_value = weighted_sum / total_confidence
+        
+        # Update satisfaction using fuzzy logic
+        self._update_fuzzy_satisfaction()
+        
+        # Track improvement
+        if self.current_value > self.best_value_achieved:
+            self.best_value_achieved = self.current_value
+            self.stagnation_count = 0
+        else:
+            self.stagnation_count += 1
+    
+    def _update_fuzzy_satisfaction(self):
+        """Update fuzzy satisfaction degree based on current value and target."""
+        # Import here to avoid circular imports
+        from .iterative_refinement import FuzzyLogicEngine
+        
+        # Create a temporary fuzzy engine for satisfaction calculation
+        fuzzy_engine = FuzzyLogicEngine()
+        
+        # Calculate fuzzy satisfaction
+        self.satisfaction_degree = fuzzy_engine.evaluate_fuzzy_satisfaction(
+            self.current_value, 
+            self.target_value, 
+            self.tolerance
+        )
+        
+        # Add to history
+        self.satisfaction_history.append(self.satisfaction_degree)
+        
+        # Calculate improvement velocity (recent trend)
+        if len(self.satisfaction_history) >= 3:
+            recent_scores = self.satisfaction_history[-3:]
+            self.improvement_velocity = (recent_scores[-1] - recent_scores[0]) / len(recent_scores)
+        
+    def get_satisfaction_trend(self) -> str:
+        """Get human-readable satisfaction trend."""
+        if self.improvement_velocity > 0.05:
+            return "improving"
+        elif self.improvement_velocity < -0.05:
+            return "declining" 
+        else:
+            return "stable"
 
 
 @dataclass
@@ -416,7 +478,7 @@ class EvidenceGraph:
         
         if isinstance(evidence.value, (int, float)):
             # Weighted update considering confidence
-            history_weight = len(objective.progress_history) * 0.1 + 0.5  # Diminishing returns
+            history_weight = len(objective.satisfaction_history) * 0.1 + 0.5  # Diminishing returns
             evidence_weight = evidence.confidence
             
             if objective.current_value == 0.0:  # First measurement
@@ -429,7 +491,7 @@ class EvidenceGraph:
                     (evidence.value * evidence_weight)
                 ) / total_weight
             
-            improvement = objective.update_progress(new_value)
+            improvement = objective.update_value(new_value)
             
             if improvement > 0.05:  # Significant improvement
                 print(f"    ✓ {objective.name}: {objective.current_value:.3f} (+{improvement:.3f})")
@@ -742,7 +804,7 @@ class EvidenceGraph:
                 "current_value": obj.current_value,
                 "weight": obj.weight,
                 "is_critical": obj.is_critical,
-                "progress_history": obj.progress_history,
+                "satisfaction_history": obj.satisfaction_history,
                 "dependencies": [str(d) for d in obj.dependencies]
             }
         

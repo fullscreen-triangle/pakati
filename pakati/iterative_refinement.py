@@ -115,6 +115,7 @@ class FuzzyLogicEngine:
         """Initialize the fuzzy logic engine with creative concept definitions."""
         self.fuzzy_sets = self._initialize_fuzzy_sets()
         self.fuzzy_rules = self._initialize_fuzzy_rules()
+        self.linguistic_modifiers = self._initialize_linguistic_modifiers()
     
     def _initialize_fuzzy_sets(self) -> Dict[str, Dict[str, FuzzySet]]:
         """Initialize fuzzy sets for common creative concepts."""
@@ -194,10 +195,33 @@ class FuzzyLogicEngine:
                 "medium": FuzzySet("medium", triangular(0.35, 0.5, 0.65)),
                 "high": FuzzySet("high", triangular(0.55, 0.7, 0.85)),
                 "dramatic": FuzzySet("dramatic", trapezoidal(0.7, 0.85, 1.0, 1.0))
+            },
+            
+            # Satisfaction levels for evidence graph integration (0.0 = unsatisfied, 1.0 = fully satisfied)
+            "satisfaction": {
+                "unsatisfied": FuzzySet("unsatisfied", trapezoidal(0.0, 0.0, 0.1, 0.3)),
+                "partially_satisfied": FuzzySet("partially_satisfied", triangular(0.2, 0.4, 0.6)),
+                "mostly_satisfied": FuzzySet("mostly_satisfied", triangular(0.5, 0.7, 0.9)),
+                "fully_satisfied": FuzzySet("fully_satisfied", trapezoidal(0.8, 0.9, 1.0, 1.0))
             }
         }
         
         return fuzzy_sets
+    
+    def _initialize_linguistic_modifiers(self) -> Dict[str, Callable[[float], float]]:
+        """Initialize linguistic modifiers (very, slightly, somewhat, etc.)."""
+        return {
+            "very": lambda x: x ** 2,           # Concentration - makes fuzzy set more focused
+            "extremely": lambda x: x ** 3,      # Even more concentration
+            "somewhat": lambda x: x ** 0.5,     # Dilation - makes fuzzy set broader
+            "slightly": lambda x: x ** 0.3,     # Even more dilation  
+            "quite": lambda x: x ** 1.5,        # Moderate concentration
+            "rather": lambda x: x ** 1.25,      # Light concentration
+            "fairly": lambda x: x ** 0.75,      # Light dilation
+            "not": lambda x: 1.0 - x,           # Negation
+            "sort_of": lambda x: x ** 0.6,      # Moderate dilation
+            "kind_of": lambda x: x ** 0.7       # Light dilation
+        }
     
     def _initialize_fuzzy_rules(self) -> List[FuzzyRule]:
         """Initialize fuzzy rules for creative adjustments."""
@@ -233,11 +257,356 @@ class FuzzyLogicEngine:
             confidence=0.9
         ))
         
+        # Satisfaction-based rules for evidence graph integration
+        rules.append(FuzzyRule(
+            antecedent={"satisfaction": (self.fuzzy_sets["satisfaction"]["unsatisfied"], 0.0)},
+            consequent={"priority_boost": 0.8, "attention_weight": 0.9},
+            confidence=0.95
+        ))
+        
+        rules.append(FuzzyRule(
+            antecedent={"satisfaction": (self.fuzzy_sets["satisfaction"]["partially_satisfied"], 0.0)},
+            consequent={"priority_boost": 0.4, "attention_weight": 0.6},
+            confidence=0.85
+        ))
+        
         return rules
+    
+    def fuzzy_inference(self, inputs: Dict[str, float], output_concepts: List[str]) -> Dict[str, Dict[str, float]]:
+        """
+        Perform complete fuzzy inference using Mamdani method.
+        
+        Args:
+            inputs: Dictionary of input values {concept: value}
+            output_concepts: List of output concept names to infer
+            
+        Returns:
+            Dictionary of fuzzy outputs {concept: {fuzzy_set: membership_degree}}
+        """
+        
+        # Step 1: Fuzzification - convert crisp inputs to fuzzy memberships
+        fuzzified_inputs = self._fuzzify_inputs(inputs)
+        
+        # Step 2: Rule evaluation - evaluate all fuzzy rules
+        rule_activations = self._evaluate_fuzzy_rules(fuzzified_inputs)
+        
+        # Step 3: Aggregation - combine rule outputs
+        aggregated_outputs = self._aggregate_rule_outputs(rule_activations, output_concepts)
+        
+        return aggregated_outputs
+    
+    def _fuzzify_inputs(self, inputs: Dict[str, float]) -> Dict[str, Dict[str, float]]:
+        """Convert crisp inputs to fuzzy membership degrees."""
+        fuzzified = {}
+        
+        for concept, value in inputs.items():
+            if concept in self.fuzzy_sets:
+                fuzzified[concept] = {}
+                for fuzzy_set_name, fuzzy_set in self.fuzzy_sets[concept].items():
+                    membership = fuzzy_set.membership_degree(value)
+                    if membership > 0:  # Only store non-zero memberships
+                        fuzzified[concept][fuzzy_set_name] = membership
+        
+        return fuzzified
+    
+    def _evaluate_fuzzy_rules(self, fuzzified_inputs: Dict[str, Dict[str, float]]) -> List[Dict[str, Any]]:
+        """Evaluate all fuzzy rules against fuzzified inputs."""
+        rule_activations = []
+        
+        for rule in self.fuzzy_rules:
+            # Calculate rule activation strength
+            antecedent_strengths = []
+            
+            for param, (fuzzy_set, _) in rule.antecedent.items():
+                if param in fuzzified_inputs and fuzzy_set.name in fuzzified_inputs[param]:
+                    membership = fuzzified_inputs[param][fuzzy_set.name]
+                    antecedent_strengths.append(membership)
+                else:
+                    antecedent_strengths.append(0.0)
+            
+            # Use minimum for AND operation (T-norm)
+            rule_strength = min(antecedent_strengths) if antecedent_strengths else 0.0
+            rule_strength *= rule.confidence
+            
+            if rule_strength > 0:
+                rule_activations.append({
+                    "rule": rule,
+                    "strength": rule_strength,
+                    "consequent": rule.consequent
+                })
+        
+        return rule_activations
+    
+    def _aggregate_rule_outputs(self, rule_activations: List[Dict[str, Any]], 
+                               output_concepts: List[str]) -> Dict[str, Dict[str, float]]:
+        """Aggregate rule outputs using maximum (S-norm)."""
+        aggregated = {}
+        
+        for concept in output_concepts:
+            aggregated[concept] = {}
+            
+            # For each output concept, aggregate all contributing rules
+            for activation in rule_activations:
+                consequent = activation["consequent"]
+                rule_strength = activation["strength"]
+                
+                for param, adjustment in consequent.items():
+                    if param.startswith(concept) or concept in param:
+                        # This is a simplification - in a full system, we'd map
+                        # output parameters to fuzzy sets more systematically
+                        fuzzy_set_name = self._map_adjustment_to_fuzzy_set(param, adjustment)
+                        
+                        if fuzzy_set_name:
+                            if fuzzy_set_name in aggregated[concept]:
+                                # Use maximum for aggregation (S-norm)
+                                aggregated[concept][fuzzy_set_name] = max(
+                                    aggregated[concept][fuzzy_set_name],
+                                    rule_strength
+                                )
+                            else:
+                                aggregated[concept][fuzzy_set_name] = rule_strength
+        
+        return aggregated
+    
+    def _map_adjustment_to_fuzzy_set(self, param: str, adjustment: float) -> Optional[str]:
+        """Map adjustment parameters to fuzzy set names."""
+        # This is a simplified mapping - could be more sophisticated
+        if adjustment > 0.5:
+            return "high"
+        elif adjustment > 0.2:
+            return "medium"  
+        elif adjustment > -0.2:
+            return "low"
+        else:
+            return "minimal"
+    
+    def defuzzify(self, fuzzy_output: Dict[str, float], concept: str, method: str = "centroid") -> float:
+        """
+        Defuzzify fuzzy output to get crisp value.
+        
+        Args:
+            fuzzy_output: Dictionary of {fuzzy_set_name: membership_degree}
+            concept: The concept being defuzzified
+            method: Defuzzification method ("centroid", "max", "mean_of_maxima")
+            
+        Returns:
+            Crisp output value
+        """
+        
+        if not fuzzy_output or concept not in self.fuzzy_sets:
+            return 0.5  # Default neutral value
+        
+        if method == "centroid":
+            return self._centroid_defuzzify(fuzzy_output, concept)
+        elif method == "max":
+            return self._max_defuzzify(fuzzy_output, concept)
+        elif method == "mean_of_maxima":
+            return self._mean_of_maxima_defuzzify(fuzzy_output, concept)
+        else:
+            return self._centroid_defuzzify(fuzzy_output, concept)
+    
+    def _centroid_defuzzify(self, fuzzy_output: Dict[str, float], concept: str) -> float:
+        """Centroid defuzzification method."""
+        # Sample the universe of discourse
+        x_values = np.linspace(0, 1, 101)
+        aggregated_membership = np.zeros(101)
+        
+        # Aggregate membership functions
+        for fuzzy_set_name, activation_strength in fuzzy_output.items():
+            if fuzzy_set_name in self.fuzzy_sets[concept]:
+                fuzzy_set = self.fuzzy_sets[concept][fuzzy_set_name]
+                
+                for i, x in enumerate(x_values):
+                    membership = fuzzy_set.membership_degree(x)
+                    # Clip membership by activation strength (Mamdani implication)
+                    clipped_membership = min(membership, activation_strength)
+                    # Use maximum for aggregation
+                    aggregated_membership[i] = max(aggregated_membership[i], clipped_membership)
+        
+        # Calculate centroid
+        numerator = np.sum(x_values * aggregated_membership)
+        denominator = np.sum(aggregated_membership)
+        
+        if denominator > 0:
+            return numerator / denominator
+        else:
+            return 0.5  # Default
+    
+    def _max_defuzzify(self, fuzzy_output: Dict[str, float], concept: str) -> float:
+        """Maximum defuzzification - return center of fuzzy set with highest activation."""
+        max_activation = 0
+        best_fuzzy_set = None
+        
+        for fuzzy_set_name, activation in fuzzy_output.items():
+            if activation > max_activation:
+                max_activation = activation
+                best_fuzzy_set = fuzzy_set_name
+        
+        if best_fuzzy_set and concept in self.fuzzy_sets:
+            fuzzy_set = self.fuzzy_sets[concept][best_fuzzy_set]
+            return self._get_fuzzy_set_center(fuzzy_set)
+        else:
+            return 0.5
+    
+    def _mean_of_maxima_defuzzify(self, fuzzy_output: Dict[str, float], concept: str) -> float:
+        """Mean of maxima defuzzification."""
+        max_activation = max(fuzzy_output.values()) if fuzzy_output else 0
+        
+        if max_activation == 0:
+            return 0.5
+        
+        # Find all fuzzy sets with maximum activation
+        max_sets = [name for name, activation in fuzzy_output.items() 
+                   if activation == max_activation]
+        
+        # Calculate mean of their centers
+        centers = []
+        for fuzzy_set_name in max_sets:
+            if concept in self.fuzzy_sets and fuzzy_set_name in self.fuzzy_sets[concept]:
+                fuzzy_set = self.fuzzy_sets[concept][fuzzy_set_name]
+                center = self._get_fuzzy_set_center(fuzzy_set)
+                centers.append(center)
+        
+        return np.mean(centers) if centers else 0.5
+    
+    def parse_linguistic_instruction(self, instruction: str) -> Dict[str, Any]:
+        """
+        Parse linguistic instruction with modifiers.
+        
+        Args:
+            instruction: Instruction like "make it very dark" or "slightly more detailed"
+            
+        Returns:
+            Parsed instruction with modifiers and concepts
+        """
+        instruction_lower = instruction.lower()
+        
+        # Extract modifiers
+        modifier = None
+        modifier_strength = 1.0
+        
+        for mod_name, mod_func in self.linguistic_modifiers.items():
+            if mod_name in instruction_lower:
+                modifier = mod_name
+                # Apply modifier to a test value to get strength
+                modifier_strength = mod_func(0.7)  # Test with 0.7
+                break
+        
+        # Extract base concepts
+        concept_mapping = {
+            "dark": ("brightness", "dark"),
+            "bright": ("brightness", "bright"),
+            "warm": ("warmth", "warm"),
+            "cool": ("warmth", "cool"),
+            "detailed": ("detail", "high"),
+            "simple": ("detail", "low"),
+            "saturated": ("saturation", "high"),
+            "muted": ("saturation", "low"),
+            "contrast": ("contrast", "high"),
+            "flat": ("contrast", "low")
+        }
+        
+        extracted_concepts = []
+        for keyword, (concept, target_level) in concept_mapping.items():
+            if keyword in instruction_lower:
+                extracted_concepts.append({
+                    "concept": concept,
+                    "target_level": target_level,
+                    "modifier": modifier,
+                    "modifier_strength": modifier_strength
+                })
+        
+        return {
+            "concepts": extracted_concepts,
+            "modifier": modifier,
+            "modifier_strength": modifier_strength,
+            "original_instruction": instruction
+        }
+    
+    def evaluate_fuzzy_satisfaction(self, current_value: float, target_value: float, 
+                                   tolerance: float = 0.1) -> float:
+        """
+        Evaluate fuzzy satisfaction for evidence graph integration.
+        
+        Args:
+            current_value: Current measured value (0.0 to 1.0)
+            target_value: Target desired value (0.0 to 1.0)  
+            tolerance: Tolerance for "good enough" satisfaction
+            
+        Returns:
+            Fuzzy satisfaction degree (0.0 to 1.0)
+        """
+        
+        # Calculate distance from target
+        distance = abs(current_value - target_value)
+        
+        # Use fuzzy satisfaction membership function
+        if distance <= tolerance:
+            # Within tolerance - high satisfaction
+            satisfaction = 1.0 - (distance / tolerance) * 0.2  # 0.8 to 1.0
+        elif distance <= tolerance * 2:
+            # Partially satisfied
+            satisfaction = 0.8 - ((distance - tolerance) / tolerance) * 0.4  # 0.4 to 0.8
+        elif distance <= tolerance * 3:
+            # Barely satisfied
+            satisfaction = 0.4 - ((distance - tolerance * 2) / tolerance) * 0.3  # 0.1 to 0.4
+        else:
+            # Unsatisfied
+            satisfaction = max(0.0, 0.1 - (distance - tolerance * 3) * 0.1)
+        
+        return satisfaction
+    
+    def fuzzy_aggregation(self, values: List[float], method: str = "weighted_average",
+                         weights: List[float] = None) -> float:
+        """
+        Perform fuzzy aggregation of multiple values.
+        
+        Args:
+            values: List of values to aggregate
+            method: Aggregation method ("max", "min", "weighted_average", "owa")
+            weights: Weights for weighted methods
+            
+        Returns:
+            Aggregated value
+        """
+        
+        if not values:
+            return 0.0
+        
+        if method == "max":
+            return max(values)
+        elif method == "min":
+            return min(values)
+        elif method == "weighted_average":
+            if weights and len(weights) == len(values):
+                total_weight = sum(weights)
+                if total_weight > 0:
+                    return sum(v * w for v, w in zip(values, weights)) / total_weight
+            return np.mean(values)
+        elif method == "owa":  # Ordered Weighted Average
+            return self._owa_aggregation(values, weights)
+        else:
+            return np.mean(values)
+    
+    def _owa_aggregation(self, values: List[float], weights: List[float] = None) -> float:
+        """Ordered Weighted Average aggregation."""
+        if not weights:
+            # Default OWA weights (gives more weight to higher values)
+            n = len(values)
+            weights = [(n - i) / sum(range(1, n + 1)) for i in range(n)]
+        
+        # Sort values in descending order
+        sorted_values = sorted(values, reverse=True)
+        
+        # Apply weights
+        if len(weights) >= len(sorted_values):
+            return sum(v * w for v, w in zip(sorted_values, weights[:len(sorted_values)]))
+        else:
+            return np.mean(sorted_values)
     
     def evaluate_creative_instruction(self, instruction: str, current_state: Dict[str, float]) -> Dict[str, float]:
         """
-        Evaluate a creative instruction and return fuzzy adjustments.
+        Evaluate a creative instruction and return fuzzy adjustments using complete inference.
         
         Args:
             instruction: Creative instruction like "make it darker", "more detailed", etc.
@@ -247,49 +616,62 @@ class FuzzyLogicEngine:
             Dictionary of adjustments {parameter: adjustment_amount}
         """
         
-        # Parse instruction to identify intent
-        instruction_lower = instruction.lower()
-        
-        # Map instruction keywords to fuzzy concepts
-        concept_mapping = {
-            "darker": ("brightness", "dark"),
-            "brighter": ("brightness", "bright"),
-            "warmer": ("warmth", "warm"),
-            "cooler": ("warmth", "cool"),
-            "more detailed": ("detail", "high"),
-            "less detailed": ("detail", "low"),
-            "more saturated": ("saturation", "high"),
-            "less saturated": ("saturation", "low"),
-            "more contrast": ("contrast", "high"),
-            "less contrast": ("contrast", "low")
-        }
+        # Parse linguistic instruction with modifiers
+        parsed = self.parse_linguistic_instruction(instruction)
         
         adjustments = {}
         
-        for keyword, (concept, target_level) in concept_mapping.items():
-            if keyword in instruction_lower:
-                # Calculate fuzzy adjustment for this concept
-                current_value = current_state.get(concept, 0.5)  # Default to medium
-                target_fuzzy_set = self.fuzzy_sets[concept][target_level]
+        # Process each extracted concept
+        for concept_info in parsed["concepts"]:
+            concept = concept_info["concept"]
+            target_level = concept_info["target_level"]
+            modifier = concept_info["modifier"]
+            modifier_strength = concept_info["modifier_strength"]
+            
+            if concept in current_state:
+                current_value = current_state[concept]
                 
-                # Calculate desired adjustment based on membership and current state
-                target_membership = target_fuzzy_set.membership_degree(current_value)
+                # Perform fuzzy inference
+                inference_inputs = {concept: current_value}
+                output_concepts = [concept]
                 
-                # If current state has low membership in target concept, increase adjustment
-                if target_membership < 0.5:
-                    # Find the center of the target fuzzy set (simplified)
+                fuzzy_outputs = self.fuzzy_inference(inference_inputs, output_concepts)
+                
+                # Get target fuzzy set
+                if concept in self.fuzzy_sets and target_level in self.fuzzy_sets[concept]:
+                    target_fuzzy_set = self.fuzzy_sets[concept][target_level]
                     target_center = self._get_fuzzy_set_center(target_fuzzy_set)
-                    adjustment_amount = (target_center - current_value) * 0.5  # Moderate adjustment
+                    
+                    # Apply linguistic modifier
+                    if modifier:
+                        modifier_func = self.linguistic_modifiers[modifier]
+                        # Modify the target based on the modifier
+                        if modifier == "very":
+                            target_center = target_center * 1.2  # More extreme
+                        elif modifier == "slightly":
+                            target_center = current_value + (target_center - current_value) * 0.3  # Less extreme
+                        elif modifier == "somewhat":
+                            target_center = current_value + (target_center - current_value) * 0.6
+                    
+                    # Calculate adjustment with fuzzy logic
+                    adjustment_amount = (target_center - current_value) * 0.5
+                    
+                    # Apply defuzzification if we have fuzzy outputs
+                    if concept in fuzzy_outputs and fuzzy_outputs[concept]:
+                        defuzzified_adjustment = self.defuzzify(fuzzy_outputs[concept], concept)
+                        # Blend with direct calculation
+                        adjustment_amount = (adjustment_amount + defuzzified_adjustment - 0.5) / 2
                     
                     adjustments[f"{concept}_adjustment"] = adjustment_amount
         
         # Apply fuzzy rules for additional context-aware adjustments
         rule_adjustments = self._apply_fuzzy_rules(current_state)
         
-        # Combine direct instruction adjustments with rule-based adjustments
+        # Use fuzzy aggregation to combine adjustments
         for param, adjustment in rule_adjustments.items():
             if param in adjustments:
-                adjustments[param] += adjustment * 0.3  # Weight rule adjustments lower
+                combined_values = [adjustments[param], adjustment * 0.3]
+                adjustments[param] = self.fuzzy_aggregation(combined_values, "weighted_average", [0.7, 0.3])
             else:
                 adjustments[param] = adjustment * 0.3
         
@@ -325,10 +707,11 @@ class FuzzyLogicEngine:
             # Get weighted consequent
             weighted_consequent = rule.get_consequent_strength()
             
-            # Combine with existing adjustments
+            # Combine with existing adjustments using fuzzy aggregation
             for param, adjustment in weighted_consequent.items():
                 if param in combined_adjustments:
-                    combined_adjustments[param] += adjustment
+                    values = [combined_adjustments[param], adjustment]
+                    combined_adjustments[param] = self.fuzzy_aggregation(values, "max")
                 else:
                     combined_adjustments[param] = adjustment
         
