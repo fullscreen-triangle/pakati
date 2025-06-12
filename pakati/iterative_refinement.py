@@ -733,6 +733,8 @@ class RefinementPass:
     image_before: Optional[Image.Image] = None
     image_after: Optional[Image.Image] = None
     execution_time: float = 0.0
+    understanding_applied: bool = False
+    understanding_guidance: List[Dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -751,6 +753,7 @@ class RefinementSession:
     is_complete: bool = False
     total_improvement: float = 0.0
     user_instructions: List[str] = field(default_factory=list)  # Fuzzy creative instructions
+    reference_learning_results: Dict[str, Any] = field(default_factory=dict)
 
 
 class IterativeRefinementEngine:
@@ -773,15 +776,24 @@ class IterativeRefinementEngine:
         from .models.image_analyzer import ImageAnalyzer
         from .models.quality_assessor import QualityAssessor
         from .models.aesthetic_scorer import AestheticScorer
+        from .reference_understanding import ReferenceUnderstandingEngine
         
         self.image_analyzer = ImageAnalyzer(device=device)
         self.quality_assessor = QualityAssessor(device=device)
         self.aesthetic_scorer = AestheticScorer(device=device)
         self.delta_analyzer = DeltaAnalyzer(device=device)
         self.fuzzy_engine = FuzzyLogicEngine()
+        
+        # Initialize reference understanding engine
+        self.reference_understanding_engine = ReferenceUnderstandingEngine(
+            canvas_interface=None,  # Will be set when canvas is provided
+            device=device
+        )
+        
         self.active_sessions: Dict[UUID, RefinementSession] = {}
         
         print("HF-powered analysis systems ready!")
+        print("Reference Understanding Engine initialized!")
         
         # Learning parameters
         self.learning_rate = 0.1
@@ -964,11 +976,14 @@ class IterativeRefinementEngine:
             print(f"Fuzzy logic produced {len(fuzzy_adjustments)} parameter adjustments")
             refinement_pass.fuzzy_adjustments = fuzzy_adjustments
         
-        # 4. Apply evidence-guided and fuzzy improvements
+        # 4. Apply reference understanding to enhance refinement
+        self.apply_reference_understanding_to_refinement(session, refinement_pass)
+        
+        # 5. Apply evidence-guided and fuzzy improvements
         print("Applying evidence-guided and fuzzy improvements...")
         self._apply_evidence_guided_improvements(session, deltas, recommendations, fuzzy_adjustments)
         
-        # 5. Record optimization step in evidence graph
+        # 6. Record optimization step in evidence graph
         if session.evidence_graph:
             actions_taken = [f"addressed_{delta.delta_type.value}" for delta in deltas[:3]]
             if fuzzy_adjustments:
@@ -1378,5 +1393,358 @@ class IterativeRefinementEngine:
             }
             for p in session.passes
         ]
+        
+        return report
+    
+    def learn_references_before_refinement(
+        self,
+        references: List[ReferenceImage],
+        masking_strategies: List[str] = None,
+        understanding_threshold: float = 0.75
+    ) -> Dict[str, Any]:
+        """
+        Make AI learn to understand references through reconstruction before using them.
+        
+        This revolutionary approach ensures the AI truly "understands" reference images
+        by making it prove it can reconstruct them from partial information.
+        
+        Args:
+            references: Reference images to learn
+            masking_strategies: Masking strategies to use for learning
+            understanding_threshold: Minimum understanding level required
+            
+        Returns:
+            Learning results and reference understanding levels
+        """
+        
+        print("\n" + "="*60)
+        print("REFERENCE UNDERSTANDING LEARNING")
+        print("="*60)
+        print("Making AI learn references through reconstruction...")
+        
+        learning_results = {
+            'total_references': len(references),
+            'understood_references': [],
+            'partial_understanding': [],
+            'failed_understanding': [],
+            'learning_summary': {}
+        }
+        
+        for i, reference in enumerate(references):
+            print(f"\nLearning reference {i+1}/{len(references)}: {reference.image_path}")
+            
+            try:
+                # Make AI learn this reference through reconstruction
+                understanding = self.reference_understanding_engine.learn_reference(
+                    reference, 
+                    masking_strategies=masking_strategies,
+                    max_attempts=8  # Reasonable number of attempts
+                )
+                
+                understanding_level = understanding.understanding_level
+                print(f"Understanding achieved: {understanding_level:.3f}")
+                
+                # Categorize understanding level
+                if understanding_level >= understanding_threshold:
+                    learning_results['understood_references'].append({
+                        'reference': reference,
+                        'understanding': understanding,
+                        'level': understanding_level,
+                        'mastery': understanding.mastery_achieved
+                    })
+                    print("✓ Reference UNDERSTOOD - ready for use!")
+                    
+                elif understanding_level >= 0.5:
+                    learning_results['partial_understanding'].append({
+                        'reference': reference,
+                        'understanding': understanding,
+                        'level': understanding_level
+                    })
+                    print("⚠ Partial understanding - will use with caution")
+                    
+                else:
+                    learning_results['failed_understanding'].append({
+                        'reference': reference,
+                        'understanding': understanding,
+                        'level': understanding_level
+                    })
+                    print("✗ Failed to understand - limited use")
+                
+            except Exception as e:
+                print(f"Error learning reference: {e}")
+                learning_results['failed_understanding'].append({
+                    'reference': reference,
+                    'understanding': None,
+                    'level': 0.0,
+                    'error': str(e)
+                })
+        
+        # Generate learning summary
+        understood_count = len(learning_results['understood_references'])
+        partial_count = len(learning_results['partial_understanding'])
+        failed_count = len(learning_results['failed_understanding'])
+        
+        learning_results['learning_summary'] = {
+            'fully_understood': understood_count,
+            'partially_understood': partial_count,
+            'failed_to_understand': failed_count,
+            'total_references': len(references),
+            'success_rate': understood_count / len(references) if references else 0,
+            'usable_references': understood_count + partial_count,
+            'usability_rate': (understood_count + partial_count) / len(references) if references else 0
+        }
+        
+        print(f"\n" + "="*60)
+        print("REFERENCE LEARNING COMPLETE")
+        print("="*60)
+        print(f"Fully understood: {understood_count}/{len(references)} ({learning_results['learning_summary']['success_rate']:.1%})")
+        print(f"Partially understood: {partial_count}/{len(references)}")
+        print(f"Failed to understand: {failed_count}/{len(references)}")
+        print(f"Total usable references: {understood_count + partial_count}/{len(references)} ({learning_results['learning_summary']['usability_rate']:.1%})")
+        
+        return learning_results
+    
+    def create_understanding_guided_refinement_session(
+        self,
+        canvas: PakatiCanvas,
+        goal: str,
+        references: List[ReferenceImage],
+        user_instructions: List[str] = None,
+        strategy: RefinementStrategy = RefinementStrategy.ADAPTIVE,
+        max_passes: int = 10,
+        target_quality: float = 0.8,
+        learn_references_first: bool = True,
+        understanding_threshold: float = 0.75
+    ) -> RefinementSession:
+        """
+        Create refinement session with reference understanding learning.
+        
+        This enhanced session first makes the AI "learn" reference images through
+        reconstruction, then uses that understanding for better refinement.
+        
+        Args:
+            canvas: The canvas to refine
+            goal: High-level goal for the refinement
+            references: Reference images to guide the refinement
+            user_instructions: List of fuzzy creative instructions
+            strategy: Refinement strategy to use
+            max_passes: Maximum number of refinement passes
+            target_quality: Target quality threshold
+            learn_references_first: Whether to learn references through reconstruction
+            understanding_threshold: Minimum understanding level for references
+            
+        Returns:
+            The created refinement session with learned references
+        """
+        
+        # Set canvas interface for reference understanding engine
+        self.reference_understanding_engine.canvas_interface = canvas
+        
+        # Learn references first if requested
+        understood_references = references
+        learning_results = None
+        
+        if learn_references_first and references:
+            print("Phase 1: Learning references through reconstruction...")
+            
+            learning_results = self.learn_references_before_refinement(
+                references, 
+                understanding_threshold=understanding_threshold
+            )
+            
+            # Use only well-understood references for refinement
+            understood_references = []
+            
+            # Add fully understood references
+            for ref_data in learning_results['understood_references']:
+                understood_references.append(ref_data['reference'])
+            
+            # Add partially understood references if we have few references
+            if len(understood_references) < 2:
+                for ref_data in learning_results['partial_understanding']:
+                    understood_references.append(ref_data['reference'])
+                    print(f"Including partially understood reference (level: {ref_data['level']:.2f})")
+            
+            print(f"Using {len(understood_references)} understood references for refinement")
+        
+        # Create evidence graph with understood references
+        print("Phase 2: Creating evidence graph with understood references...")
+        evidence_graph = EvidenceGraph(goal)
+        objectives = evidence_graph.decompose_goal(goal, understood_references)
+        
+        # Create refinement session
+        session = RefinementSession(
+            goal=goal,
+            target_quality_threshold=target_quality,
+            max_passes=max_passes,
+            strategy=strategy,
+            references=understood_references,
+            current_canvas=canvas,
+            evidence_graph=evidence_graph,
+            user_instructions=user_instructions or []
+        )
+        
+        # Store learning results in session for later analysis
+        if learning_results:
+            session.reference_learning_results = learning_results
+        
+        self.active_sessions[session.id] = session
+        
+        print(f"Understanding-guided refinement session created!")
+        print(f"References: {len(understood_references)} understood")
+        print(f"Objectives: {len(objectives)} measurable goals")
+        if user_instructions:
+            print(f"Fuzzy instructions: {user_instructions}")
+        
+        return session
+    
+    def apply_reference_understanding_to_refinement(
+        self, 
+        session: RefinementSession, 
+        refinement_pass: RefinementPass
+    ):
+        """
+        Apply reference understanding to enhance refinement quality.
+        
+        Uses the AI's learned understanding of reference images to guide
+        generation more effectively.
+        
+        Args:
+            session: Current refinement session
+            refinement_pass: Current refinement pass to enhance
+        """
+        
+        if not session.references:
+            return
+        
+        print("Applying reference understanding to refinement...")
+        
+        # Get understanding guidance for each reference
+        understanding_guidance = []
+        
+        for reference in session.references:
+            reference_id = reference.image_path or str(uuid4())
+            
+            try:
+                # Get understanding-based guidance
+                guidance = self.reference_understanding_engine.use_understood_reference(
+                    reference_id,
+                    session.goal,
+                    transfer_aspects=['style', 'composition', 'color_harmony', 'lighting']
+                )
+                
+                understanding_guidance.append(guidance)
+                print(f"  Using reference understanding (level: {guidance['understanding_level']:.2f})")
+                
+            except Exception as e:
+                print(f"  Could not use reference understanding: {e}")
+                continue
+        
+        if not understanding_guidance:
+            print("  No reference understanding available")
+            return
+        
+        # Apply understanding guidance to regions
+        for region in session.current_canvas.regions.values():
+            if region.prompt:
+                original_prompt = region.prompt
+                
+                # Enhance prompt with understanding-based guidance
+                for guidance in understanding_guidance:
+                    # Apply style guidance
+                    style_guidance = guidance.get('style_guidance', {})
+                    if style_guidance.get('artistic_level', 0) > 0.7:
+                        region.prompt += ", artistic style"
+                    elif style_guidance.get('realistic_level', 0) > 0.7:
+                        region.prompt += ", photorealistic"
+                    
+                    # Apply composition guidance
+                    composition_guidance = guidance.get('composition_guidance', {})
+                    if composition_guidance.get('composition_score', 0) > 0.7:
+                        region.prompt += ", well-composed"
+                    
+                    # Apply technical guidance
+                    technical_guidance = guidance.get('technical_guidance', {})
+                    if technical_guidance.get('overall_learning', 0) > 0.7:
+                        region.prompt += ", high quality"
+                
+                # Apply understanding pathway insights
+                for guidance in understanding_guidance:
+                    pathway = guidance.get('generation_pathway', [])
+                    if pathway:
+                        # Use insights from best understanding attempts
+                        best_attempt = max(pathway, key=lambda x: x['understanding_score'])
+                        
+                        if best_attempt['understanding_score'] > 0.8:
+                            # Apply specific learned patterns
+                            learned_features = best_attempt.get('learned_features', {})
+                            
+                            if learned_features.get('brightness_preservation', 0) > 0.8:
+                                region.prompt += ", consistent lighting"
+                            if learned_features.get('detail_preservation', 0) > 0.8:
+                                region.prompt += ", detailed"
+                
+                if region.prompt != original_prompt:
+                    print(f"    Enhanced region prompt with reference understanding")
+        
+        # Store understanding application in refinement pass
+        refinement_pass.understanding_applied = True
+        refinement_pass.understanding_guidance = understanding_guidance
+    
+    def get_reference_understanding_report(self) -> Dict[str, Any]:
+        """Get comprehensive report of all reference understanding."""
+        
+        understood_refs = self.reference_understanding_engine.understood_references
+        
+        if not understood_refs:
+            return {'message': 'No references have been learned yet'}
+        
+        report = {
+            'total_understood_references': len(understood_refs),
+            'reference_summaries': [],
+            'overall_statistics': {
+                'avg_understanding_level': 0.0,
+                'mastery_achieved_count': 0,
+                'total_usage_count': 0,
+                'successful_transfers': 0
+            }
+        }
+        
+        understanding_levels = []
+        total_usage = 0
+        successful_transfers = 0
+        mastery_count = 0
+        
+        for ref_id, understanding in understood_refs.items():
+            # Get detailed report for this reference
+            detailed_report = self.reference_understanding_engine.get_understanding_report(ref_id)
+            
+            report['reference_summaries'].append({
+                'reference_id': ref_id,
+                'understanding_level': understanding.understanding_level,
+                'mastery_achieved': understanding.mastery_achieved,
+                'attempts_made': len(understanding.attempts),
+                'strategies_used': len(set(a.masking_strategy for a in understanding.attempts)),
+                'times_used': understanding.times_referenced,
+                'successful_transfers': understanding.successful_transfers,
+                'learned_features_count': len(understanding.visual_features),
+                'generation_pathway_steps': len(understanding.generation_pathway)
+            })
+            
+            understanding_levels.append(understanding.understanding_level)
+            total_usage += understanding.times_referenced
+            successful_transfers += understanding.successful_transfers
+            if understanding.mastery_achieved:
+                mastery_count += 1
+        
+        # Calculate overall statistics
+        report['overall_statistics'] = {
+            'avg_understanding_level': np.mean(understanding_levels) if understanding_levels else 0.0,
+            'mastery_achieved_count': mastery_count,
+            'mastery_rate': mastery_count / len(understood_refs),
+            'total_usage_count': total_usage,
+            'successful_transfers': successful_transfers,
+            'transfer_success_rate': successful_transfers / total_usage if total_usage > 0 else 0.0
+        }
         
         return report 
