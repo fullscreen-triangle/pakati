@@ -1,0 +1,48 @@
+# Hugging Face Dependencies for Pakati AI Image Generation
+# Core transformers and model dependencies
+transformers>=4.35.0
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Image processing and computer vision
+opencv-python>=4.8.0
+Pillow>=10.0.0
+scikit-image>=0.21.0
+numpy>=1.24.0
+scipy>=1.11.0
+
+# Hugging Face models and processors
+accelerate>=0.24.0
+safetensors>=0.4.0
+tokenizers>=0.14.0
+
+# CLIP and vision-language models
+clip-by-openai
+sentence-transformers>=2.2.0
+
+# Additional ML utilities
+scikit-learn>=1.3.0
+datasets>=2.14.0
+
+# Image quality assessment
+lpips  # For perceptual similarity
+pytorch-fid  # For FID scores
+
+# Color analysis
+colorspacious  # For color space conversions
+webcolors  # For color name mapping
+
+# Optional: Specialized aesthetic models (if available)
+# These may need to be installed manually from specific repos
+# nima-pytorch  # Neural Image Assessment
+# ava-pytorch   # AVA aesthetic dataset models
+
+# Development and debugging
+matplotlib>=3.7.0
+seaborn>=0.12.0
+tqdm>=4.66.0
+
+# Performance optimization
+einops>=0.7.0  # Tensor operations
+timm>=0.9.0    # PyTorch image models 

@@ -763,12 +763,25 @@ class IterativeRefinementEngine:
     objectives and fuzzy creative guidance.
     """
     
-    def __init__(self, reference_library: ReferenceLibrary):
-        """Initialize the refinement engine."""
+    def __init__(self, reference_library: ReferenceLibrary, device: str = "auto"):
+        """Initialize the refinement engine with HF-powered analysis."""
         self.reference_library = reference_library
-        self.delta_analyzer = DeltaAnalyzer()
+        self.device = device
+        
+        # Initialize HF-powered analyzers
+        print("Initializing HF-powered analysis systems...")
+        from .models.image_analyzer import ImageAnalyzer
+        from .models.quality_assessor import QualityAssessor
+        from .models.aesthetic_scorer import AestheticScorer
+        
+        self.image_analyzer = ImageAnalyzer(device=device)
+        self.quality_assessor = QualityAssessor(device=device)
+        self.aesthetic_scorer = AestheticScorer(device=device)
+        self.delta_analyzer = DeltaAnalyzer(device=device)
         self.fuzzy_engine = FuzzyLogicEngine()
         self.active_sessions: Dict[UUID, RefinementSession] = {}
+        
+        print("HF-powered analysis systems ready!")
         
         # Learning parameters
         self.learning_rate = 0.1
@@ -981,47 +994,84 @@ class IterativeRefinementEngine:
         return refinement_pass
     
     def _extract_current_state(self, canvas: PakatiCanvas) -> Dict[str, float]:
-        """Extract current state parameters for fuzzy logic evaluation."""
+        """Extract current state parameters using HF-powered image analysis."""
         if not canvas or not canvas.current_image:
             return {}
         
-        # Analyze current image to extract fuzzy parameters
-        import numpy as np
-        from PIL import ImageStat
-        
-        img_array = np.array(canvas.current_image)
-        
-        # Calculate brightness (average luminance)
-        brightness = np.mean(img_array) / 255.0
-        
-        # Calculate warmth (R+Y vs B+C ratio, simplified)
-        r_channel = img_array[:, :, 0]
-        g_channel = img_array[:, :, 1] 
-        b_channel = img_array[:, :, 2]
-        
-        warm_components = np.mean(r_channel) + np.mean(g_channel) * 0.5
-        cool_components = np.mean(b_channel) + np.mean(g_channel) * 0.5
-        warmth = warm_components / (warm_components + cool_components) if (warm_components + cool_components) > 0 else 0.5
-        
-        # Calculate saturation (simplified using standard deviation)
-        saturation = np.std(img_array) / 128.0  # Normalize to 0-1
-        
-        # Calculate contrast (simplified using range)
-        contrast = (np.max(img_array) - np.min(img_array)) / 255.0
-        
-        # Estimate detail level (edge density)
-        gray = np.mean(img_array, axis=2)
-        edges = np.abs(np.gradient(gray)[0]) + np.abs(np.gradient(gray)[1])
-        detail = np.mean(edges) / 100.0  # Normalize
-        detail = min(detail, 1.0)
-        
-        return {
-            "brightness": brightness,
-            "warmth": warmth,
-            "saturation": saturation,
-            "contrast": contrast,
-            "detail": detail
-        }
+        # Use HF-powered image analyzer to extract real fuzzy parameters
+        try:
+            print("Extracting current state using HF image analyzer...")
+            analysis = self.image_analyzer.analyze_image(canvas.current_image, cache_key="current_state")
+            
+            # Add quality and aesthetic metrics
+            quality_scores = self.quality_assessor.assess_quality(canvas.current_image) 
+            aesthetic_scores = self.aesthetic_scorer.score_aesthetics(canvas.current_image)
+            
+            # Combine all analysis results
+            current_state = {
+                # Basic properties from image analyzer
+                'brightness': analysis.get('brightness', 0.5),
+                'warmth': analysis.get('warmth', 0.5),
+                'detail': analysis.get('detail', 0.5),
+                'saturation': analysis.get('saturation', 0.5),
+                'contrast': analysis.get('contrast', 0.5),
+                
+                # Quality metrics
+                'sharpness': quality_scores.get('sharpness', 0.5),
+                'noise_level': quality_scores.get('noise_level', 0.5),
+                'technical_quality': quality_scores.get('technical_quality', 0.5),
+                
+                # Aesthetic metrics
+                'composition_quality': aesthetic_scores.get('composition', 0.5),
+                'color_harmony': aesthetic_scores.get('color_harmony', 0.5),
+                'aesthetic_appeal': aesthetic_scores.get('overall_aesthetic', 0.5),
+                'beauty': aesthetic_scores.get('beauty', 0.5),
+                'artistic_merit': aesthetic_scores.get('artistic_merit', 0.5)
+            }
+            
+            print(f"Current state extracted: brightness={current_state['brightness']:.2f}, "
+                  f"warmth={current_state['warmth']:.2f}, detail={current_state['detail']:.2f}")
+            
+            return current_state
+            
+        except Exception as e:
+            print(f"Error extracting current state with HF models: {e}")
+            # Fallback to simplified analysis
+            import numpy as np
+            
+            img_array = np.array(canvas.current_image)
+            
+            # Calculate brightness (average luminance)
+            brightness = np.mean(img_array) / 255.0
+            
+            # Calculate warmth (R+Y vs B+C ratio, simplified)
+            r_channel = img_array[:, :, 0]
+            g_channel = img_array[:, :, 1] 
+            b_channel = img_array[:, :, 2]
+            
+            warm_components = np.mean(r_channel) + np.mean(g_channel) * 0.5
+            cool_components = np.mean(b_channel) + np.mean(g_channel) * 0.5
+            warmth = warm_components / (warm_components + cool_components) if (warm_components + cool_components) > 0 else 0.5
+            
+            # Calculate saturation (simplified using standard deviation)
+            saturation = np.std(img_array) / 128.0  # Normalize to 0-1
+            
+            # Calculate contrast (simplified using range)
+            contrast = (np.max(img_array) - np.min(img_array)) / 255.0
+            
+            # Estimate detail level (edge density)
+            gray = np.mean(img_array, axis=2)
+            edges = np.abs(np.gradient(gray)[0]) + np.abs(np.gradient(gray)[1])
+            detail = np.mean(edges) / 100.0  # Normalize
+            detail = min(detail, 1.0)
+            
+            return {
+                "brightness": brightness,
+                "warmth": warmth,
+                "saturation": saturation,
+                "contrast": contrast,
+                "detail": detail
+            }
     
     def _analyze_current_state(self, session: RefinementSession) -> List[Delta]:
         """Analyze the current state of the canvas against references."""
