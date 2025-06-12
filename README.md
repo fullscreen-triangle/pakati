@@ -15,6 +15,10 @@ Pakati (meaning "space between" in Shona) is a specialized tool that provides gr
 - **Progressive Refinement**: Build complex images through incremental editing
 - **Computational Efficiency**: Only regenerate specified regions, reducing processing time and resources
 - **Metacognitive Orchestration**: Guide the generation process with high-level goals while maintaining coherence
+- **🆕 Reference-Based Refinement**: Use annotated reference images to guide iterative improvements
+- **🆕 Multi-Pass Generation**: Autonomous improvement through multiple generation passes
+- **🆕 Delta Analysis**: Intelligent comparison between generated and reference images
+- **🆕 Template System**: Save and reuse successful configurations
 
 ## 🧠 Metacognitive Architecture
 
@@ -132,6 +136,59 @@ result = canvas.generate(seed=42)
 result.save("composite_image.png")
 ```
 
+### 🆕 Reference-Guided Generation
+
+```python
+from pakati import EnhancedPakatiCanvas, RefinementStrategy
+
+# Initialize enhanced canvas with goal
+canvas = EnhancedPakatiCanvas(width=1024, height=768)
+canvas.set_goal("Create a majestic mountain landscape at golden hour")
+
+# Add reference images with annotations
+mountain_ref = canvas.add_reference_image(
+    "references/mountains.jpg",
+    "dramatic mountain peaks with snow caps",
+    aspect="composition"
+)
+
+sky_ref = canvas.add_reference_image(
+    "references/golden_sky.jpg", 
+    "warm golden hour lighting",
+    aspect="lighting"
+)
+
+# Define regions
+sky_region = canvas.create_region([(0, 0), (1024, 0), (1024, 300), (0, 300)])
+mountain_region = canvas.create_region([(0, 300), (1024, 300), (1024, 768), (0, 768)])
+
+# Apply generation with reference guidance
+canvas.apply_to_region_with_references(
+    sky_region,
+    prompt="dramatic sky at golden hour",
+    reference_descriptions=["warm golden hour lighting"]
+)
+
+canvas.apply_to_region_with_references(
+    mountain_region,
+    prompt="majestic mountain peaks",
+    reference_descriptions=["dramatic mountain peaks"]
+)
+
+# Generate with iterative refinement
+final_image = canvas.generate_with_refinement(
+    max_passes=5,
+    target_quality=0.85,
+    strategy=RefinementStrategy.ADAPTIVE,
+    seed=42
+)
+
+final_image.save("refined_landscape.png")
+
+# Save as template for reuse
+canvas.save_template("Mountain Landscape", "templates/mountain_template.json")
+```
+
 ### Advanced Usage with Orchestration
 
 ```python
@@ -201,6 +258,52 @@ Pakati employs a layered modular architecture:
 12. **API Integration**: Provides unified interfaces to diverse model providers
 
 ## 🔍 Advanced Features
+
+### 🆕 Reference-Based Iterative Refinement
+
+The breakthrough feature of Pakati is its ability to use annotated reference images to autonomously improve generated content through multiple passes. This addresses the fundamental challenge that describing visual concepts is difficult and AI rarely gets it right on the first try.
+
+#### How It Works
+
+1. **Reference Collection**: Add reference images with specific annotations describing what aspects to use (color, texture, composition, lighting, style)
+
+2. **Delta Analysis**: The system compares generated regions against references, identifying specific differences in color, texture, lighting, etc.
+
+3. **Autonomous Refinement**: Based on detected deltas, the system automatically adjusts prompts and parameters, then regenerates regions
+
+4. **Multi-Pass Learning**: Each pass builds on the previous one, with the system becoming "smarter" as it learns what works
+
+5. **Template Reuse**: Save successful configurations as templates for future use
+
+#### Reference Aspects
+
+- **Color**: Match color palettes and distributions
+- **Texture**: Replicate surface textures and details  
+- **Composition**: Follow layout and element placement
+- **Lighting**: Match lighting conditions and mood
+- **Style**: Transfer artistic or photographic styles
+- **General**: Overall visual similarity
+
+#### Example Workflow
+
+```python
+# Add references for different aspects
+canvas.add_reference_image("mountain_photo.jpg", "rocky mountain texture", aspect="texture")
+canvas.add_reference_image("sunset_sky.jpg", "warm golden lighting", aspect="lighting") 
+canvas.add_reference_image("painting.jpg", "impressionist style", aspect="style")
+
+# The system will iteratively improve the generation to match these references
+final_image = canvas.generate_with_refinement(max_passes=8, target_quality=0.9)
+```
+
+#### Delta Types Detected
+
+- Color mismatches and palette differences
+- Texture variations and detail levels
+- Composition and layout issues
+- Lighting and mood discrepancies
+- Style transfer requirements
+- Missing or incorrect details
 
 ### Seed Management
 
