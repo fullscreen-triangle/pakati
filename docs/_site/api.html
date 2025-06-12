@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>API Documentation | Pakati: Regional Control for AI Image Generation</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="API Documentation" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Complete API reference and technical documentation" />
+<meta property="og:description" content="Complete API reference and technical documentation" />
+<link rel="canonical" href="http://localhost:4000/api.html" />
+<meta property="og:url" content="http://localhost:4000/api.html" />
+<meta property="og:site_name" content="Pakati: Regional Control for AI Image Generation" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="API Documentation" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Complete API reference and technical documentation","headline":"API Documentation","url":"http://localhost:4000/api.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Pakati: Regional Control for AI Image Generation" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Pakati: Regional Control for AI Image Generation</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/">Home</a><a class="page-link" href="/architecture.html">System Architecture</a><a class="page-link" href="/reference_understanding.html">Reference Understanding Engine</a><a class="page-link" href="/fuzzy_logic.html">Fuzzy Logic Integration</a><a class="page-link" href="/research.html">Research &amp; Publications</a><a class="page-link" href="/api.html">API Documentation</a><a class="page-link" href="/examples.html">Examples &amp; Tutorials</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <h1 class="fs-9" id="api-documentation">API Documentation</h1>
+
+<p class="fs-6 fw-300">Complete API reference and technical documentation for the Pakati system.</p>
+
+<hr />
+
+<h2 class="no_toc text-delta" id="table-of-contents">Table of Contents</h2>
+
+<ol id="markdown-toc">
+  <li><a href="#api-documentation" id="markdown-toc-api-documentation">API Documentation</a>    <ol>
+      <li><a href="#installation" id="markdown-toc-installation">Installation</a>        <ol>
+          <li><a href="#requirements" id="markdown-toc-requirements">Requirements</a></li>
+          <li><a href="#basic-installation" id="markdown-toc-basic-installation">Basic Installation</a></li>
+          <li><a href="#development-installation" id="markdown-toc-development-installation">Development Installation</a></li>
+          <li><a href="#with-huggingface-models" id="markdown-toc-with-huggingface-models">With HuggingFace Models</a></li>
+          <li><a href="#complete-installation" id="markdown-toc-complete-installation">Complete Installation</a></li>
+        </ol>
+      </li>
+      <li><a href="#quick-start" id="markdown-toc-quick-start">Quick Start</a>        <ol>
+          <li><a href="#basic-usage" id="markdown-toc-basic-usage">Basic Usage</a></li>
+          <li><a href="#with-reference-understanding" id="markdown-toc-with-reference-understanding">With Reference Understanding</a></li>
+        </ol>
+      </li>
+      <li><a href="#core-classes" id="markdown-toc-core-classes">Core Classes</a>        <ol>
+          <li><a href="#pakaticanvas" id="markdown-toc-pakaticanvas">PakatiCanvas</a>            <ol>
+              <li><a href="#properties" id="markdown-toc-properties">Properties</a></li>
+              <li><a href="#methods" id="markdown-toc-methods">Methods</a>                <ol>
+                  <li><a href="#create_region" id="markdown-toc-create_region">create_region()</a></li>
+                  <li><a href="#apply_to_region" id="markdown-toc-apply_to_region">apply_to_region()</a></li>
+                  <li><a href="#blend_regions" id="markdown-toc-blend_regions">blend_regions()</a></li>
+                  <li><a href="#save" id="markdown-toc-save">save()</a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li><a href="#region" id="markdown-toc-region">Region</a>            <ol>
+              <li><a href="#properties-1" id="markdown-toc-properties-1">Properties</a></li>
+              <li><a href="#methods-1" id="markdown-toc-methods-1">Methods</a>                <ol>
+                  <li><a href="#overlaps_with" id="markdown-toc-overlaps_with">overlaps_with()</a></li>
+                  <li><a href="#get_overlap_area" id="markdown-toc-get_overlap_area">get_overlap_area()</a></li>
+                  <li><a href="#contains_point" id="markdown-toc-contains_point">contains_point()</a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li><a href="#reference-understanding-api" id="markdown-toc-reference-understanding-api">Reference Understanding API</a>        <ol>
+          <li><a href="#referenceunderstandingengine" id="markdown-toc-referenceunderstandingengine">ReferenceUnderstandingEngine</a>            <ol>
+              <li><a href="#methods-2" id="markdown-toc-methods-2">Methods</a>                <ol>
+                  <li><a href="#learn_reference" id="markdown-toc-learn_reference">learn_reference()</a></li>
+                  <li><a href="#use_understood_reference" id="markdown-toc-use_understood_reference">use_understood_reference()</a></li>
+                  <li><a href="#get_understanding_report" id="markdown-toc-get_understanding_report">get_understanding_report()</a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li><a href="#referenceimage" id="markdown-toc-referenceimage">ReferenceImage</a>            <ol>
+              <li><a href="#properties-2" id="markdown-toc-properties-2">Properties</a></li>
+              <li><a href="#methods-3" id="markdown-toc-methods-3">Methods</a>                <ol>
+                  <li><a href="#resize" id="markdown-toc-resize">resize()</a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li><a href="#referenceunderstanding" id="markdown-toc-referenceunderstanding">ReferenceUnderstanding</a></li>
+        </ol>
+      </li>
+      <li><a href="#fuzzy-logic-api" id="markdown-toc-fuzzy-logic-api">Fuzzy Logic API</a>        <ol>
+          <li><a href="#fuzzylogicengine" id="markdown-toc-fuzzylogicengine">FuzzyLogicEngine</a>            <ol>
+              <li><a href="#methods-4" id="markdown-toc-methods-4">Methods</a>                <ol>
+                  <li><a href="#process_instruction" id="markdown-toc-process_instruction">process_instruction()</a></li>
+                  <li><a href="#evaluate_satisfaction" id="markdown-toc-evaluate_satisfaction">evaluate_satisfaction()</a></li>
+                  <li><a href="#create_fuzzy_set" id="markdown-toc-create_fuzzy_set">create_fuzzy_set()</a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li><a href="#fuzzyset" id="markdown-toc-fuzzyset">FuzzySet</a>            <ol>
+              <li><a href="#methods-5" id="markdown-toc-methods-5">Methods</a>                <ol>
+                  <li><a href="#membership" id="markdown-toc-membership">membership()</a></li>
+                  <li><a href="#apply_modifier" id="markdown-toc-apply_modifier">apply_modifier()</a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li><a href="#iterative-refinement-api" id="markdown-toc-iterative-refinement-api">Iterative Refinement API</a>        <ol>
+          <li><a href="#iterativerefinementengine" id="markdown-toc-iterativerefinementengine">IterativeRefinementEngine</a>            <ol>
+              <li><a href="#methods-6" id="markdown-toc-methods-6">Methods</a>                <ol>
+                  <li><a href="#refine_iteratively" id="markdown-toc-refine_iteratively">refine_iteratively()</a></li>
+                  <li><a href="#refine_with_understanding" id="markdown-toc-refine_with_understanding">refine_with_understanding()</a></li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li><a href="#refinementresult" id="markdown-toc-refinementresult">RefinementResult</a></li>
+        </ol>
+      </li>
+      <li><a href="#model-interface-api" id="markdown-toc-model-interface-api">Model Interface API</a>        <ol>
+          <li><a href="#model-selection-and-usage" id="markdown-toc-model-selection-and-usage">Model Selection and Usage</a>            <ol>
+              <li><a href="#available-models" id="markdown-toc-available-models">Available Models</a></li>
+              <li><a href="#model-configuration" id="markdown-toc-model-configuration">Model Configuration</a></li>
+            </ol>
+          </li>
+          <li><a href="#baseimagemodel" id="markdown-toc-baseimagemodel">BaseImageModel</a></li>
+        </ol>
+      </li>
+      <li><a href="#utility-functions" id="markdown-toc-utility-functions">Utility Functions</a>        <ol>
+          <li><a href="#image-processing" id="markdown-toc-image-processing">Image Processing</a></li>
+          <li><a href="#region-utilities" id="markdown-toc-region-utilities">Region Utilities</a></li>
+          <li><a href="#analysis-utilities" id="markdown-toc-analysis-utilities">Analysis Utilities</a></li>
+        </ol>
+      </li>
+      <li><a href="#configuration" id="markdown-toc-configuration">Configuration</a>        <ol>
+          <li><a href="#environment-variables" id="markdown-toc-environment-variables">Environment Variables</a></li>
+          <li><a href="#configuration-file" id="markdown-toc-configuration-file">Configuration File</a></li>
+        </ol>
+      </li>
+      <li><a href="#error-handling" id="markdown-toc-error-handling">Error Handling</a>        <ol>
+          <li><a href="#common-exceptions" id="markdown-toc-common-exceptions">Common Exceptions</a></li>
+          <li><a href="#error-codes" id="markdown-toc-error-codes">Error Codes</a></li>
+        </ol>
+      </li>
+      <li><a href="#performance-optimization" id="markdown-toc-performance-optimization">Performance Optimization</a>        <ol>
+          <li><a href="#caching" id="markdown-toc-caching">Caching</a></li>
+          <li><a href="#parallel-processing" id="markdown-toc-parallel-processing">Parallel Processing</a></li>
+          <li><a href="#memory-management" id="markdown-toc-memory-management">Memory Management</a></li>
+        </ol>
+      </li>
+      <li><a href="#logging-and-debugging" id="markdown-toc-logging-and-debugging">Logging and Debugging</a>        <ol>
+          <li><a href="#logging-configuration" id="markdown-toc-logging-configuration">Logging Configuration</a></li>
+          <li><a href="#debug-mode" id="markdown-toc-debug-mode">Debug Mode</a></li>
+        </ol>
+      </li>
+      <li><a href="#examples" id="markdown-toc-examples">Examples</a>        <ol>
+          <li><a href="#complete-workflow-example" id="markdown-toc-complete-workflow-example">Complete Workflow Example</a></li>
+        </ol>
+      </li>
+      <li><a href="#migration-guide" id="markdown-toc-migration-guide">Migration Guide</a>        <ol>
+          <li><a href="#from-version-1x-to-2x" id="markdown-toc-from-version-1x-to-2x">From Version 1.x to 2.x</a>            <ol>
+              <li><a href="#breaking-changes" id="markdown-toc-breaking-changes">Breaking Changes</a></li>
+              <li><a href="#new-features-in-2x" id="markdown-toc-new-features-in-2x">New Features in 2.x</a></li>
+            </ol>
+          </li>
+          <li><a href="#upgrade-steps" id="markdown-toc-upgrade-steps">Upgrade Steps</a></li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="installation">Installation</h2>
+
+<h3 id="requirements">Requirements</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Python 3.8+</span>
+python <span class="nt">--version</span>
+
+<span class="c"># System dependencies</span>
+<span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> libgl1-mesa-glx libglib2.0-0 libsm6 libxext6 libxrender-dev libgomp1
+</code></pre></div></div>
+
+<h3 id="basic-installation">Basic Installation</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>pakati
+</code></pre></div></div>
+
+<h3 id="development-installation">Development Installation</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/yourusername/pakati.git
+<span class="nb">cd </span>pakati
+pip <span class="nb">install</span> <span class="nt">-e</span> <span class="nb">.</span>
+</code></pre></div></div>
+
+<h3 id="with-huggingface-models">With HuggingFace Models</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>pakati[huggingface]
+</code></pre></div></div>
+
+<h3 id="complete-installation">Complete Installation</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>pakati[complete]
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="quick-start">Quick Start</h2>
+
+<h3 id="basic-usage">Basic Usage</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="n">PakatiCanvas</span>
+
+<span class="c1"># Initialize canvas
+</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">768</span><span class="p">)</span>
+
+<span class="c1"># Create region
+</span><span class="n">region</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">400</span><span class="p">),</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">400</span><span class="p">)])</span>
+
+<span class="c1"># Generate content
+</span><span class="n">result</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="s">"a beautiful sunset"</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="c1"># Save result
+</span><span class="n">result</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"sunset.png"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="with-reference-understanding">With Reference Understanding</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="n">PakatiCanvas</span><span class="p">,</span> <span class="n">ReferenceUnderstandingEngine</span><span class="p">,</span> <span class="n">ReferenceImage</span>
+
+<span class="c1"># Initialize system
+</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">768</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">ReferenceUnderstandingEngine</span><span class="p">(</span><span class="n">canvas_interface</span><span class="o">=</span><span class="n">canvas</span><span class="p">)</span>
+
+<span class="c1"># Load reference
+</span><span class="n">reference</span> <span class="o">=</span> <span class="n">ReferenceImage</span><span class="p">(</span><span class="s">"masterpiece.jpg"</span><span class="p">)</span>
+
+<span class="c1"># Make AI understand the reference
+</span><span class="n">understanding</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">learn_reference</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">max_attempts</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Use understanding for generation
+</span><span class="n">guidance</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">use_understood_reference</span><span class="p">(</span>
+    <span class="n">understanding</span><span class="p">.</span><span class="n">reference_id</span><span class="p">,</span>
+    <span class="s">"mountain landscape at sunset"</span><span class="p">,</span>
+    <span class="n">transfer_aspects</span><span class="o">=</span><span class="p">[</span><span class="s">"composition"</span><span class="p">,</span> <span class="s">"lighting"</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">generate_with_understanding</span><span class="p">(</span><span class="n">guidance</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="core-classes">Core Classes</h2>
+
+<h3 id="pakaticanvas">PakatiCanvas</h3>
+
+<p>Main canvas for regional image generation.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PakatiCanvas</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> 
+        <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">background_color</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+    <span class="p">):</span>
+        <span class="s">"""
+        Initialize canvas.
+        
+        Args:
+            width: Canvas width in pixels
+            height: Canvas height in pixels
+            background_color: RGB background color tuple
+        """</span>
+</code></pre></div></div>
+
+<h4 id="properties">Properties</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="nb">property</span>
+<span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="s">"""Canvas dimensions as (width, height)."""</span>
+
+<span class="o">@</span><span class="nb">property</span>
+<span class="k">def</span> <span class="nf">regions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Region</span><span class="p">]:</span>
+    <span class="s">"""List of all regions on canvas."""</span>
+
+<span class="o">@</span><span class="nb">property</span>
+<span class="k">def</span> <span class="nf">base_image</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">]:</span>
+    <span class="s">"""Current base image."""</span>
+</code></pre></div></div>
+
+<h4 id="methods">Methods</h4>
+
+<h5 id="create_region">create_region()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_region</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> 
+    <span class="n">vertices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span>
+    <span class="n">region_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Region</span><span class="p">:</span>
+    <span class="s">"""
+    Create a new region on canvas.
+    
+    Args:
+        vertices: List of (x, y) coordinates defining region boundary
+        region_id: Optional custom region ID
+        
+    Returns:
+        Region: Created region object
+        
+    Raises:
+        ValueError: If vertices form invalid polygon
+        
+    Example:
+        &gt;&gt;&gt; region = canvas.create_region([(0, 0), (100, 0), (100, 100), (0, 100)])
+    """</span>
+</code></pre></div></div>
+
+<h5 id="apply_to_region">apply_to_region()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">apply_to_region</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">region</span><span class="p">:</span> <span class="n">Region</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="n">negative_prompt</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="n">guidance_scale</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">7.5</span><span class="p">,</span>
+    <span class="n">steps</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GenerationResult</span><span class="p">:</span>
+    <span class="s">"""
+    Apply generation to specific region.
+    
+    Args:
+        region: Target region
+        prompt: Text prompt for generation
+        model_name: Model to use (auto-selected if None)
+        negative_prompt: Negative text prompt
+        guidance_scale: Classifier-free guidance scale
+        steps: Number of inference steps
+        seed: Random seed for reproducibility
+        **kwargs: Additional model-specific parameters
+        
+    Returns:
+        GenerationResult: Generation result with metadata
+        
+    Example:
+        &gt;&gt;&gt; result = canvas.apply_to_region(
+        ...     region, 
+        ...     "a red apple on wooden table",
+        ...     model_name="stable-diffusion-xl",
+        ...     seed=42
+        ... )
+    """</span>
+</code></pre></div></div>
+
+<h5 id="blend_regions">blend_regions()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">blend_regions</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">region1</span><span class="p">:</span> <span class="n">Region</span><span class="p">,</span>
+    <span class="n">region2</span><span class="p">:</span> <span class="n">Region</span><span class="p">,</span>
+    <span class="n">blend_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s">"normal"</span><span class="p">,</span>
+    <span class="n">opacity</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="s">"""
+    Blend overlapping regions.
+    
+    Args:
+        region1: First region
+        region2: Second region  
+        blend_mode: Blending mode ("normal", "multiply", "overlay", etc.)
+        opacity: Blend opacity (0.0-1.0)
+        
+    Raises:
+        ValueError: If regions don't overlap
+    """</span>
+</code></pre></div></div>
+
+<h5 id="save">save()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">save</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> 
+    <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="nb">format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="n">quality</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">95</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="s">"""
+    Save canvas to file.
+    
+    Args:
+        filepath: Output file path
+        format: Image format (inferred from extension if None)
+        quality: JPEG quality (1-100)
+    """</span>
+</code></pre></div></div>
+
+<h3 id="region">Region</h3>
+
+<p>Represents a regional area on the canvas.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Region</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">vertices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span>
+        <span class="n">canvas_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+    <span class="p">):</span>
+        <span class="s">"""
+        Initialize region.
+        
+        Args:
+            id: Unique region identifier
+            vertices: Polygon vertices
+            canvas_size: Parent canvas dimensions
+        """</span>
+</code></pre></div></div>
+
+<h4 id="properties-1">Properties</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="nb">property</span>
+<span class="k">def</span> <span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="s">"""Region area in pixels."""</span>
+
+<span class="o">@</span><span class="nb">property</span>
+<span class="k">def</span> <span class="nf">bounding_box</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="s">"""Bounding box as (left, top, right, bottom)."""</span>
+
+<span class="o">@</span><span class="nb">property</span>
+<span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="s">"""Region center point as (x, y)."""</span>
+
+<span class="o">@</span><span class="nb">property</span>
+<span class="k">def</span> <span class="nf">mask</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">:</span>
+    <span class="s">"""Binary mask image."""</span>
+</code></pre></div></div>
+
+<h4 id="methods-1">Methods</h4>
+
+<h5 id="overlaps_with">overlaps_with()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">overlaps_with</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s">'Region'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="s">"""
+    Check if region overlaps with another.
+    
+    Args:
+        other: Other region to check
+        
+    Returns:
+        bool: True if regions overlap
+    """</span>
+</code></pre></div></div>
+
+<h5 id="get_overlap_area">get_overlap_area()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_overlap_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s">'Region'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="s">"""
+    Calculate overlap area with another region.
+    
+    Args:
+        other: Other region
+        
+    Returns:
+        float: Overlap area as fraction of total canvas area
+    """</span>
+</code></pre></div></div>
+
+<h5 id="contains_point">contains_point()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">contains_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="s">"""
+    Check if point is inside region.
+    
+    Args:
+        x: X coordinate
+        y: Y coordinate
+        
+    Returns:
+        bool: True if point is inside region
+    """</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="reference-understanding-api">Reference Understanding API</h2>
+
+<h3 id="referenceunderstandingengine">ReferenceUnderstandingEngine</h3>
+
+<p>Core engine for AI reference understanding through reconstruction.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ReferenceUnderstandingEngine</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">canvas_interface</span><span class="p">,</span>
+        <span class="n">device</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s">"auto"</span><span class="p">,</span>
+        <span class="n">cache_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span>
+    <span class="p">):</span>
+        <span class="s">"""
+        Initialize reference understanding engine.
+        
+        Args:
+            canvas_interface: Canvas interface for generation
+            device: Device for ML models ("auto", "cuda", "cpu")
+            cache_size: Cache size for storing results
+        """</span>
+</code></pre></div></div>
+
+<h4 id="methods-2">Methods</h4>
+
+<h5 id="learn_reference">learn_reference()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">learn_reference</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">reference</span><span class="p">:</span> <span class="n">ReferenceImage</span><span class="p">,</span>
+    <span class="n">masking_strategies</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="n">max_attempts</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="n">mastery_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.85</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ReferenceUnderstanding</span><span class="p">:</span>
+    <span class="s">"""
+    Make AI learn to understand reference through reconstruction.
+    
+    Args:
+        reference: Reference image to understand
+        masking_strategies: List of masking strategies to use
+        max_attempts: Maximum reconstruction attempts per strategy
+        mastery_threshold: Score threshold for mastery achievement
+        
+    Returns:
+        ReferenceUnderstanding: Understanding results
+        
+    Available masking strategies:
+        - "random_patches": Random patches of varying sizes
+        - "progressive_reveal": Start small, expand outward
+        - "center_out": Reveal from center outward
+        - "edge_in": Reveal from edges inward
+        - "quadrant_reveal": Reveal one quadrant at a time
+        - "frequency_bands": Mask frequency components
+        - "semantic_regions": Mask semantic regions
+        
+    Example:
+        &gt;&gt;&gt; understanding = engine.learn_reference(
+        ...     reference,
+        ...     masking_strategies=["center_out", "progressive_reveal"],
+        ...     max_attempts=15
+        ... )
+        &gt;&gt;&gt; print(f"Understanding: {understanding.understanding_level:.2f}")
+        &gt;&gt;&gt; print(f"Mastery: {understanding.mastery_achieved}")
+    """</span>
+</code></pre></div></div>
+
+<h5 id="use_understood_reference">use_understood_reference()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">use_understood_reference</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">reference_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">target_prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">transfer_aspects</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="s">"""
+    Use understood reference for new generation.
+    
+    Args:
+        reference_id: ID of understood reference
+        target_prompt: Prompt for new generation
+        transfer_aspects: Aspects to transfer from reference
+        
+    Available transfer aspects:
+        - "composition": Layout and element placement
+        - "color_harmony": Color relationships and palette
+        - "lighting": Light direction and mood
+        - "style": Artistic style and approach
+        - "texture": Surface textures and details
+        
+    Returns:
+        Dict: Generation guidance dictionary
+        
+    Example:
+        &gt;&gt;&gt; guidance = engine.use_understood_reference(
+        ...     "mountain_landscape_001",
+        ...     "serene lake at sunset",
+        ...     transfer_aspects=["composition", "lighting", "color_harmony"]
+        ... )
+    """</span>
+</code></pre></div></div>
+
+<h5 id="get_understanding_report">get_understanding_report()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get_understanding_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="s">"""
+    Get detailed understanding report for reference.
+    
+    Args:
+        reference_id: Reference ID
+        
+    Returns:
+        Dict: Comprehensive understanding report
+        
+    Report includes:
+        - Understanding level and mastery status
+        - Detailed attempt history
+        - Extracted visual features
+        - Generation pathway
+        - Usage statistics
+    """</span>
+</code></pre></div></div>
+
+<h3 id="referenceimage">ReferenceImage</h3>
+
+<p>Container for reference images with metadata.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ReferenceImage</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">image_path</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">image_data</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="p">):</span>
+        <span class="s">"""
+        Initialize reference image.
+        
+        Args:
+            image_path: Path to image file
+            image_data: PIL Image object
+            metadata: Additional metadata
+            
+        Note:
+            Either image_path or image_data must be provided
+        """</span>
+</code></pre></div></div>
+
+<h4 id="properties-2">Properties</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="nb">property</span>
+<span class="k">def</span> <span class="nf">image</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">:</span>
+    <span class="s">"""PIL Image object."""</span>
+
+<span class="o">@</span><span class="nb">property</span>
+<span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="s">"""Image dimensions as (width, height)."""</span>
+
+<span class="o">@</span><span class="nb">property</span>  
+<span class="k">def</span> <span class="nf">aspect_ratio</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="s">"""Image aspect ratio (width/height)."""</span>
+</code></pre></div></div>
+
+<h4 id="methods-3">Methods</h4>
+
+<h5 id="resize">resize()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">resize</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span>
+    <span class="n">resample</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Image</span><span class="p">.</span><span class="n">LANCZOS</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s">'ReferenceImage'</span><span class="p">:</span>
+    <span class="s">"""
+    Resize reference image.
+    
+    Args:
+        size: Target size as (width, height)
+        resample: Resampling filter
+        
+    Returns:
+        ReferenceImage: New resized reference image
+    """</span>
+</code></pre></div></div>
+
+<h3 id="referenceunderstanding">ReferenceUnderstanding</h3>
+
+<p>Contains AI understanding results for a reference.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">ReferenceUnderstanding</span><span class="p">:</span>
+    <span class="n">reference_id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">reference_image</span><span class="p">:</span> <span class="n">ReferenceImage</span>
+    
+    <span class="c1"># Understanding progression
+</span>    <span class="n">attempts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ReconstructionAttempt</span><span class="p">]</span>
+    <span class="n">understanding_level</span><span class="p">:</span> <span class="nb">float</span>  <span class="c1"># 0-1 score
+</span>    <span class="n">mastery_achieved</span><span class="p">:</span> <span class="nb">bool</span>
+    
+    <span class="c1"># Extracted knowledge
+</span>    <span class="n">visual_features</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+    <span class="n">composition_patterns</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+    <span class="n">style_characteristics</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+    <span class="n">generation_pathway</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+    
+    <span class="c1"># Usage statistics
+</span>    <span class="n">times_referenced</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">successful_transfers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">last_used</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="fuzzy-logic-api">Fuzzy Logic API</h2>
+
+<h3 id="fuzzylogicengine">FuzzyLogicEngine</h3>
+
+<p>Handles subjective creative concepts with fuzzy logic.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FuzzyLogicEngine</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">custom_sets</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">FuzzySet</span><span class="p">]]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">custom_rules</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">FuzzyRule</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="p">):</span>
+        <span class="s">"""
+        Initialize fuzzy logic engine.
+        
+        Args:
+            custom_sets: Custom fuzzy sets to add
+            custom_rules: Custom fuzzy rules to add
+        """</span>
+</code></pre></div></div>
+
+<h4 id="methods-4">Methods</h4>
+
+<h5 id="process_instruction">process_instruction()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">process_instruction</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">instruction</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">current_state</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="s">"""
+    Process fuzzy creative instruction.
+    
+    Args:
+        instruction: Natural language instruction
+        current_state: Current image state features
+        
+    Returns:
+        Dict: Recommended adjustments
+        
+    Example:
+        &gt;&gt;&gt; adjustments = fuzzy_engine.process_instruction(
+        ...     "make it very slightly warmer",
+        ...     {"color_warmth": 0.4, "brightness": 0.6}
+        ... )
+        &gt;&gt;&gt; print(adjustments)
+        {"color_warmth": 0.15, "brightness": 0.0}
+    """</span>
+</code></pre></div></div>
+
+<h5 id="evaluate_satisfaction">evaluate_satisfaction()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">evaluate_satisfaction</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">current_features</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span>
+    <span class="n">target_features</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="s">"""
+    Calculate fuzzy satisfaction degree.
+    
+    Args:
+        current_features: Current image features
+        target_features: Target feature values
+        
+    Returns:
+        float: Satisfaction score (0-1)
+    """</span>
+</code></pre></div></div>
+
+<h5 id="create_fuzzy_set">create_fuzzy_set()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">create_fuzzy_set</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">membership_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+    <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FuzzySet</span><span class="p">:</span>
+    <span class="s">"""
+    Create custom fuzzy set.
+    
+    Args:
+        name: Fuzzy set name
+        membership_func: Membership function
+        params: Function parameters
+        
+    Returns:
+        FuzzySet: Created fuzzy set
+        
+    Available membership functions:
+        - trapezoid_membership: Trapezoidal shape
+        - triangular_membership: Triangular shape  
+        - gaussian_membership: Gaussian (bell) shape
+        - sigmoid_membership: S-shaped curve
+    """</span>
+</code></pre></div></div>
+
+<h3 id="fuzzyset">FuzzySet</h3>
+
+<p>Represents a fuzzy set with membership function.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FuzzySet</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">membership_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+        <span class="n">params</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">,</span> <span class="n">Dict</span><span class="p">]</span>
+    <span class="p">):</span>
+        <span class="s">"""
+        Initialize fuzzy set.
+        
+        Args:
+            name: Set name
+            membership_func: Membership function
+            params: Function parameters
+        """</span>
+</code></pre></div></div>
+
+<h4 id="methods-5">Methods</h4>
+
+<h5 id="membership">membership()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">membership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="s">"""
+    Calculate membership degree for value.
+    
+    Args:
+        value: Input value
+        
+    Returns:
+        float: Membership degree (0-1)
+    """</span>
+</code></pre></div></div>
+
+<h5 id="apply_modifier">apply_modifier()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">apply_modifier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="s">"""
+    Apply linguistic modifier to membership value.
+    
+    Args:
+        modifier: Modifier name ("very", "slightly", etc.)
+        value: Input membership value
+        
+    Returns:
+        float: Modified membership value
+        
+    Available modifiers:
+        - "very": x^2 (concentration)
+        - "extremely": x^3 (strong concentration)
+        - "somewhat": x^0.5 (dilation)
+        - "slightly": x^0.25 (strong dilation)
+        - "quite": x^1.25 (mild concentration)
+        - "rather": x^1.5 (moderate concentration)
+        - "moderately": x^0.75 (mild dilation)
+    """</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="iterative-refinement-api">Iterative Refinement API</h2>
+
+<h3 id="iterativerefinementengine">IterativeRefinementEngine</h3>
+
+<p>Autonomous improvement through multiple generation passes.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">IterativeRefinementEngine</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">canvas_interface</span><span class="p">,</span>
+        <span class="n">reference_understanding_engine</span><span class="p">:</span> <span class="n">ReferenceUnderstandingEngine</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">fuzzy_logic_engine</span><span class="p">:</span> <span class="n">FuzzyLogicEngine</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">delta_analyzer</span><span class="p">:</span> <span class="n">DeltaAnalyzer</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="p">):</span>
+        <span class="s">"""
+        Initialize iterative refinement engine.
+        
+        Args:
+            canvas_interface: Canvas interface
+            reference_understanding_engine: Reference understanding engine
+            fuzzy_logic_engine: Fuzzy logic engine
+            delta_analyzer: Delta analysis engine
+        """</span>
+</code></pre></div></div>
+
+<h4 id="methods-6">Methods</h4>
+
+<h5 id="refine_iteratively">refine_iteratively()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">refine_iteratively</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">initial_result</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">,</span>
+    <span class="n">target_description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">reference_images</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ReferenceImage</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="n">max_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="n">strategy</span><span class="p">:</span> <span class="n">RefinementStrategy</span> <span class="o">=</span> <span class="n">RefinementStrategy</span><span class="p">.</span><span class="n">ADAPTIVE</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RefinementResult</span><span class="p">:</span>
+    <span class="s">"""
+    Perform iterative refinement of generated image.
+    
+    Args:
+        initial_result: Initial generated image
+        target_description: Target description
+        reference_images: Reference images for guidance
+        max_iterations: Maximum refinement iterations
+        strategy: Refinement strategy to use
+        
+    Returns:
+        RefinementResult: Final result with iteration history
+        
+    Available strategies:
+        - RefinementStrategy.EVIDENCE_PRIORITY: Evidence graph first
+        - RefinementStrategy.DELTA_PRIORITY: Delta analysis first
+        - RefinementStrategy.FUZZY_PRIORITY: Fuzzy logic first
+        - RefinementStrategy.ADAPTIVE: Adaptive strategy selection
+        - RefinementStrategy.BALANCED: Equal weight to all approaches
+    """</span>
+</code></pre></div></div>
+
+<h5 id="refine_with_understanding">refine_with_understanding()</h5>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">refine_with_understanding</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">target_prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">understood_references</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="n">max_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">:</span>
+    <span class="s">"""
+    Perform refinement using understood references.
+    
+    Args:
+        target_prompt: Target generation prompt
+        understood_references: List of understood reference IDs
+        max_iterations: Maximum iterations
+        
+    Returns:
+        Image.Image: Final refined image
+    """</span>
+</code></pre></div></div>
+
+<h3 id="refinementresult">RefinementResult</h3>
+
+<p>Contains results from iterative refinement process.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">RefinementResult</span><span class="p">:</span>
+    <span class="n">final_image</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span>
+    <span class="n">initial_image</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span>
+    <span class="n">total_iterations</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">iteration_history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span>
+    <span class="n">convergence_achieved</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">final_quality_score</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">improvement_metrics</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="model-interface-api">Model Interface API</h2>
+
+<h3 id="model-selection-and-usage">Model Selection and Usage</h3>
+
+<h4 id="available-models">Available Models</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># List available models
+</span><span class="kn">from</span> <span class="nn">pakati.models</span> <span class="kn">import</span> <span class="n">list_available_models</span>
+
+<span class="n">models</span> <span class="o">=</span> <span class="n">list_available_models</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">models</span><span class="p">)</span>
+<span class="c1"># Output: ['dalle-3', 'stable-diffusion-xl', 'claude-3-sonnet', 'midjourney-v6']
+</span></code></pre></div></div>
+
+<h4 id="model-configuration">Model Configuration</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati.models</span> <span class="kn">import</span> <span class="n">configure_model</span>
+
+<span class="c1"># Configure DALL-E
+</span><span class="n">configure_model</span><span class="p">(</span><span class="s">'dalle-3'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="s">'api_key'</span><span class="p">:</span> <span class="s">'your-openai-api-key'</span><span class="p">,</span>
+    <span class="s">'quality'</span><span class="p">:</span> <span class="s">'hd'</span><span class="p">,</span>
+    <span class="s">'timeout'</span><span class="p">:</span> <span class="mi">60</span>
+<span class="p">})</span>
+
+<span class="c1"># Configure Stable Diffusion
+</span><span class="n">configure_model</span><span class="p">(</span><span class="s">'stable-diffusion-xl'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="s">'model_path'</span><span class="p">:</span> <span class="s">'./models/sdxl-1.0'</span><span class="p">,</span>
+    <span class="s">'device'</span><span class="p">:</span> <span class="s">'cuda'</span><span class="p">,</span>
+    <span class="s">'precision'</span><span class="p">:</span> <span class="s">'fp16'</span>
+<span class="p">})</span>
+</code></pre></div></div>
+
+<h3 id="baseimagemodel">BaseImageModel</h3>
+
+<p>Abstract base class for all image generation models.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati.models</span> <span class="kn">import</span> <span class="n">BaseImageModel</span>
+
+<span class="k">class</span> <span class="nc">CustomModel</span><span class="p">(</span><span class="n">BaseImageModel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GenerationResult</span><span class="p">:</span>
+        <span class="c1"># Your implementation
+</span>        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">inpaint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">mask</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GenerationResult</span><span class="p">:</span>
+        <span class="c1"># Your implementation  
+</span>        <span class="k">pass</span>
+    
+    <span class="k">def</span> <span class="nf">get_capabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModelCapabilities</span><span class="p">:</span>
+        <span class="c1"># Return model capabilities
+</span>        <span class="k">pass</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="utility-functions">Utility Functions</h2>
+
+<h3 id="image-processing">Image Processing</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati.utils</span> <span class="kn">import</span> <span class="n">image_utils</span>
+
+<span class="c1"># Resize image maintaining aspect ratio
+</span><span class="n">resized</span> <span class="o">=</span> <span class="n">image_utils</span><span class="p">.</span><span class="n">resize_maintain_aspect</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">))</span>
+
+<span class="c1"># Create mask from polygon
+</span><span class="n">mask</span> <span class="o">=</span> <span class="n">image_utils</span><span class="p">.</span><span class="n">polygon_to_mask</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">image_size</span><span class="p">)</span>
+
+<span class="c1"># Blend images
+</span><span class="n">blended</span> <span class="o">=</span> <span class="n">image_utils</span><span class="p">.</span><span class="n">blend_images</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">blend_mode</span><span class="o">=</span><span class="s">"normal"</span><span class="p">)</span>
+
+<span class="c1"># Extract color palette
+</span><span class="n">palette</span> <span class="o">=</span> <span class="n">image_utils</span><span class="p">.</span><span class="n">extract_color_palette</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">num_colors</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="region-utilities">Region Utilities</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati.utils</span> <span class="kn">import</span> <span class="n">region_utils</span>
+
+<span class="c1"># Create region from bounding box
+</span><span class="n">region</span> <span class="o">=</span> <span class="n">region_utils</span><span class="p">.</span><span class="n">bbox_to_region</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">)</span>
+
+<span class="c1"># Create circular region
+</span><span class="n">region</span> <span class="o">=</span> <span class="n">region_utils</span><span class="p">.</span><span class="n">circle_to_region</span><span class="p">(</span><span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+
+<span class="c1"># Smooth region edges
+</span><span class="n">smoothed</span> <span class="o">=</span> <span class="n">region_utils</span><span class="p">.</span><span class="n">smooth_region</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">smoothing_factor</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="analysis-utilities">Analysis Utilities</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati.utils</span> <span class="kn">import</span> <span class="n">analysis_utils</span>
+
+<span class="c1"># Extract image features
+</span><span class="n">features</span> <span class="o">=</span> <span class="n">analysis_utils</span><span class="p">.</span><span class="n">extract_features</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+<span class="c1"># Calculate image similarity
+</span><span class="n">similarity</span> <span class="o">=</span> <span class="n">analysis_utils</span><span class="p">.</span><span class="n">calculate_similarity</span><span class="p">(</span><span class="n">image1</span><span class="p">,</span> <span class="n">image2</span><span class="p">)</span>
+
+<span class="c1"># Analyze composition
+</span><span class="n">composition</span> <span class="o">=</span> <span class="n">analysis_utils</span><span class="p">.</span><span class="n">analyze_composition</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="configuration">Configuration</h2>
+
+<h3 id="environment-variables">Environment Variables</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># API Keys</span>
+<span class="nb">export </span><span class="nv">PAKATI_API_KEY_OPENAI</span><span class="o">=</span><span class="s2">"your-openai-key"</span>
+<span class="nb">export </span><span class="nv">PAKATI_API_KEY_ANTHROPIC</span><span class="o">=</span><span class="s2">"your-anthropic-key"</span>
+<span class="nb">export </span><span class="nv">PAKATI_API_KEY_HUGGINGFACE</span><span class="o">=</span><span class="s2">"your-hf-token"</span>
+
+<span class="c"># Model Configuration</span>
+<span class="nb">export </span><span class="nv">PAKATI_DEFAULT_MODEL</span><span class="o">=</span><span class="s2">"stable-diffusion-xl"</span>
+<span class="nb">export </span><span class="nv">PAKATI_DEVICE</span><span class="o">=</span><span class="s2">"cuda"</span>
+
+<span class="c"># Cache Configuration</span>
+<span class="nb">export </span><span class="nv">PAKATI_CACHE_DIR</span><span class="o">=</span><span class="s2">"./cache"</span>
+<span class="nb">export </span><span class="nv">PAKATI_CACHE_SIZE</span><span class="o">=</span><span class="s2">"1000"</span>
+
+<span class="c"># Logging</span>
+<span class="nb">export </span><span class="nv">PAKATI_LOG_LEVEL</span><span class="o">=</span><span class="s2">"INFO"</span>
+<span class="nb">export </span><span class="nv">PAKATI_LOG_FILE</span><span class="o">=</span><span class="s2">"./pakati.log"</span>
+</code></pre></div></div>
+
+<h3 id="configuration-file">Configuration File</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># pakati_config.py
+</span><span class="n">PAKATI_CONFIG</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'models'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'dalle-3'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'api_endpoint'</span><span class="p">:</span> <span class="s">'https://api.openai.com/v1/images/generations'</span><span class="p">,</span>
+            <span class="s">'timeout'</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+            <span class="s">'retries'</span><span class="p">:</span> <span class="mi">3</span>
+        <span class="p">},</span>
+        <span class="s">'stable-diffusion-xl'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'model_path'</span><span class="p">:</span> <span class="s">'./models/sdxl-1.0'</span><span class="p">,</span>
+            <span class="s">'device'</span><span class="p">:</span> <span class="s">'cuda'</span><span class="p">,</span>
+            <span class="s">'precision'</span><span class="p">:</span> <span class="s">'fp16'</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    
+    <span class="s">'reference_understanding'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'mastery_threshold'</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span>
+        <span class="s">'max_attempts'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="s">'default_strategies'</span><span class="p">:</span> <span class="p">[</span><span class="s">'center_out'</span><span class="p">,</span> <span class="s">'progressive_reveal'</span><span class="p">,</span> <span class="s">'frequency_bands'</span><span class="p">]</span>
+    <span class="p">},</span>
+    
+    <span class="s">'fuzzy_logic'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'default_modifiers'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+        <span class="s">'cultural_adaptation'</span><span class="p">:</span> <span class="s">'western'</span><span class="p">,</span>
+        <span class="s">'satisfaction_threshold'</span><span class="p">:</span> <span class="mf">0.7</span>
+    <span class="p">},</span>
+    
+    <span class="s">'refinement'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'max_iterations'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s">'convergence_threshold'</span><span class="p">:</span> <span class="mf">0.02</span><span class="p">,</span>
+        <span class="s">'default_strategy'</span><span class="p">:</span> <span class="s">'adaptive'</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="error-handling">Error Handling</h2>
+
+<h3 id="common-exceptions">Common Exceptions</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PakatiError</span><span class="p">,</span>
+    <span class="n">ModelNotAvailableError</span><span class="p">,</span>
+    <span class="n">InvalidRegionError</span><span class="p">,</span>
+    <span class="n">GenerationError</span><span class="p">,</span>
+    <span class="n">UnderstandingError</span><span class="p">,</span>
+    <span class="n">ConfigurationError</span>
+<span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">prompt</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">ModelNotAvailableError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Model not available: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">InvalidRegionError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Invalid region: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">GenerationError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Generation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="error-codes">Error Codes</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Exception</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1001</td>
+      <td>ModelNotAvailableError</td>
+      <td>Requested model not configured</td>
+    </tr>
+    <tr>
+      <td>1002</td>
+      <td>InvalidRegionError</td>
+      <td>Region vertices form invalid polygon</td>
+    </tr>
+    <tr>
+      <td>1003</td>
+      <td>GenerationError</td>
+      <td>Image generation failed</td>
+    </tr>
+    <tr>
+      <td>1004</td>
+      <td>UnderstandingError</td>
+      <td>Reference understanding failed</td>
+    </tr>
+    <tr>
+      <td>1005</td>
+      <td>ConfigurationError</td>
+      <td>Invalid configuration</td>
+    </tr>
+    <tr>
+      <td>1006</td>
+      <td>APIError</td>
+      <td>External API error</td>
+    </tr>
+    <tr>
+      <td>1007</td>
+      <td>ResourceError</td>
+      <td>Insufficient resources</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="performance-optimization">Performance Optimization</h2>
+
+<h3 id="caching">Caching</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati.cache</span> <span class="kn">import</span> <span class="n">enable_caching</span><span class="p">,</span> <span class="n">clear_cache</span>
+
+<span class="c1"># Enable caching for better performance
+</span><span class="n">enable_caching</span><span class="p">(</span>
+    <span class="n">memory_cache_size</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
+    <span class="n">disk_cache_size</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span>
+    <span class="n">redis_url</span><span class="o">=</span><span class="s">"redis://localhost:6379"</span>
+<span class="p">)</span>
+
+<span class="c1"># Clear cache when needed
+</span><span class="n">clear_cache</span><span class="p">(</span><span class="n">cache_type</span><span class="o">=</span><span class="s">"memory"</span><span class="p">)</span>  <span class="c1"># "memory", "disk", "redis", "all"
+</span></code></pre></div></div>
+
+<h3 id="parallel-processing">Parallel Processing</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati.parallel</span> <span class="kn">import</span> <span class="n">ParallelCanvas</span>
+
+<span class="c1"># Use parallel processing for multiple regions
+</span><span class="n">parallel_canvas</span> <span class="o">=</span> <span class="n">ParallelCanvas</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Process multiple regions simultaneously
+</span><span class="n">results</span> <span class="o">=</span> <span class="n">parallel_canvas</span><span class="p">.</span><span class="n">apply_to_regions_parallel</span><span class="p">([</span>
+    <span class="p">(</span><span class="n">region1</span><span class="p">,</span> <span class="s">"sunset sky"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">region2</span><span class="p">,</span> <span class="s">"mountain landscape"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">region3</span><span class="p">,</span> <span class="s">"flowing river"</span><span class="p">)</span>
+<span class="p">])</span>
+</code></pre></div></div>
+
+<h3 id="memory-management">Memory Management</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati.memory</span> <span class="kn">import</span> <span class="n">optimize_memory</span><span class="p">,</span> <span class="n">get_memory_usage</span>
+
+<span class="c1"># Monitor memory usage
+</span><span class="n">usage</span> <span class="o">=</span> <span class="n">get_memory_usage</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Memory usage: </span><span class="si">{</span><span class="n">usage</span><span class="p">.</span><span class="n">percent</span><span class="si">}</span><span class="s">%"</span><span class="p">)</span>
+
+<span class="c1"># Optimize memory if needed
+</span><span class="k">if</span> <span class="n">usage</span><span class="p">.</span><span class="n">percent</span> <span class="o">&gt;</span> <span class="mi">80</span><span class="p">:</span>
+    <span class="n">optimize_memory</span><span class="p">()</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="logging-and-debugging">Logging and Debugging</h2>
+
+<h3 id="logging-configuration">Logging Configuration</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">pakati.logging</span> <span class="kn">import</span> <span class="n">setup_logging</span>
+
+<span class="c1"># Setup logging
+</span><span class="n">setup_logging</span><span class="p">(</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="p">.</span><span class="n">INFO</span><span class="p">,</span>
+    <span class="n">file_path</span><span class="o">=</span><span class="s">"./pakati.log"</span><span class="p">,</span>
+    <span class="n">console_output</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Use logger
+</span><span class="kn">import</span> <span class="nn">pakati</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">pakati</span><span class="p">.</span><span class="n">get_logger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+<span class="n">logger</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="s">"Starting generation process"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="debug-mode">Debug Mode</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="n">enable_debug_mode</span>
+
+<span class="c1"># Enable debug mode for detailed logging
+</span><span class="n">enable_debug_mode</span><span class="p">(</span>
+    <span class="n">save_intermediate_images</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">log_model_parameters</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">profile_performance</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="examples">Examples</h2>
+
+<h3 id="complete-workflow-example">Complete Workflow Example</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PakatiCanvas</span><span class="p">,</span> 
+    <span class="n">ReferenceUnderstandingEngine</span><span class="p">,</span> 
+    <span class="n">IterativeRefinementEngine</span><span class="p">,</span>
+    <span class="n">ReferenceImage</span>
+<span class="p">)</span>
+
+<span class="c1"># Initialize system
+</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">768</span><span class="p">)</span>
+<span class="n">understanding_engine</span> <span class="o">=</span> <span class="n">ReferenceUnderstandingEngine</span><span class="p">(</span><span class="n">canvas</span><span class="p">)</span>
+<span class="n">refinement_engine</span> <span class="o">=</span> <span class="n">IterativeRefinementEngine</span><span class="p">(</span>
+    <span class="n">canvas</span><span class="p">,</span> 
+    <span class="n">understanding_engine</span>
+<span class="p">)</span>
+
+<span class="c1"># Load and understand reference
+</span><span class="n">reference</span> <span class="o">=</span> <span class="n">ReferenceImage</span><span class="p">(</span><span class="s">"landscape_reference.jpg"</span><span class="p">)</span>
+<span class="n">understanding</span> <span class="o">=</span> <span class="n">understanding_engine</span><span class="p">.</span><span class="n">learn_reference</span><span class="p">(</span>
+    <span class="n">reference</span><span class="p">,</span>
+    <span class="n">masking_strategies</span><span class="o">=</span><span class="p">[</span><span class="s">"progressive_reveal"</span><span class="p">,</span> <span class="s">"center_out"</span><span class="p">],</span>
+    <span class="n">max_attempts</span><span class="o">=</span><span class="mi">8</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Understanding level: </span><span class="si">{</span><span class="n">understanding</span><span class="p">.</span><span class="n">understanding_level</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+<span class="c1"># Create regions
+</span><span class="n">sky_region</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">)])</span>
+<span class="n">land_region</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">768</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">768</span><span class="p">)])</span>
+
+<span class="c1"># Generate initial content
+</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span><span class="n">sky_region</span><span class="p">,</span> <span class="s">"dramatic sunset sky"</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span><span class="n">land_region</span><span class="p">,</span> <span class="s">"rolling hills landscape"</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">43</span><span class="p">)</span>
+
+<span class="c1"># Refine using understanding
+</span><span class="k">if</span> <span class="n">understanding</span><span class="p">.</span><span class="n">mastery_achieved</span><span class="p">:</span>
+    <span class="n">final_result</span> <span class="o">=</span> <span class="n">refinement_engine</span><span class="p">.</span><span class="n">refine_with_understanding</span><span class="p">(</span>
+        <span class="s">"breathtaking landscape at golden hour"</span><span class="p">,</span>
+        <span class="n">understood_references</span><span class="o">=</span><span class="p">[</span><span class="n">understanding</span><span class="p">.</span><span class="n">reference_id</span><span class="p">],</span>
+        <span class="n">max_iterations</span><span class="o">=</span><span class="mi">5</span>
+    <span class="p">)</span>
+    
+    <span class="n">canvas</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"final_landscape.png"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Generation complete!"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Reference understanding not achieved"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="migration-guide">Migration Guide</h2>
+
+<h3 id="from-version-1x-to-2x">From Version 1.x to 2.x</h3>
+
+<h4 id="breaking-changes">Breaking Changes</h4>
+
+<ol>
+  <li><strong>Canvas Initialization</strong>: Background color parameter renamed
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Old
+</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">768</span><span class="p">,</span> <span class="n">bg_color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
+   
+<span class="c1"># New  
+</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">768</span><span class="p">,</span> <span class="n">background_color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Model Selection</strong>: Model names standardized
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Old
+</span><span class="n">model_name</span> <span class="o">=</span> <span class="s">"sd-xl"</span>
+   
+<span class="c1"># New
+</span><span class="n">model_name</span> <span class="o">=</span> <span class="s">"stable-diffusion-xl"</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Reference Understanding</strong>: API simplified
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Old
+</span><span class="n">understanding</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">understand_reference</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">strategies</span><span class="p">,</span> <span class="n">attempts</span><span class="p">)</span>
+   
+<span class="c1"># New
+</span><span class="n">understanding</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">learn_reference</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">masking_strategies</span><span class="p">,</span> <span class="n">max_attempts</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h4 id="new-features-in-2x">New Features in 2.x</h4>
+
+<ul>
+  <li>Reference Understanding Engine</li>
+  <li>Fuzzy Logic Integration</li>
+  <li>Multi-Priority Iterative Refinement</li>
+  <li>Enhanced HuggingFace Model Support</li>
+  <li>Improved Performance and Caching</li>
+</ul>
+
+<h3 id="upgrade-steps">Upgrade Steps</h3>
+
+<ol>
+  <li><strong>Update Installation</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install</span> <span class="nt">--upgrade</span> pakati
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Update Imports</strong>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Add new imports
+</span><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="n">ReferenceUnderstandingEngine</span><span class="p">,</span> <span class="n">FuzzyLogicEngine</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Update Configuration</strong>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Update model names in config
+</span><span class="n">config</span><span class="p">[</span><span class="s">'default_model'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'stable-diffusion-xl'</span>  <span class="c1"># was 'sd-xl'
+</span></code></pre></div>    </div>
+  </li>
+  <li><strong>Test Existing Code</strong>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-m</span> pakati.test_compatibility your_script.py
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<hr />
+
+<p><em>This completes the comprehensive API documentation. For working examples, see <a href="examples.html">Examples</a>. For research background, visit <a href="research.html">Research</a>.</em></p>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Pakati: Regional Control for AI Image Generation</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Pakati: Regional Control for AI Image Generation</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Revolutionary AI image generation system with regional control, metacognitive orchestration, and reference understanding.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

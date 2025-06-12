@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Examples &amp; Tutorials | Pakati: Regional Control for AI Image Generation</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Examples &amp; Tutorials" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Comprehensive examples and step-by-step tutorials" />
+<meta property="og:description" content="Comprehensive examples and step-by-step tutorials" />
+<link rel="canonical" href="http://localhost:4000/examples.html" />
+<meta property="og:url" content="http://localhost:4000/examples.html" />
+<meta property="og:site_name" content="Pakati: Regional Control for AI Image Generation" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Examples &amp; Tutorials" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Comprehensive examples and step-by-step tutorials","headline":"Examples &amp; Tutorials","url":"http://localhost:4000/examples.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Pakati: Regional Control for AI Image Generation" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Pakati: Regional Control for AI Image Generation</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/">Home</a><a class="page-link" href="/architecture.html">System Architecture</a><a class="page-link" href="/reference_understanding.html">Reference Understanding Engine</a><a class="page-link" href="/fuzzy_logic.html">Fuzzy Logic Integration</a><a class="page-link" href="/research.html">Research &amp; Publications</a><a class="page-link" href="/api.html">API Documentation</a><a class="page-link" href="/examples.html">Examples &amp; Tutorials</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <h1 class="fs-9" id="examples--tutorials">Examples &amp; Tutorials</h1>
+
+<p class="fs-6 fw-300">Comprehensive examples and step-by-step tutorials for mastering the Pakati system.</p>
+
+<hr />
+
+<h2 class="no_toc text-delta" id="table-of-contents">Table of Contents</h2>
+
+<ol id="markdown-toc">
+  <li><a href="#examples--tutorials" id="markdown-toc-examples--tutorials">Examples &amp; Tutorials</a>    <ol>
+      <li><a href="#getting-started-examples" id="markdown-toc-getting-started-examples">Getting Started Examples</a>        <ol>
+          <li><a href="#example-1-basic-regional-generation" id="markdown-toc-example-1-basic-regional-generation">Example 1: Basic Regional Generation</a></li>
+          <li><a href="#example-2-reference-understanding-basics" id="markdown-toc-example-2-reference-understanding-basics">Example 2: Reference Understanding Basics</a></li>
+        </ol>
+      </li>
+      <li><a href="#intermediate-examples" id="markdown-toc-intermediate-examples">Intermediate Examples</a>        <ol>
+          <li><a href="#example-3-multi-region-portrait-with-understanding" id="markdown-toc-example-3-multi-region-portrait-with-understanding">Example 3: Multi-Region Portrait with Understanding</a></li>
+          <li><a href="#example-4-fuzzy-logic-creative-instructions" id="markdown-toc-example-4-fuzzy-logic-creative-instructions">Example 4: Fuzzy Logic Creative Instructions</a></li>
+        </ol>
+      </li>
+      <li><a href="#advanced-examples" id="markdown-toc-advanced-examples">Advanced Examples</a>        <ol>
+          <li><a href="#example-5-complex-scene-with-multiple-understanding" id="markdown-toc-example-5-complex-scene-with-multiple-understanding">Example 5: Complex Scene with Multiple Understanding</a></li>
+          <li><a href="#example-6-real-time-interactive-refinement" id="markdown-toc-example-6-real-time-interactive-refinement">Example 6: Real-time Interactive Refinement</a></li>
+        </ol>
+      </li>
+      <li><a href="#specialized-use-cases" id="markdown-toc-specialized-use-cases">Specialized Use Cases</a>        <ol>
+          <li><a href="#example-7-architectural-visualization" id="markdown-toc-example-7-architectural-visualization">Example 7: Architectural Visualization</a></li>
+          <li><a href="#example-8-character-design-workflow" id="markdown-toc-example-8-character-design-workflow">Example 8: Character Design Workflow</a></li>
+        </ol>
+      </li>
+      <li><a href="#performance-tips-and-best-practices" id="markdown-toc-performance-tips-and-best-practices">Performance Tips and Best Practices</a>        <ol>
+          <li><a href="#memory-optimization" id="markdown-toc-memory-optimization">Memory Optimization</a></li>
+          <li><a href="#parallel-processing" id="markdown-toc-parallel-processing">Parallel Processing</a></li>
+          <li><a href="#caching-strategies" id="markdown-toc-caching-strategies">Caching Strategies</a></li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="getting-started-examples">Getting Started Examples</h2>
+
+<h3 id="example-1-basic-regional-generation">Example 1: Basic Regional Generation</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="n">PakatiCanvas</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="c1"># Initialize canvas
+</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">768</span><span class="p">)</span>
+
+<span class="c1"># Create sky region (top third)
+</span><span class="n">sky_region</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="c1"># Create landscape region (bottom two-thirds)
+</span><span class="n">land_region</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">768</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">768</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="c1"># Generate content for each region
+</span><span class="n">sky_result</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+    <span class="n">sky_region</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="s">"dramatic sunset sky with orange and purple clouds"</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s">"stable-diffusion-xl"</span><span class="p">,</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="n">land_result</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+    <span class="n">land_region</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="s">"rolling green hills with scattered trees"</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s">"stable-diffusion-xl"</span><span class="p">,</span> 
+    <span class="n">seed</span><span class="o">=</span><span class="mi">43</span>
+<span class="p">)</span>
+
+<span class="c1"># Save the complete image
+</span><span class="n">canvas</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"landscape_composition.png"</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Generated landscape with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">canvas</span><span class="p">.</span><span class="n">regions</span><span class="p">)</span><span class="si">}</span><span class="s"> regions"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Sky generation took </span><span class="si">{</span><span class="n">sky_result</span><span class="p">.</span><span class="n">generation_time</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">s"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Land generation took </span><span class="si">{</span><span class="n">land_result</span><span class="p">.</span><span class="n">generation_time</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">s"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="example-2-reference-understanding-basics">Example 2: Reference Understanding Basics</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="n">PakatiCanvas</span><span class="p">,</span> <span class="n">ReferenceUnderstandingEngine</span><span class="p">,</span> <span class="n">ReferenceImage</span>
+
+<span class="c1"># Initialize system
+</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">768</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">ReferenceUnderstandingEngine</span><span class="p">(</span><span class="n">canvas_interface</span><span class="o">=</span><span class="n">canvas</span><span class="p">)</span>
+
+<span class="c1"># Load reference image
+</span><span class="n">reference</span> <span class="o">=</span> <span class="n">ReferenceImage</span><span class="p">(</span>
+    <span class="n">image_path</span><span class="o">=</span><span class="s">"reference_mountain.jpg"</span><span class="p">,</span>
+    <span class="n">metadata</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">"type"</span><span class="p">:</span> <span class="s">"landscape"</span><span class="p">,</span>
+        <span class="s">"style"</span><span class="p">:</span> <span class="s">"photographic"</span><span class="p">,</span>
+        <span class="s">"complexity"</span><span class="p">:</span> <span class="s">"medium"</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="c1"># Make AI understand the reference
+</span><span class="k">print</span><span class="p">(</span><span class="s">"Teaching AI to understand the reference..."</span><span class="p">)</span>
+<span class="n">understanding</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">learn_reference</span><span class="p">(</span>
+    <span class="n">reference</span><span class="p">,</span>
+    <span class="n">masking_strategies</span><span class="o">=</span><span class="p">[</span>
+        <span class="s">"progressive_reveal"</span><span class="p">,</span>
+        <span class="s">"center_out"</span><span class="p">,</span> 
+        <span class="s">"frequency_bands"</span>
+    <span class="p">],</span>
+    <span class="n">max_attempts</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
+
+<span class="c1"># Check understanding results
+</span><span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Understanding Level: </span><span class="si">{</span><span class="n">understanding</span><span class="p">.</span><span class="n">understanding_level</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Mastery Achieved: </span><span class="si">{</span><span class="n">understanding</span><span class="p">.</span><span class="n">mastery_achieved</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Total Attempts: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">understanding</span><span class="p">.</span><span class="n">attempts</span><span class="p">)</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">understanding</span><span class="p">.</span><span class="n">mastery_achieved</span><span class="p">:</span>
+    <span class="c1"># Use understanding for new generation
+</span>    <span class="n">guidance</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">use_understood_reference</span><span class="p">(</span>
+        <span class="n">understanding</span><span class="p">.</span><span class="n">reference_id</span><span class="p">,</span>
+        <span class="n">target_prompt</span><span class="o">=</span><span class="s">"serene mountain lake at golden hour"</span><span class="p">,</span>
+        <span class="n">transfer_aspects</span><span class="o">=</span><span class="p">[</span><span class="s">"composition"</span><span class="p">,</span> <span class="s">"lighting"</span><span class="p">,</span> <span class="s">"color_harmony"</span><span class="p">]</span>
+    <span class="p">)</span>
+    
+    <span class="n">result</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">generate_with_understanding</span><span class="p">(</span><span class="n">guidance</span><span class="p">)</span>
+    <span class="n">result</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"understood_generation.png"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Successfully generated image using understood reference!"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"AI didn't achieve mastery of the reference"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="intermediate-examples">Intermediate Examples</h2>
+
+<h3 id="example-3-multi-region-portrait-with-understanding">Example 3: Multi-Region Portrait with Understanding</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PakatiCanvas</span><span class="p">,</span> 
+    <span class="n">ReferenceUnderstandingEngine</span><span class="p">,</span> 
+    <span class="n">ReferenceImage</span><span class="p">,</span>
+    <span class="n">IterativeRefinementEngine</span>
+<span class="p">)</span>
+
+<span class="c1"># Initialize system
+</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">768</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+<span class="n">understanding_engine</span> <span class="o">=</span> <span class="n">ReferenceUnderstandingEngine</span><span class="p">(</span><span class="n">canvas</span><span class="p">)</span>
+<span class="n">refinement_engine</span> <span class="o">=</span> <span class="n">IterativeRefinementEngine</span><span class="p">(</span><span class="n">canvas</span><span class="p">,</span> <span class="n">understanding_engine</span><span class="p">)</span>
+
+<span class="c1"># Load multiple references
+</span><span class="n">face_reference</span> <span class="o">=</span> <span class="n">ReferenceImage</span><span class="p">(</span><span class="s">"portrait_reference.jpg"</span><span class="p">)</span>
+<span class="n">lighting_reference</span> <span class="o">=</span> <span class="n">ReferenceImage</span><span class="p">(</span><span class="s">"dramatic_lighting.jpg"</span><span class="p">)</span>
+
+<span class="c1"># Understand references
+</span><span class="k">print</span><span class="p">(</span><span class="s">"Understanding face composition..."</span><span class="p">)</span>
+<span class="n">face_understanding</span> <span class="o">=</span> <span class="n">understanding_engine</span><span class="p">.</span><span class="n">learn_reference</span><span class="p">(</span>
+    <span class="n">face_reference</span><span class="p">,</span>
+    <span class="n">masking_strategies</span><span class="o">=</span><span class="p">[</span><span class="s">"center_out"</span><span class="p">,</span> <span class="s">"semantic_regions"</span><span class="p">],</span>
+    <span class="n">max_attempts</span><span class="o">=</span><span class="mi">8</span>
+<span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Understanding lighting..."</span><span class="p">)</span>
+<span class="n">lighting_understanding</span> <span class="o">=</span> <span class="n">understanding_engine</span><span class="p">.</span><span class="n">learn_reference</span><span class="p">(</span>
+    <span class="n">lighting_reference</span><span class="p">,</span>
+    <span class="n">masking_strategies</span><span class="o">=</span><span class="p">[</span><span class="s">"frequency_bands"</span><span class="p">,</span> <span class="s">"progressive_reveal"</span><span class="p">],</span>
+    <span class="n">max_attempts</span><span class="o">=</span><span class="mi">8</span>
+<span class="p">)</span>
+
+<span class="c1"># Define portrait regions
+</span><span class="n">background_region</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">768</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">768</span><span class="p">,</span> <span class="mi">1024</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">face_region</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+    <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="p">(</span><span class="mi">568</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="p">(</span><span class="mi">568</span><span class="p">,</span> <span class="mi">650</span><span class="p">),</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">650</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="c1"># Generate background first
+</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+    <span class="n">background_region</span><span class="p">,</span>
+    <span class="n">prompt</span><span class="o">=</span><span class="s">"soft gradient background with subtle bokeh"</span><span class="p">,</span>
+    <span class="n">model_name</span><span class="o">=</span><span class="s">"stable-diffusion-xl"</span>
+<span class="p">)</span>
+
+<span class="c1"># Generate face using understood references
+</span><span class="k">if</span> <span class="n">face_understanding</span><span class="p">.</span><span class="n">mastery_achieved</span><span class="p">:</span>
+    <span class="n">face_guidance</span> <span class="o">=</span> <span class="n">understanding_engine</span><span class="p">.</span><span class="n">use_understood_reference</span><span class="p">(</span>
+        <span class="n">face_understanding</span><span class="p">.</span><span class="n">reference_id</span><span class="p">,</span>
+        <span class="s">"professional portrait of a confident person"</span><span class="p">,</span>
+        <span class="n">transfer_aspects</span><span class="o">=</span><span class="p">[</span><span class="s">"composition"</span><span class="p">,</span> <span class="s">"facial_structure"</span><span class="p">]</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Apply lighting understanding
+</span>    <span class="k">if</span> <span class="n">lighting_understanding</span><span class="p">.</span><span class="n">mastery_achieved</span><span class="p">:</span>
+        <span class="n">lighting_guidance</span> <span class="o">=</span> <span class="n">understanding_engine</span><span class="p">.</span><span class="n">use_understood_reference</span><span class="p">(</span>
+            <span class="n">lighting_understanding</span><span class="p">.</span><span class="n">reference_id</span><span class="p">,</span>
+            <span class="s">"dramatic studio lighting"</span><span class="p">,</span>
+            <span class="n">transfer_aspects</span><span class="o">=</span><span class="p">[</span><span class="s">"lighting"</span><span class="p">,</span> <span class="s">"mood"</span><span class="p">]</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Combine guidance
+</span>        <span class="n">combined_guidance</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="o">**</span><span class="n">face_guidance</span><span class="p">,</span>
+            <span class="s">"lighting_guidance"</span><span class="p">:</span> <span class="n">lighting_guidance</span>
+        <span class="p">}</span>
+        
+        <span class="n">face_result</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">generate_with_understanding</span><span class="p">(</span><span class="n">combined_guidance</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">face_result</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">generate_with_understanding</span><span class="p">(</span><span class="n">face_guidance</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># Fallback to traditional generation
+</span>    <span class="n">face_result</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+        <span class="n">face_region</span><span class="p">,</span>
+        <span class="s">"professional portrait with dramatic lighting"</span>
+    <span class="p">)</span>
+
+<span class="c1"># Refine the portrait
+</span><span class="n">final_portrait</span> <span class="o">=</span> <span class="n">refinement_engine</span><span class="p">.</span><span class="n">refine_iteratively</span><span class="p">(</span>
+    <span class="n">canvas</span><span class="p">.</span><span class="n">base_image</span><span class="p">,</span>
+    <span class="s">"stunning professional portrait with perfect lighting"</span><span class="p">,</span>
+    <span class="n">reference_images</span><span class="o">=</span><span class="p">[</span><span class="n">face_reference</span><span class="p">,</span> <span class="n">lighting_reference</span><span class="p">],</span>
+    <span class="n">max_iterations</span><span class="o">=</span><span class="mi">4</span>
+<span class="p">)</span>
+
+<span class="n">final_portrait</span><span class="p">.</span><span class="n">final_image</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"refined_portrait.png"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Portrait completed with </span><span class="si">{</span><span class="n">final_portrait</span><span class="p">.</span><span class="n">total_iterations</span><span class="si">}</span><span class="s"> refinement iterations"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="example-4-fuzzy-logic-creative-instructions">Example 4: Fuzzy Logic Creative Instructions</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="n">PakatiCanvas</span><span class="p">,</span> <span class="n">FuzzyLogicEngine</span><span class="p">,</span> <span class="n">IterativeRefinementEngine</span>
+
+<span class="c1"># Initialize system with fuzzy logic
+</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">768</span><span class="p">)</span>
+<span class="n">fuzzy_engine</span> <span class="o">=</span> <span class="n">FuzzyLogicEngine</span><span class="p">()</span>
+<span class="n">refinement_engine</span> <span class="o">=</span> <span class="n">IterativeRefinementEngine</span><span class="p">(</span>
+    <span class="n">canvas_interface</span><span class="o">=</span><span class="n">canvas</span><span class="p">,</span>
+    <span class="n">fuzzy_logic_engine</span><span class="o">=</span><span class="n">fuzzy_engine</span>
+<span class="p">)</span>
+
+<span class="c1"># Generate initial landscape
+</span><span class="n">region</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">768</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">768</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">initial_result</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+    <span class="n">region</span><span class="p">,</span>
+    <span class="s">"mountain landscape at sunset"</span><span class="p">,</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># Apply fuzzy creative instructions
+</span><span class="n">instructions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">"make it slightly warmer"</span><span class="p">,</span>
+    <span class="s">"add very subtle details"</span><span class="p">,</span> 
+    <span class="s">"enhance the colors somewhat"</span><span class="p">,</span>
+    <span class="s">"make the lighting more dramatic but not too intense"</span>
+<span class="p">]</span>
+
+<span class="n">current_image</span> <span class="o">=</span> <span class="n">initial_result</span><span class="p">.</span><span class="n">image</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">instructions</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Applying instruction </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">: '</span><span class="si">{</span><span class="n">instruction</span><span class="si">}</span><span class="s">'"</span><span class="p">)</span>
+    
+    <span class="c1"># Extract current image features
+</span>    <span class="n">current_features</span> <span class="o">=</span> <span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">extract_features</span><span class="p">(</span><span class="n">current_image</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Current warmth: </span><span class="si">{</span><span class="n">current_features</span><span class="p">[</span><span class="s">'color_warmth'</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Current detail: </span><span class="si">{</span><span class="n">current_features</span><span class="p">[</span><span class="s">'detail_level'</span><span class="p">]</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    
+    <span class="c1"># Process fuzzy instruction
+</span>    <span class="n">adjustments</span> <span class="o">=</span> <span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">process_instruction</span><span class="p">(</span>
+        <span class="n">instruction</span><span class="p">,</span> 
+        <span class="n">current_features</span>
+    <span class="p">)</span>
+    
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Recommended adjustments: </span><span class="si">{</span><span class="n">adjustments</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    
+    <span class="c1"># Apply adjustments
+</span>    <span class="n">enhanced_prompt</span> <span class="o">=</span> <span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">enhance_prompt_with_adjustments</span><span class="p">(</span>
+        <span class="s">"mountain landscape at sunset"</span><span class="p">,</span>
+        <span class="n">adjustments</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Regenerate with adjustments
+</span>    <span class="n">adjusted_result</span> <span class="o">=</span> <span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+        <span class="n">region</span><span class="p">,</span>
+        <span class="n">enhanced_prompt</span><span class="p">,</span>
+        <span class="n">seed</span><span class="o">=</span><span class="mi">42</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="p">)</span>
+    
+    <span class="n">current_image</span> <span class="o">=</span> <span class="n">adjusted_result</span><span class="p">.</span><span class="n">image</span>
+    
+    <span class="c1"># Save intermediate result
+</span>    <span class="n">current_image</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s">"fuzzy_step_</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s">.png"</span><span class="p">)</span>
+
+<span class="c1"># Final result
+</span><span class="n">current_image</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"fuzzy_final.png"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"Fuzzy instruction sequence completed!"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="advanced-examples">Advanced Examples</h2>
+
+<h3 id="example-5-complex-scene-with-multiple-understanding">Example 5: Complex Scene with Multiple Understanding</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">PakatiCanvas</span><span class="p">,</span>
+    <span class="n">ReferenceUnderstandingEngine</span><span class="p">,</span>
+    <span class="n">IterativeRefinementEngine</span><span class="p">,</span>
+    <span class="n">ReferenceImage</span><span class="p">,</span>
+    <span class="n">FuzzyLogicEngine</span>
+<span class="p">)</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">class</span> <span class="nc">AdvancedSceneGenerator</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1920</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1080</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span> <span class="o">=</span> <span class="n">ReferenceUnderstandingEngine</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span> <span class="o">=</span> <span class="n">FuzzyLogicEngine</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">refinement_engine</span> <span class="o">=</span> <span class="n">IterativeRefinementEngine</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span>
+        <span class="p">)</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">understood_references</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">load_and_understand_references</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_paths</span><span class="p">):</span>
+        <span class="s">"""Load and understand multiple references."""</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Loading and understanding references..."</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">reference_paths</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Understanding </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">..."</span><span class="p">)</span>
+            <span class="n">reference</span> <span class="o">=</span> <span class="n">ReferenceImage</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            
+            <span class="n">understanding</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span><span class="p">.</span><span class="n">learn_reference</span><span class="p">(</span>
+                <span class="n">reference</span><span class="p">,</span>
+                <span class="n">masking_strategies</span><span class="o">=</span><span class="p">[</span>
+                    <span class="s">"progressive_reveal"</span><span class="p">,</span>
+                    <span class="s">"center_out"</span><span class="p">,</span>
+                    <span class="s">"frequency_bands"</span><span class="p">,</span>
+                    <span class="s">"semantic_regions"</span>
+                <span class="p">],</span>
+                <span class="n">max_attempts</span><span class="o">=</span><span class="mi">12</span>
+            <span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">understanding</span><span class="p">.</span><span class="n">mastery_achieved</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">understood_references</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">understanding</span>
+                <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"✓ </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">understanding</span><span class="p">.</span><span class="n">understanding_level</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"✗ </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s">: Failed to achieve mastery"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">create_scene_regions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""Define regions for complex scene."""</span>
+        <span class="n">regions</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">'sky'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+                <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">400</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+            <span class="p">]),</span>
+            
+            <span class="s">'mountains'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+                <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">400</span><span class="p">),</span> <span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">400</span><span class="p">),</span> <span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">700</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">700</span><span class="p">)</span>
+            <span class="p">]),</span>
+            
+            <span class="s">'water'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+                <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">700</span><span class="p">),</span> <span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">700</span><span class="p">),</span> <span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">1080</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1080</span><span class="p">)</span>
+            <span class="p">]),</span>
+            
+            <span class="s">'foreground_left'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+                <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">600</span><span class="p">),</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">600</span><span class="p">),</span> <span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">1080</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1080</span><span class="p">)</span>
+            <span class="p">]),</span>
+            
+            <span class="s">'foreground_right'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+                <span class="p">(</span><span class="mi">1520</span><span class="p">,</span> <span class="mi">600</span><span class="p">),</span> <span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">600</span><span class="p">),</span> <span class="p">(</span><span class="mi">1920</span><span class="p">,</span> <span class="mi">1080</span><span class="p">),</span> <span class="p">(</span><span class="mi">1520</span><span class="p">,</span> <span class="mi">1080</span><span class="p">)</span>
+            <span class="p">])</span>
+        <span class="p">}</span>
+        
+        <span class="k">return</span> <span class="n">regions</span>
+    
+    <span class="k">def</span> <span class="nf">generate_scene_with_understanding</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">regions</span><span class="p">):</span>
+        <span class="s">"""Generate scene using understood references."""</span>
+        
+        <span class="c1"># Sky with dramatic lighting
+</span>        <span class="k">if</span> <span class="s">'sky_reference'</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">understood_references</span><span class="p">:</span>
+            <span class="n">sky_guidance</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span><span class="p">.</span><span class="n">use_understood_reference</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">understood_references</span><span class="p">[</span><span class="s">'sky_reference'</span><span class="p">].</span><span class="n">reference_id</span><span class="p">,</span>
+                <span class="s">"dramatic sunset sky with volumetric clouds"</span><span class="p">,</span>
+                <span class="n">transfer_aspects</span><span class="o">=</span><span class="p">[</span><span class="s">"lighting"</span><span class="p">,</span> <span class="s">"color_harmony"</span><span class="p">,</span> <span class="s">"composition"</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">generate_region_with_understanding</span><span class="p">(</span><span class="n">regions</span><span class="p">[</span><span class="s">'sky'</span><span class="p">],</span> <span class="n">sky_guidance</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+                <span class="n">regions</span><span class="p">[</span><span class="s">'sky'</span><span class="p">],</span>
+                <span class="s">"dramatic sunset sky with volumetric clouds"</span>
+            <span class="p">)</span>
+        
+        <span class="c1"># Mountains with understood composition
+</span>        <span class="k">if</span> <span class="s">'mountain_reference'</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">understood_references</span><span class="p">:</span>
+            <span class="n">mountain_guidance</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span><span class="p">.</span><span class="n">use_understood_reference</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">understood_references</span><span class="p">[</span><span class="s">'mountain_reference'</span><span class="p">].</span><span class="n">reference_id</span><span class="p">,</span>
+                <span class="s">"majestic mountain range silhouetted against sky"</span><span class="p">,</span>
+                <span class="n">transfer_aspects</span><span class="o">=</span><span class="p">[</span><span class="s">"composition"</span><span class="p">,</span> <span class="s">"structure"</span><span class="p">,</span> <span class="s">"style"</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">generate_region_with_understanding</span><span class="p">(</span><span class="n">regions</span><span class="p">[</span><span class="s">'mountains'</span><span class="p">],</span> <span class="n">mountain_guidance</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+                <span class="n">regions</span><span class="p">[</span><span class="s">'mountains'</span><span class="p">],</span>
+                <span class="s">"majestic mountain range silhouetted against sky"</span>
+            <span class="p">)</span>
+        
+        <span class="c1"># Water with reflection understanding
+</span>        <span class="k">if</span> <span class="s">'water_reference'</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">understood_references</span><span class="p">:</span>
+            <span class="n">water_guidance</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span><span class="p">.</span><span class="n">use_understood_reference</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">understood_references</span><span class="p">[</span><span class="s">'water_reference'</span><span class="p">].</span><span class="n">reference_id</span><span class="p">,</span>
+                <span class="s">"calm lake water with perfect reflections"</span><span class="p">,</span>
+                <span class="n">transfer_aspects</span><span class="o">=</span><span class="p">[</span><span class="s">"surface_quality"</span><span class="p">,</span> <span class="s">"reflections"</span><span class="p">,</span> <span class="s">"color"</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">generate_region_with_understanding</span><span class="p">(</span><span class="n">regions</span><span class="p">[</span><span class="s">'water'</span><span class="p">],</span> <span class="n">water_guidance</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+                <span class="n">regions</span><span class="p">[</span><span class="s">'water'</span><span class="p">],</span>
+                <span class="s">"calm lake water with perfect reflections"</span>
+            <span class="p">)</span>
+        
+        <span class="c1"># Foreground elements
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+            <span class="n">regions</span><span class="p">[</span><span class="s">'foreground_left'</span><span class="p">],</span>
+            <span class="s">"detailed rock formation with moss and vegetation"</span>
+        <span class="p">)</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+            <span class="n">regions</span><span class="p">[</span><span class="s">'foreground_right'</span><span class="p">],</span>
+            <span class="s">"ancient weathered tree trunk with intricate bark"</span>
+        <span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">apply_fuzzy_refinements</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""Apply fuzzy logic refinements."""</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Applying fuzzy refinements..."</span><span class="p">)</span>
+        
+        <span class="n">fuzzy_instructions</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s">"make the colors very slightly warmer"</span><span class="p">,</span>
+            <span class="s">"enhance the atmospheric perspective somewhat"</span><span class="p">,</span>
+            <span class="s">"add subtle details to the foreground"</span><span class="p">,</span>
+            <span class="s">"balance the overall lighting more dramatically"</span>
+        <span class="p">]</span>
+        
+        <span class="k">for</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="n">fuzzy_instructions</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Applying: </span><span class="si">{</span><span class="n">instruction</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            
+            <span class="n">current_features</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">extract_features</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">base_image</span><span class="p">)</span>
+            <span class="n">adjustments</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">process_instruction</span><span class="p">(</span><span class="n">instruction</span><span class="p">,</span> <span class="n">current_features</span><span class="p">)</span>
+            
+            <span class="c1"># Apply adjustments to relevant regions
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_fuzzy_adjustments</span><span class="p">(</span><span class="n">adjustments</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">final_refinement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""Perform final iterative refinement."""</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Final iterative refinement..."</span><span class="p">)</span>
+        
+        <span class="n">reference_images</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">understanding</span><span class="p">.</span><span class="n">reference_image</span> 
+            <span class="k">for</span> <span class="n">understanding</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">understood_references</span><span class="p">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="p">]</span>
+        
+        <span class="n">final_result</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">refinement_engine</span><span class="p">.</span><span class="n">refine_iteratively</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">base_image</span><span class="p">,</span>
+            <span class="s">"breathtaking landscape photography with perfect composition and lighting"</span><span class="p">,</span>
+            <span class="n">reference_images</span><span class="o">=</span><span class="n">reference_images</span><span class="p">,</span>
+            <span class="n">max_iterations</span><span class="o">=</span><span class="mi">6</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">final_result</span>
+    
+    <span class="k">def</span> <span class="nf">generate_masterpiece</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_paths</span><span class="p">):</span>
+        <span class="s">"""Generate complete masterpiece scene."""</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+        
+        <span class="c1"># Step 1: Understand references
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">load_and_understand_references</span><span class="p">(</span><span class="n">reference_paths</span><span class="p">)</span>
+        
+        <span class="c1"># Step 2: Create regions
+</span>        <span class="n">regions</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">create_scene_regions</span><span class="p">()</span>
+        
+        <span class="c1"># Step 3: Generate with understanding
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">generate_scene_with_understanding</span><span class="p">(</span><span class="n">regions</span><span class="p">)</span>
+        
+        <span class="c1"># Step 4: Apply fuzzy refinements
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">apply_fuzzy_refinements</span><span class="p">()</span>
+        
+        <span class="c1"># Step 5: Final refinement
+</span>        <span class="n">final_result</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">final_refinement</span><span class="p">()</span>
+        
+        <span class="n">total_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span>
+        
+        <span class="c1"># Save results
+</span>        <span class="n">final_result</span><span class="p">.</span><span class="n">final_image</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"masterpiece_scene.png"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"masterpiece_regions.png"</span><span class="p">)</span>
+        
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Masterpiece completed in </span><span class="si">{</span><span class="n">total_time</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s"> seconds"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Final quality score: </span><span class="si">{</span><span class="n">final_result</span><span class="p">.</span><span class="n">final_quality_score</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Convergence achieved: </span><span class="si">{</span><span class="n">final_result</span><span class="p">.</span><span class="n">convergence_achieved</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">final_result</span>
+
+<span class="c1"># Usage
+</span><span class="n">generator</span> <span class="o">=</span> <span class="n">AdvancedSceneGenerator</span><span class="p">()</span>
+
+<span class="n">reference_paths</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'sky_reference'</span><span class="p">:</span> <span class="s">'references/dramatic_sky.jpg'</span><span class="p">,</span>
+    <span class="s">'mountain_reference'</span><span class="p">:</span> <span class="s">'references/mountain_silhouette.jpg'</span><span class="p">,</span> 
+    <span class="s">'water_reference'</span><span class="p">:</span> <span class="s">'references/lake_reflection.jpg'</span>
+<span class="p">}</span>
+
+<span class="n">masterpiece</span> <span class="o">=</span> <span class="n">generator</span><span class="p">.</span><span class="n">generate_masterpiece</span><span class="p">(</span><span class="n">reference_paths</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="example-6-real-time-interactive-refinement">Example 6: Real-time Interactive Refinement</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">tkinter</span> <span class="k">as</span> <span class="n">tk</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">ttk</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageTk</span>
+
+<span class="k">class</span> <span class="nc">InteractiveRefinementApp</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Pakati Interactive Refinement"</span><span class="p">)</span>
+        
+        <span class="c1"># Initialize Pakati system
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span> <span class="o">=</span> <span class="n">ReferenceUnderstandingEngine</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span> <span class="o">=</span> <span class="n">FuzzyLogicEngine</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">refinement_engine</span> <span class="o">=</span> <span class="n">IterativeRefinementEngine</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span>
+        <span class="p">)</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">current_image</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">setup_ui</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">setup_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""Setup the user interface."""</span>
+        <span class="c1"># Main frame
+</span>        <span class="n">main_frame</span> <span class="o">=</span> <span class="n">ttk</span><span class="p">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s">"10"</span><span class="p">)</span>
+        <span class="n">main_frame</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="p">.</span><span class="n">W</span><span class="p">,</span> <span class="n">tk</span><span class="p">.</span><span class="n">E</span><span class="p">,</span> <span class="n">tk</span><span class="p">.</span><span class="n">N</span><span class="p">,</span> <span class="n">tk</span><span class="p">.</span><span class="n">S</span><span class="p">))</span>
+        
+        <span class="c1"># Image display
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">image_label</span> <span class="o">=</span> <span class="n">ttk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">main_frame</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_label</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+        
+        <span class="c1"># Prompt entry
+</span>        <span class="n">ttk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">main_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Prompt:"</span><span class="p">).</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="p">.</span><span class="n">W</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">prompt_var</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">StringVar</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">"beautiful landscape"</span><span class="p">)</span>
+        <span class="n">prompt_entry</span> <span class="o">=</span> <span class="n">ttk</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">main_frame</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">prompt_var</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+        <span class="n">prompt_entry</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="p">.</span><span class="n">W</span><span class="p">,</span> <span class="n">tk</span><span class="p">.</span><span class="n">E</span><span class="p">))</span>
+        
+        <span class="c1"># Generate button
+</span>        <span class="n">generate_btn</span> <span class="o">=</span> <span class="n">ttk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">main_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Generate"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">generate_image</span><span class="p">)</span>
+        <span class="n">generate_btn</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        
+        <span class="c1"># Fuzzy instruction entry
+</span>        <span class="n">ttk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">main_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Fuzzy Instruction:"</span><span class="p">).</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="p">.</span><span class="n">W</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_var</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">StringVar</span><span class="p">()</span>
+        <span class="n">fuzzy_entry</span> <span class="o">=</span> <span class="n">ttk</span><span class="p">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">main_frame</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_var</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+        <span class="n">fuzzy_entry</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="p">(</span><span class="n">tk</span><span class="p">.</span><span class="n">W</span><span class="p">,</span> <span class="n">tk</span><span class="p">.</span><span class="n">E</span><span class="p">),</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        
+        <span class="c1"># Apply fuzzy button
+</span>        <span class="n">fuzzy_btn</span> <span class="o">=</span> <span class="n">ttk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">main_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Apply Fuzzy"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">apply_fuzzy</span><span class="p">)</span>
+        <span class="n">fuzzy_btn</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        
+        <span class="c1"># Refine button
+</span>        <span class="n">refine_btn</span> <span class="o">=</span> <span class="n">ttk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">main_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Refine"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">refine_image</span><span class="p">)</span>
+        <span class="n">refine_btn</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        
+        <span class="c1"># Save button
+</span>        <span class="n">save_btn</span> <span class="o">=</span> <span class="n">ttk</span><span class="p">.</span><span class="n">Button</span><span class="p">(</span><span class="n">main_frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s">"Save"</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">save_image</span><span class="p">)</span>
+        <span class="n">save_btn</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        
+        <span class="c1"># Status label
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">status_var</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">StringVar</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s">"Ready"</span><span class="p">)</span>
+        <span class="n">status_label</span> <span class="o">=</span> <span class="n">ttk</span><span class="p">.</span><span class="n">Label</span><span class="p">(</span><span class="n">main_frame</span><span class="p">,</span> <span class="n">textvariable</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">status_var</span><span class="p">)</span>
+        <span class="n">status_label</span><span class="p">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">pady</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    
+    <span class="k">def</span> <span class="nf">update_display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+        <span class="s">"""Update the displayed image."""</span>
+        <span class="c1"># Resize for display
+</span>        <span class="n">display_image</span> <span class="o">=</span> <span class="n">image</span><span class="p">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span> <span class="n">Image</span><span class="p">.</span><span class="n">LANCZOS</span><span class="p">)</span>
+        <span class="n">photo</span> <span class="o">=</span> <span class="n">ImageTk</span><span class="p">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">display_image</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_label</span><span class="p">.</span><span class="n">configure</span><span class="p">(</span><span class="n">image</span><span class="o">=</span><span class="n">photo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_label</span><span class="p">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">photo</span>  <span class="c1"># Keep a reference
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">current_image</span> <span class="o">=</span> <span class="n">image</span>
+    
+    <span class="k">def</span> <span class="nf">generate_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""Generate initial image."""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">status_var</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="s">"Generating..."</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">update</span><span class="p">()</span>
+        
+        <span class="n">region</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+            <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+        <span class="p">])</span>
+        
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+            <span class="n">region</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">prompt_var</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="n">seed</span><span class="o">=</span><span class="mi">42</span>
+        <span class="p">)</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">update_display</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">image</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">status_var</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="s">"Generated successfully"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">apply_fuzzy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""Apply fuzzy instruction."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">current_image</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">status_var</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="s">"No image to modify"</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="n">instruction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_var</span><span class="p">.</span><span class="n">get</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">instruction</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">status_var</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="s">"Enter fuzzy instruction"</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">status_var</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="sa">f</span><span class="s">"Applying: </span><span class="si">{</span><span class="n">instruction</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">update</span><span class="p">()</span>
+        
+        <span class="c1"># Extract features
+</span>        <span class="n">current_features</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">extract_features</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">current_image</span><span class="p">)</span>
+        
+        <span class="c1"># Process instruction
+</span>        <span class="n">adjustments</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">process_instruction</span><span class="p">(</span>
+            <span class="n">instruction</span><span class="p">,</span> 
+            <span class="n">current_features</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Apply adjustments
+</span>        <span class="n">enhanced_prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">enhance_prompt_with_adjustments</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">prompt_var</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="n">adjustments</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Regenerate
+</span>        <span class="n">region</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">regions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">enhanced_prompt</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">update_display</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">image</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">status_var</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="sa">f</span><span class="s">"Applied: </span><span class="si">{</span><span class="n">instruction</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_var</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="s">""</span><span class="p">)</span>  <span class="c1"># Clear instruction
+</span>    
+    <span class="k">def</span> <span class="nf">refine_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""Refine current image."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">current_image</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">status_var</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="s">"No image to refine"</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">status_var</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="s">"Refining..."</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">root</span><span class="p">.</span><span class="n">update</span><span class="p">()</span>
+        
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">refinement_engine</span><span class="p">.</span><span class="n">refine_iteratively</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current_image</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">prompt_var</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="n">max_iterations</span><span class="o">=</span><span class="mi">3</span>
+        <span class="p">)</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">update_display</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">final_image</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">status_var</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="sa">f</span><span class="s">"Refined in </span><span class="si">{</span><span class="n">result</span><span class="p">.</span><span class="n">total_iterations</span><span class="si">}</span><span class="s"> iterations"</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">save_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""Save current image."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">current_image</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">status_var</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="s">"No image to save"</span><span class="p">)</span>
+            <span class="k">return</span>
+        
+        <span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">filedialog</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="n">filedialog</span><span class="p">.</span><span class="n">asksaveasfilename</span><span class="p">(</span>
+            <span class="n">defaultextension</span><span class="o">=</span><span class="s">".png"</span><span class="p">,</span>
+            <span class="n">filetypes</span><span class="o">=</span><span class="p">[(</span><span class="s">"PNG files"</span><span class="p">,</span> <span class="s">"*.png"</span><span class="p">),</span> <span class="p">(</span><span class="s">"JPEG files"</span><span class="p">,</span> <span class="s">"*.jpg"</span><span class="p">)]</span>
+        <span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">filename</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">current_image</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">status_var</span><span class="p">.</span><span class="nb">set</span><span class="p">(</span><span class="sa">f</span><span class="s">"Saved: </span><span class="si">{</span><span class="n">filename</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+<span class="c1"># Run the interactive app
+</span><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="p">.</span><span class="n">Tk</span><span class="p">()</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">InteractiveRefinementApp</span><span class="p">(</span><span class="n">root</span><span class="p">)</span>
+    <span class="n">root</span><span class="p">.</span><span class="n">mainloop</span><span class="p">()</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="specialized-use-cases">Specialized Use Cases</h2>
+
+<h3 id="example-7-architectural-visualization">Example 7: Architectural Visualization</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span> <span class="nc">ArchitecturalVisualizer</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1600</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">900</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span> <span class="o">=</span> <span class="n">ReferenceUnderstandingEngine</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">)</span>
+        
+        <span class="c1"># Load architectural references
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">architectural_references</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">load_architectural_references</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">load_architectural_references</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""Load and understand architectural reference images."""</span>
+        <span class="n">references</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="c1"># Modern building reference
+</span>        <span class="n">modern_ref</span> <span class="o">=</span> <span class="n">ReferenceImage</span><span class="p">(</span><span class="s">"references/modern_building.jpg"</span><span class="p">)</span>
+        <span class="n">modern_understanding</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span><span class="p">.</span><span class="n">learn_reference</span><span class="p">(</span>
+            <span class="n">modern_ref</span><span class="p">,</span>
+            <span class="n">masking_strategies</span><span class="o">=</span><span class="p">[</span><span class="s">"semantic_regions"</span><span class="p">,</span> <span class="s">"progressive_reveal"</span><span class="p">],</span>
+            <span class="n">max_attempts</span><span class="o">=</span><span class="mi">10</span>
+        <span class="p">)</span>
+        <span class="n">references</span><span class="p">[</span><span class="s">'modern'</span><span class="p">]</span> <span class="o">=</span> <span class="n">modern_understanding</span>
+        
+        <span class="c1"># Classical architecture reference
+</span>        <span class="n">classical_ref</span> <span class="o">=</span> <span class="n">ReferenceImage</span><span class="p">(</span><span class="s">"references/classical_architecture.jpg"</span><span class="p">)</span>
+        <span class="n">classical_understanding</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span><span class="p">.</span><span class="n">learn_reference</span><span class="p">(</span>
+            <span class="n">classical_ref</span><span class="p">,</span>
+            <span class="n">masking_strategies</span><span class="o">=</span><span class="p">[</span><span class="s">"semantic_regions"</span><span class="p">,</span> <span class="s">"center_out"</span><span class="p">],</span>
+            <span class="n">max_attempts</span><span class="o">=</span><span class="mi">10</span>
+        <span class="p">)</span>
+        <span class="n">references</span><span class="p">[</span><span class="s">'classical'</span><span class="p">]</span> <span class="o">=</span> <span class="n">classical_understanding</span>
+        
+        <span class="k">return</span> <span class="n">references</span>
+    
+    <span class="k">def</span> <span class="nf">create_architectural_scene</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s">"modern"</span><span class="p">):</span>
+        <span class="s">"""Create architectural visualization."""</span>
+        
+        <span class="c1"># Define regions
+</span>        <span class="n">sky_region</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+            <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1600</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1600</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+        <span class="p">])</span>
+        
+        <span class="n">building_region</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+            <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="p">(</span><span class="mi">1400</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="p">(</span><span class="mi">1400</span><span class="p">,</span> <span class="mi">700</span><span class="p">),</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">700</span><span class="p">)</span>
+        <span class="p">])</span>
+        
+        <span class="n">ground_region</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+            <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">700</span><span class="p">),</span> <span class="p">(</span><span class="mi">1600</span><span class="p">,</span> <span class="mi">700</span><span class="p">),</span> <span class="p">(</span><span class="mi">1600</span><span class="p">,</span> <span class="mi">900</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">900</span><span class="p">)</span>
+        <span class="p">])</span>
+        
+        <span class="n">environment_left</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+            <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">700</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">700</span><span class="p">)</span>
+        <span class="p">])</span>
+        
+        <span class="n">environment_right</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+            <span class="p">(</span><span class="mi">1400</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="p">(</span><span class="mi">1600</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="p">(</span><span class="mi">1600</span><span class="p">,</span> <span class="mi">700</span><span class="p">),</span> <span class="p">(</span><span class="mi">1400</span><span class="p">,</span> <span class="mi">700</span><span class="p">)</span>
+        <span class="p">])</span>
+        
+        <span class="c1"># Generate sky
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+            <span class="n">sky_region</span><span class="p">,</span>
+            <span class="s">"clear blue sky with soft white clouds, architectural photography lighting"</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Generate building using understood style
+</span>        <span class="k">if</span> <span class="n">style</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">architectural_references</span><span class="p">:</span>
+            <span class="n">understanding</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">architectural_references</span><span class="p">[</span><span class="n">style</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">understanding</span><span class="p">.</span><span class="n">mastery_achieved</span><span class="p">:</span>
+                <span class="n">building_guidance</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span><span class="p">.</span><span class="n">use_understood_reference</span><span class="p">(</span>
+                    <span class="n">understanding</span><span class="p">.</span><span class="n">reference_id</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s">"stunning </span><span class="si">{</span><span class="n">style</span><span class="si">}</span><span class="s"> architecture building, professional photography"</span><span class="p">,</span>
+                    <span class="n">transfer_aspects</span><span class="o">=</span><span class="p">[</span><span class="s">"composition"</span><span class="p">,</span> <span class="s">"structure"</span><span class="p">,</span> <span class="s">"style"</span><span class="p">,</span> <span class="s">"lighting"</span><span class="p">]</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">generate_region_with_understanding</span><span class="p">(</span><span class="n">building_region</span><span class="p">,</span> <span class="n">building_guidance</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+                    <span class="n">building_region</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s">"stunning </span><span class="si">{</span><span class="n">style</span><span class="si">}</span><span class="s"> architecture building, professional photography"</span>
+                <span class="p">)</span>
+        
+        <span class="c1"># Generate environment
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+            <span class="n">ground_region</span><span class="p">,</span>
+            <span class="s">"well-maintained landscape architecture, stone pathways, professional landscaping"</span>
+        <span class="p">)</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+            <span class="n">environment_left</span><span class="p">,</span>
+            <span class="s">"mature trees and shrubs, architectural landscaping"</span>
+        <span class="p">)</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+            <span class="n">environment_right</span><span class="p">,</span>
+            <span class="s">"decorative elements, outdoor lighting, landscape design"</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">base_image</span>
+
+<span class="c1"># Usage
+</span><span class="n">visualizer</span> <span class="o">=</span> <span class="n">ArchitecturalVisualizer</span><span class="p">()</span>
+<span class="n">modern_scene</span> <span class="o">=</span> <span class="n">visualizer</span><span class="p">.</span><span class="n">create_architectural_scene</span><span class="p">(</span><span class="s">"modern"</span><span class="p">)</span>
+<span class="n">modern_scene</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"modern_architecture.png"</span><span class="p">)</span>
+
+<span class="n">classical_scene</span> <span class="o">=</span> <span class="n">visualizer</span><span class="p">.</span><span class="n">create_architectural_scene</span><span class="p">(</span><span class="s">"classical"</span><span class="p">)</span>
+<span class="n">classical_scene</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"classical_architecture.png"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="example-8-character-design-workflow">Example 8: Character Design Workflow</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span> <span class="nc">CharacterDesignWorkflow</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span> <span class="o">=</span> <span class="n">ReferenceUnderstandingEngine</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span> <span class="o">=</span> <span class="n">FuzzyLogicEngine</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">character_sheet</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">understand_character_references</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference_paths</span><span class="p">):</span>
+        <span class="s">"""Understand character design references."""</span>
+        <span class="n">understood_refs</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">for</span> <span class="n">ref_type</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">reference_paths</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Understanding </span><span class="si">{</span><span class="n">ref_type</span><span class="si">}</span><span class="s"> reference..."</span><span class="p">)</span>
+            <span class="n">reference</span> <span class="o">=</span> <span class="n">ReferenceImage</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            
+            <span class="c1"># Use specialized masking for character design
+</span>            <span class="k">if</span> <span class="n">ref_type</span> <span class="o">==</span> <span class="s">"face"</span><span class="p">:</span>
+                <span class="n">strategies</span> <span class="o">=</span> <span class="p">[</span><span class="s">"center_out"</span><span class="p">,</span> <span class="s">"semantic_regions"</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">ref_type</span> <span class="o">==</span> <span class="s">"pose"</span><span class="p">:</span>
+                <span class="n">strategies</span> <span class="o">=</span> <span class="p">[</span><span class="s">"progressive_reveal"</span><span class="p">,</span> <span class="s">"semantic_regions"</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">ref_type</span> <span class="o">==</span> <span class="s">"clothing"</span><span class="p">:</span>
+                <span class="n">strategies</span> <span class="o">=</span> <span class="p">[</span><span class="s">"random_patches"</span><span class="p">,</span> <span class="s">"semantic_regions"</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">strategies</span> <span class="o">=</span> <span class="p">[</span><span class="s">"progressive_reveal"</span><span class="p">,</span> <span class="s">"center_out"</span><span class="p">]</span>
+            
+            <span class="n">understanding</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span><span class="p">.</span><span class="n">learn_reference</span><span class="p">(</span>
+                <span class="n">reference</span><span class="p">,</span>
+                <span class="n">masking_strategies</span><span class="o">=</span><span class="n">strategies</span><span class="p">,</span>
+                <span class="n">max_attempts</span><span class="o">=</span><span class="mi">12</span>
+            <span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">understanding</span><span class="p">.</span><span class="n">mastery_achieved</span><span class="p">:</span>
+                <span class="n">understood_refs</span><span class="p">[</span><span class="n">ref_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">understanding</span>
+                <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"✓ </span><span class="si">{</span><span class="n">ref_type</span><span class="si">}</span><span class="s">: </span><span class="si">{</span><span class="n">understanding</span><span class="p">.</span><span class="n">understanding_level</span><span class="si">:</span><span class="p">.</span><span class="mi">2</span><span class="n">f</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"✗ </span><span class="si">{</span><span class="n">ref_type</span><span class="si">}</span><span class="s">: Failed mastery"</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">understood_refs</span>
+    
+    <span class="k">def</span> <span class="nf">design_character_concept</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">understood_refs</span><span class="p">,</span> <span class="n">character_description</span><span class="p">):</span>
+        <span class="s">"""Create character concept using understood references."""</span>
+        
+        <span class="c1"># Create character sheet regions
+</span>        <span class="n">main_pose_region</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+            <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">824</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">824</span><span class="p">,</span> <span class="mi">900</span><span class="p">),</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">900</span><span class="p">)</span>
+        <span class="p">])</span>
+        
+        <span class="n">face_detail_region</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+            <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span> <span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">250</span><span class="p">),</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+        <span class="p">])</span>
+        
+        <span class="n">hands_detail_region</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+            <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span> <span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">),</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+        <span class="p">])</span>
+        
+        <span class="c1"># Generate main character pose
+</span>        <span class="k">if</span> <span class="s">"pose"</span> <span class="ow">in</span> <span class="n">understood_refs</span><span class="p">:</span>
+            <span class="n">pose_guidance</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span><span class="p">.</span><span class="n">use_understood_reference</span><span class="p">(</span>
+                <span class="n">understood_refs</span><span class="p">[</span><span class="s">"pose"</span><span class="p">].</span><span class="n">reference_id</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s">"character design sheet: </span><span class="si">{</span><span class="n">character_description</span><span class="si">}</span><span class="s">, full body pose"</span><span class="p">,</span>
+                <span class="n">transfer_aspects</span><span class="o">=</span><span class="p">[</span><span class="s">"composition"</span><span class="p">,</span> <span class="s">"pose"</span><span class="p">,</span> <span class="s">"proportions"</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">main_result</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">generate_region_with_understanding</span><span class="p">(</span>
+                <span class="n">main_pose_region</span><span class="p">,</span> 
+                <span class="n">pose_guidance</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">main_result</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+                <span class="n">main_pose_region</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s">"character design sheet: </span><span class="si">{</span><span class="n">character_description</span><span class="si">}</span><span class="s">, full body pose"</span>
+            <span class="p">)</span>
+        
+        <span class="c1"># Generate face detail
+</span>        <span class="k">if</span> <span class="s">"face"</span> <span class="ow">in</span> <span class="n">understood_refs</span><span class="p">:</span>
+            <span class="n">face_guidance</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">understanding_engine</span><span class="p">.</span><span class="n">use_understood_reference</span><span class="p">(</span>
+                <span class="n">understood_refs</span><span class="p">[</span><span class="s">"face"</span><span class="p">].</span><span class="n">reference_id</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s">"character face detail: </span><span class="si">{</span><span class="n">character_description</span><span class="si">}</span><span class="s">"</span><span class="p">,</span>
+                <span class="n">transfer_aspects</span><span class="o">=</span><span class="p">[</span><span class="s">"facial_features"</span><span class="p">,</span> <span class="s">"expression"</span><span class="p">,</span> <span class="s">"style"</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">face_result</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">generate_region_with_understanding</span><span class="p">(</span>
+                <span class="n">face_detail_region</span><span class="p">,</span>
+                <span class="n">face_guidance</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">face_result</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+                <span class="n">face_detail_region</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s">"character face detail: </span><span class="si">{</span><span class="n">character_description</span><span class="si">}</span><span class="s">"</span>
+            <span class="p">)</span>
+        
+        <span class="c1"># Generate hands detail
+</span>        <span class="n">hands_result</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+            <span class="n">hands_detail_region</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s">"character hand studies: </span><span class="si">{</span><span class="n">character_description</span><span class="si">}</span><span class="s">, detailed hands"</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s">'main_pose'</span><span class="p">:</span> <span class="n">main_result</span><span class="p">,</span>
+            <span class="s">'face_detail'</span><span class="p">:</span> <span class="n">face_result</span><span class="p">,</span>
+            <span class="s">'hands_detail'</span><span class="p">:</span> <span class="n">hands_result</span>
+        <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="nf">refine_character_with_feedback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">design_results</span><span class="p">,</span> <span class="n">feedback_instructions</span><span class="p">):</span>
+        <span class="s">"""Refine character design based on fuzzy feedback."""</span>
+        
+        <span class="k">for</span> <span class="n">instruction</span> <span class="ow">in</span> <span class="n">feedback_instructions</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Applying feedback: </span><span class="si">{</span><span class="n">instruction</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            
+            <span class="c1"># Extract current features
+</span>            <span class="n">current_features</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">extract_features</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">base_image</span><span class="p">)</span>
+            
+            <span class="c1"># Process fuzzy instruction
+</span>            <span class="n">adjustments</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">process_instruction</span><span class="p">(</span>
+                <span class="n">instruction</span><span class="p">,</span>
+                <span class="n">current_features</span>
+            <span class="p">)</span>
+            
+            <span class="c1"># Apply to relevant regions
+</span>            <span class="k">if</span> <span class="s">"face"</span> <span class="ow">in</span> <span class="n">instruction</span><span class="p">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="c1"># Apply to face region
+</span>                <span class="n">enhanced_prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">enhance_prompt_with_adjustments</span><span class="p">(</span>
+                    <span class="s">"character face detail with improvements"</span><span class="p">,</span>
+                    <span class="n">adjustments</span>
+                <span class="p">)</span>
+                <span class="n">face_region</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">regions</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Face detail region
+</span>                <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span><span class="n">face_region</span><span class="p">,</span> <span class="n">enhanced_prompt</span><span class="p">)</span>
+            
+            <span class="k">elif</span> <span class="s">"pose"</span> <span class="ow">in</span> <span class="n">instruction</span><span class="p">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">or</span> <span class="s">"body"</span> <span class="ow">in</span> <span class="n">instruction</span><span class="p">.</span><span class="n">lower</span><span class="p">():</span>
+                <span class="c1"># Apply to main pose region
+</span>                <span class="n">enhanced_prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">enhance_prompt_with_adjustments</span><span class="p">(</span>
+                    <span class="s">"character full body pose with improvements"</span><span class="p">,</span>
+                    <span class="n">adjustments</span>
+                <span class="p">)</span>
+                <span class="n">main_region</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">regions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Main pose region
+</span>                <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span><span class="n">main_region</span><span class="p">,</span> <span class="n">enhanced_prompt</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">.</span><span class="n">base_image</span>
+    
+    <span class="k">def</span> <span class="nf">create_character_variations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">base_character</span><span class="p">,</span> <span class="n">variation_prompts</span><span class="p">):</span>
+        <span class="s">"""Create character variations."""</span>
+        <span class="n">variations</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">for</span> <span class="n">var_name</span><span class="p">,</span> <span class="n">var_prompt</span> <span class="ow">in</span> <span class="n">variation_prompts</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># Create new canvas for variation
+</span>            <span class="n">var_canvas</span> <span class="o">=</span> <span class="n">PakatiCanvas</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
+            <span class="n">var_region</span> <span class="o">=</span> <span class="n">var_canvas</span><span class="p">.</span><span class="n">create_region</span><span class="p">([</span>
+                <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>
+            <span class="p">])</span>
+            
+            <span class="c1"># Generate variation
+</span>            <span class="n">var_result</span> <span class="o">=</span> <span class="n">var_canvas</span><span class="p">.</span><span class="n">apply_to_region</span><span class="p">(</span>
+                <span class="n">var_region</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">base_character</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">var_prompt</span><span class="si">}</span><span class="s">"</span>
+            <span class="p">)</span>
+            
+            <span class="n">variations</span><span class="p">[</span><span class="n">var_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">var_result</span><span class="p">.</span><span class="n">image</span>
+        
+        <span class="k">return</span> <span class="n">variations</span>
+
+<span class="c1"># Usage example
+</span><span class="n">workflow</span> <span class="o">=</span> <span class="n">CharacterDesignWorkflow</span><span class="p">()</span>
+
+<span class="c1"># Character references
+</span><span class="n">references</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">"face"</span><span class="p">:</span> <span class="s">"references/character_face.jpg"</span><span class="p">,</span>
+    <span class="s">"pose"</span><span class="p">:</span> <span class="s">"references/character_pose.jpg"</span><span class="p">,</span> 
+    <span class="s">"clothing"</span><span class="p">:</span> <span class="s">"references/character_outfit.jpg"</span>
+<span class="p">}</span>
+
+<span class="c1"># Understand references
+</span><span class="n">understood_refs</span> <span class="o">=</span> <span class="n">workflow</span><span class="p">.</span><span class="n">understand_character_references</span><span class="p">(</span><span class="n">references</span><span class="p">)</span>
+
+<span class="c1"># Design character
+</span><span class="n">character_desc</span> <span class="o">=</span> <span class="s">"fantasy warrior princess, elegant and strong, detailed armor"</span>
+<span class="n">design_results</span> <span class="o">=</span> <span class="n">workflow</span><span class="p">.</span><span class="n">design_character_concept</span><span class="p">(</span><span class="n">understood_refs</span><span class="p">,</span> <span class="n">character_desc</span><span class="p">)</span>
+
+<span class="c1"># Apply feedback
+</span><span class="n">feedback</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">"make the armor slightly more ornate"</span><span class="p">,</span>
+    <span class="s">"enhance the facial expression to be more determined"</span><span class="p">,</span>
+    <span class="s">"add very subtle magical elements"</span>
+<span class="p">]</span>
+
+<span class="n">refined_character</span> <span class="o">=</span> <span class="n">workflow</span><span class="p">.</span><span class="n">refine_character_with_feedback</span><span class="p">(</span><span class="n">design_results</span><span class="p">,</span> <span class="n">feedback</span><span class="p">)</span>
+<span class="n">refined_character</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="s">"character_design_sheet.png"</span><span class="p">)</span>
+
+<span class="c1"># Create variations
+</span><span class="n">variations</span> <span class="o">=</span> <span class="n">workflow</span><span class="p">.</span><span class="n">create_character_variations</span><span class="p">(</span>
+    <span class="n">character_desc</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="s">"battle_ready"</span><span class="p">:</span> <span class="s">"in dynamic action pose, weapon drawn"</span><span class="p">,</span>
+        <span class="s">"royal_court"</span><span class="p">:</span> <span class="s">"in elegant court dress, formal pose"</span><span class="p">,</span>
+        <span class="s">"casual"</span><span class="p">:</span> <span class="s">"in travel clothes, relaxed expression"</span>
+    <span class="p">}</span>
+<span class="p">)</span>
+
+<span class="k">for</span> <span class="n">var_name</span><span class="p">,</span> <span class="n">var_image</span> <span class="ow">in</span> <span class="n">variations</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">var_image</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s">"character_</span><span class="si">{</span><span class="n">var_name</span><span class="si">}</span><span class="s">.png"</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"Character design workflow completed!"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="performance-tips-and-best-practices">Performance Tips and Best Practices</h2>
+
+<h3 id="memory-optimization">Memory Optimization</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati</span> <span class="kn">import</span> <span class="n">enable_memory_optimization</span><span class="p">,</span> <span class="n">clear_cache</span>
+
+<span class="c1"># Enable memory optimization for large projects
+</span><span class="n">enable_memory_optimization</span><span class="p">(</span>
+    <span class="n">auto_clear_cache</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">compress_intermediates</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">limit_concurrent_models</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+
+<span class="c1"># Manually clear cache when needed
+</span><span class="n">clear_cache</span><span class="p">(</span><span class="s">"all"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="parallel-processing">Parallel Processing</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati.parallel</span> <span class="kn">import</span> <span class="n">ParallelCanvas</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+
+<span class="c1"># Use parallel processing for multiple regions
+</span><span class="n">parallel_canvas</span> <span class="o">=</span> <span class="n">ParallelCanvas</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Define multiple regions
+</span><span class="n">regions_and_prompts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">region1</span><span class="p">,</span> <span class="s">"mountain landscape"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">region2</span><span class="p">,</span> <span class="s">"forest scene"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">region3</span><span class="p">,</span> <span class="s">"river flowing"</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">region4</span><span class="p">,</span> <span class="s">"wildlife elements"</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="c1"># Process in parallel
+</span><span class="n">results</span> <span class="o">=</span> <span class="n">parallel_canvas</span><span class="p">.</span><span class="n">apply_to_regions_parallel</span><span class="p">(</span><span class="n">regions_and_prompts</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Generated </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s"> regions in parallel"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="caching-strategies">Caching Strategies</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pakati.cache</span> <span class="kn">import</span> <span class="n">setup_intelligent_caching</span>
+
+<span class="c1"># Setup intelligent caching
+</span><span class="n">setup_intelligent_caching</span><span class="p">(</span>
+    <span class="n">strategy</span><span class="o">=</span><span class="s">"adaptive"</span><span class="p">,</span>
+    <span class="n">memory_limit</span><span class="o">=</span><span class="s">"4GB"</span><span class="p">,</span>
+    <span class="n">disk_limit</span><span class="o">=</span><span class="s">"20GB"</span><span class="p">,</span>
+    <span class="n">cache_understood_references</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">cache_fuzzy_computations</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<p><em>This comprehensive set of examples provides hands-on experience with all major Pakati features. For detailed API reference, see <a href="api.html">API Documentation</a>. For research background, visit <a href="research.html">Research</a>.</em></p>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Pakati: Regional Control for AI Image Generation</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Pakati: Regional Control for AI Image Generation</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Revolutionary AI image generation system with regional control, metacognitive orchestration, and reference understanding.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Pakati Project Structure | Pakati: Regional Control for AI Image Generation</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Pakati Project Structure" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Revolutionary AI image generation system with regional control, metacognitive orchestration, and reference understanding." />
+<meta property="og:description" content="Revolutionary AI image generation system with regional control, metacognitive orchestration, and reference understanding." />
+<link rel="canonical" href="http://localhost:4000/structure.html" />
+<meta property="og:url" content="http://localhost:4000/structure.html" />
+<meta property="og:site_name" content="Pakati: Regional Control for AI Image Generation" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Pakati Project Structure" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Revolutionary AI image generation system with regional control, metacognitive orchestration, and reference understanding.","headline":"Pakati Project Structure","url":"http://localhost:4000/structure.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Pakati: Regional Control for AI Image Generation" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Pakati: Regional Control for AI Image Generation</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/">Home</a><a class="page-link" href="/architecture.html">System Architecture</a><a class="page-link" href="/reference_understanding.html">Reference Understanding Engine</a><a class="page-link" href="/fuzzy_logic.html">Fuzzy Logic Integration</a><a class="page-link" href="/research.html">Research &amp; Publications</a><a class="page-link" href="/api.html">API Documentation</a><a class="page-link" href="/examples.html">Examples &amp; Tutorials</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Pakati Project Structure</h1>
+  </header>
+
+  <div class="post-content">
+    <h1 id="pakati-project-structure">Pakati Project Structure</h1>
+
+<p>This document outlines the folder and file organization for the Pakati project.</p>
+
+<h2 id="root-directory-structure">Root Directory Structure</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pakati/
+├── .github/                  # GitHub workflow configurations
+├── app/                      # Frontend web application
+├── docs/                     # Documentation files
+├── pakati/                   # Main Python package
+├── scripts/                  # Utility scripts
+├── tests/                    # Test suite
+├── .env.example              # Example environment variables
+├── .gitignore                # Git ignore patterns
+├── LICENSE                   # Project license
+├── README.md                 # Project overview
+├── pyproject.toml            # Python package configuration
+└── requirements.txt          # Python dependencies
+</code></pre></div></div>
+
+<h2 id="python-package-structure">Python Package Structure</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pakati/
+├── __init__.py               # Package initialization
+├── canvas.py                 # Canvas and region management
+├── models/                   # AI model interfaces
+│   ├── __init__.py           # Models package initialization
+│   ├── base.py               # Base model interface
+│   ├── stable_diffusion.py   # Stable Diffusion implementation
+│   ├── dalle.py              # DALL-E API implementation
+│   ├── claude.py             # Claude API implementation
+│   └── controlnet.py         # ControlNet extensions
+├── processing/               # Image processing utilities
+│   ├── __init__.py           # Processing package initialization
+│   ├── diffusion.py          # Core diffusion algorithms
+│   ├── masking.py            # Mask creation and manipulation
+│   ├── inpainting.py         # Inpainting utilities
+│   └── compositing.py        # Image composition tools
+├── storage/                  # Project persistence
+│   ├── __init__.py           # Storage package initialization
+│   ├── project.py            # Project file format
+│   ├── history.py            # Edit history tracking
+│   └── export.py             # Export utilities
+├── server/                   # API server implementation
+│   ├── __init__.py           # Server package initialization
+│   ├── api.py                # API routes
+│   ├── websocket.py          # WebSocket server for real-time updates
+│   └── auth.py               # Authentication handlers
+└── utils/                    # Shared utility functions
+    ├── __init__.py           # Utils package initialization
+    ├── config.py             # Configuration management
+    ├── logging.py            # Logging utilities
+    └── geometry.py           # Geometry calculations
+</code></pre></div></div>
+
+<h2 id="web-application-structure">Web Application Structure</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app/
+├── public/                   # Static public assets
+│   ├── index.html            # HTML entry point
+│   ├── favicon.ico           # Site favicon
+│   └── assets/               # Other static assets
+├── components/               # React components
+│   ├── Canvas/               # Canvas-related components
+│   │   ├── Canvas.tsx        # Main canvas component
+│   │   ├── Region.tsx        # Region component
+│   │   └── RegionControls.tsx # UI for region manipulation
+│   ├── Sidebar/              # Sidebar components
+│   │   ├── ModelSelector.tsx # AI model selection
+│   │   ├── PromptEditor.tsx  # Prompt editing interface
+│   │   └── LayerManager.tsx  # Layer/region management
+│   ├── Toolbar/              # Tool selection components
+│   └── Common/               # Shared UI components
+├── hooks/                    # React hooks
+│   ├── useCanvas.ts          # Canvas state management
+│   ├── useRegions.ts         # Region manipulation
+│   └── useGeneration.ts      # Image generation state
+├── services/                 # Frontend services
+│   ├── api.ts                # API client
+│   ├── websocket.ts          # WebSocket client
+│   └── storage.ts            # Local storage utilities
+├── state/                    # Global state management
+│   ├── store.ts              # Redux/Zustand store
+│   ├── canvasSlice.ts        # Canvas state slice
+│   └── generationSlice.ts    # Generation state slice
+├── styles/                   # Global styles
+├── utils/                    # Frontend utilities
+├── App.tsx                   # Main application component
+├── index.tsx                 # Application entry point
+├── package.json              # Frontend dependencies
+└── tsconfig.json             # TypeScript configuration
+</code></pre></div></div>
+
+<h2 id="documentation-structure">Documentation Structure</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docs/
+├── api/                      # API documentation
+├── examples/                 # Example projects and use cases
+├── guides/                   # User guides
+│   ├── getting-started.md    # Getting started guide
+│   ├── regions.md            # Working with regions
+│   └── models.md             # Using different AI models
+├── architecture.md           # System architecture documentation
+├── contributing.md           # Contribution guidelines
+└── structure.md              # This file - project structure
+</code></pre></div></div>
+
+<h2 id="tests-structure">Tests Structure</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tests/
+├── unit/                     # Unit tests
+│   ├── test_canvas.py        # Canvas functionality tests
+│   ├── test_masking.py       # Masking tests
+│   └── test_models.py        # Model integration tests
+├── integration/              # Integration tests
+│   ├── test_api.py           # API endpoint tests
+│   └── test_generation.py    # End-to-end generation tests
+└── fixtures/                 # Test fixtures
+    ├── images/               # Sample images for testing
+    └── prompts/              # Sample prompts for testing
+</code></pre></div></div>
+
+<h2 id="configuration-files">Configuration Files</h2>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.env.example
+# API keys for various services
+OPENAI_API_KEY=your_openai_api_key
+ANTHROPIC_API_KEY=your_anthropic_api_key
+HUGGINGFACE_API_KEY=your_huggingface_api_key
+
+# Server configuration
+PORT=8000
+HOST=localhost
+DEBUG=False
+
+# Storage configuration
+STORAGE_PATH=./storage
+</code></pre></div></div>
+
+<p>```
+pyproject.toml
+[build-system]
+requires = [“setuptools&gt;=42”, “wheel”]
+build-backend = “setuptools.build_meta”</p>
+
+<p>[project]
+name = “pakati”
+version = “0.1.0”
+description = “A tool for regional control in AI image generation”
+readme = “README.md”
+requires-python = “&gt;=3.8”
+license = {text = “MIT”}
+authors = [
+    {name = “Your Name”, email = “your.email@example.com”}
+]</p>
+
+<p>[project.dependencies]
+torch = “&gt;=1.10.0”
+transformers = “&gt;=4.15.0”
+diffusers = “&gt;=0.10.0”
+pillow = “&gt;=9.0.0”
+fastapi = “&gt;=0.70.0”
+uvicorn = “&gt;=0.15.0”
+python-dotenv = “&gt;=0.19.0”
+numpy = “&gt;=1.20.0”
+requests = “&gt;=2.25.0”</p>
+
+<p>[project.optional-dependencies]
+dev = [
+    “pytest&gt;=6.0.0”,
+    “black&gt;=21.5b2”,
+    “isort&gt;=5.8.0”,
+    “mypy&gt;=0.812”,
+]</p>
+
+<p>[project.urls]
+“Homepage” = “https://github.com/yourusername/pakati”
+“Bug Tracker” = “https://github.com/yourusername/pakati/issues”</p>
+
+  </div>
+
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Pakati: Regional Control for AI Image Generation</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Pakati: Regional Control for AI Image Generation</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Revolutionary AI image generation system with regional control, metacognitive orchestration, and reference understanding.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

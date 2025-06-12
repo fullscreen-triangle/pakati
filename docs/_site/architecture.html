@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>System Architecture | Pakati: Regional Control for AI Image Generation</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="System Architecture" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Complete technical architecture of the Pakati system" />
+<meta property="og:description" content="Complete technical architecture of the Pakati system" />
+<link rel="canonical" href="http://localhost:4000/architecture.html" />
+<meta property="og:url" content="http://localhost:4000/architecture.html" />
+<meta property="og:site_name" content="Pakati: Regional Control for AI Image Generation" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="System Architecture" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Complete technical architecture of the Pakati system","headline":"System Architecture","url":"http://localhost:4000/architecture.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Pakati: Regional Control for AI Image Generation" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Pakati: Regional Control for AI Image Generation</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/">Home</a><a class="page-link" href="/architecture.html">System Architecture</a><a class="page-link" href="/reference_understanding.html">Reference Understanding Engine</a><a class="page-link" href="/fuzzy_logic.html">Fuzzy Logic Integration</a><a class="page-link" href="/research.html">Research &amp; Publications</a><a class="page-link" href="/api.html">API Documentation</a><a class="page-link" href="/examples.html">Examples &amp; Tutorials</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <h1 class="fs-9" id="system-architecture">System Architecture</h1>
+
+<p class="fs-6 fw-300">Deep dive into Pakati’s layered modular architecture and technical components.</p>
+
+<hr />
+
+<h2 class="no_toc text-delta" id="table-of-contents">Table of Contents</h2>
+
+<ol id="markdown-toc">
+  <li><a href="#system-architecture" id="markdown-toc-system-architecture">System Architecture</a>    <ol>
+      <li><a href="#overview" id="markdown-toc-overview">Overview</a></li>
+      <li><a href="#layer-1-foundation-services" id="markdown-toc-layer-1-foundation-services">Layer 1: Foundation Services</a>        <ol>
+          <li><a href="#persistence-layer" id="markdown-toc-persistence-layer">Persistence Layer</a></li>
+          <li><a href="#caching-system" id="markdown-toc-caching-system">Caching System</a></li>
+          <li><a href="#security-manager" id="markdown-toc-security-manager">Security Manager</a></li>
+        </ol>
+      </li>
+      <li><a href="#layer-2-model-interface" id="markdown-toc-layer-2-model-interface">Layer 2: Model Interface</a>        <ol>
+          <li><a href="#unified-model-api" id="markdown-toc-unified-model-api">Unified Model API</a></li>
+          <li><a href="#model-implementations" id="markdown-toc-model-implementations">Model Implementations</a>            <ol>
+              <li><a href="#dall-e-integration" id="markdown-toc-dall-e-integration">DALL-E Integration</a></li>
+              <li><a href="#stable-diffusion-integration" id="markdown-toc-stable-diffusion-integration">Stable Diffusion Integration</a></li>
+            </ol>
+          </li>
+          <li><a href="#model-selection-engine" id="markdown-toc-model-selection-engine">Model Selection Engine</a></li>
+        </ol>
+      </li>
+      <li><a href="#layer-3-processing-pipeline" id="markdown-toc-layer-3-processing-pipeline">Layer 3: Processing Pipeline</a>        <ol>
+          <li><a href="#canvas-layer" id="markdown-toc-canvas-layer">Canvas Layer</a></li>
+          <li><a href="#region-management" id="markdown-toc-region-management">Region Management</a></li>
+          <li><a href="#iterative-refinement-engine" id="markdown-toc-iterative-refinement-engine">Iterative Refinement Engine</a></li>
+        </ol>
+      </li>
+      <li><a href="#layer-4-metacognitive-orchestration" id="markdown-toc-layer-4-metacognitive-orchestration">Layer 4: Metacognitive Orchestration</a>        <ol>
+          <li><a href="#reference-understanding-engine" id="markdown-toc-reference-understanding-engine">Reference Understanding Engine</a></li>
+          <li><a href="#context-manager" id="markdown-toc-context-manager">Context Manager</a></li>
+          <li><a href="#planner" id="markdown-toc-planner">Planner</a></li>
+        </ol>
+      </li>
+      <li><a href="#integration-patterns" id="markdown-toc-integration-patterns">Integration Patterns</a>        <ol>
+          <li><a href="#event-driven-architecture" id="markdown-toc-event-driven-architecture">Event-Driven Architecture</a></li>
+          <li><a href="#plugin-architecture" id="markdown-toc-plugin-architecture">Plugin Architecture</a></li>
+        </ol>
+      </li>
+      <li><a href="#performance-optimizations" id="markdown-toc-performance-optimizations">Performance Optimizations</a>        <ol>
+          <li><a href="#parallel-processing" id="markdown-toc-parallel-processing">Parallel Processing</a></li>
+          <li><a href="#memory-management" id="markdown-toc-memory-management">Memory Management</a></li>
+        </ol>
+      </li>
+      <li><a href="#monitoring-and-observability" id="markdown-toc-monitoring-and-observability">Monitoring and Observability</a>        <ol>
+          <li><a href="#performance-monitoring" id="markdown-toc-performance-monitoring">Performance Monitoring</a></li>
+        </ol>
+      </li>
+      <li><a href="#scalability-considerations" id="markdown-toc-scalability-considerations">Scalability Considerations</a>        <ol>
+          <li><a href="#horizontal-scaling" id="markdown-toc-horizontal-scaling">Horizontal Scaling</a></li>
+          <li><a href="#load-balancing" id="markdown-toc-load-balancing">Load Balancing</a></li>
+        </ol>
+      </li>
+      <li><a href="#security-architecture" id="markdown-toc-security-architecture">Security Architecture</a>        <ol>
+          <li><a href="#security-layers" id="markdown-toc-security-layers">Security Layers</a></li>
+        </ol>
+      </li>
+      <li><a href="#configuration-management" id="markdown-toc-configuration-management">Configuration Management</a>        <ol>
+          <li><a href="#environment-based-configuration" id="markdown-toc-environment-based-configuration">Environment-Based Configuration</a></li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="overview">Overview</h2>
+
+<p>Pakati employs a sophisticated <strong>layered modular architecture</strong> designed for scalability, maintainability, and extensibility. The system is built around the principle of <strong>separation of concerns</strong>, with each layer handling specific aspects of the image generation pipeline.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>┌─────────────────────────────────────────────────────────────────┐
+│                     User Interface Layer                        │
+│              Web Interface │ CLI │ Python API                  │
+├─────────────────────────────────────────────────────────────────┤
+│                Metacognitive Orchestration                     │
+│  ┌─────────────┐ ┌─────────────┐ ┌─────────────────────────────┐ │
+│  │   Context   │ │   Planner   │ │   Reference Understanding   │ │
+│  │  Manager    │ │             │ │        Engine               │ │
+│  └─────────────┘ └─────────────┘ └─────────────────────────────┘ │
+├─────────────────────────────────────────────────────────────────┤
+│                    Processing Pipeline                         │
+│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │
+│  │   Canvas    │ │ Iterative   │ │    Delta    │ │ Fuzzy Logic │ │
+│  │   Layer     │ │ Refinement  │ │  Analysis   │ │   Engine    │ │
+│  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │
+├─────────────────────────────────────────────────────────────────┤
+│                     Model Interface                            │
+│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │
+│  │    DALL-E   │ │   Stable    │ │   Claude    │ │   Custom    │ │
+│  │     API     │ │ Diffusion   │ │     API     │ │   Models    │ │
+│  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │
+├─────────────────────────────────────────────────────────────────┤
+│                   Foundation Services                          │
+│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ │
+│  │ Persistence │ │   Caching   │ │   Security  │ │ Monitoring  │ │
+│  │   Layer     │ │   System    │ │   Manager   │ │ &amp; Logging   │ │
+│  └─────────────┘ └─────────────┘ └─────────────┘ └─────────────┘ │
+└─────────────────────────────────────────────────────────────────┘
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="layer-1-foundation-services">Layer 1: Foundation Services</h2>
+
+<p>The foundation layer provides core infrastructure services that support all higher-level components.</p>
+
+<h3 id="persistence-layer">Persistence Layer</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PakatiDatabase</span><span class="p">:</span>
+    <span class="s">"""Centralized data persistence for all Pakati components."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">database_url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="n">database_url</span> <span class="ow">or</span> <span class="s">"sqlite:///pakati.db"</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">session_factory</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">engine</span><span class="p">)</span>
+    
+    <span class="c1"># Core entities
+</span>    <span class="n">projects</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s">'projects'</span><span class="p">,</span> <span class="p">...)</span>
+    <span class="n">references</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s">'references'</span><span class="p">,</span> <span class="p">...)</span>
+    <span class="n">understanding_data</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s">'understanding_data'</span><span class="p">,</span> <span class="p">...)</span>
+    <span class="n">generation_history</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s">'generation_history'</span><span class="p">,</span> <span class="p">...)</span>
+    <span class="n">fuzzy_rules</span><span class="p">:</span> <span class="n">Table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s">'fuzzy_rules'</span><span class="p">,</span> <span class="p">...)</span>
+</code></pre></div></div>
+
+<p><strong>Key Features</strong>:</p>
+<ul>
+  <li>SQLAlchemy-based ORM for flexible database backends</li>
+  <li>Migration system for schema evolution</li>
+  <li>Automated backup and recovery</li>
+  <li>ACID compliance for data integrity</li>
+</ul>
+
+<h3 id="caching-system">Caching System</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PakatiCache</span><span class="p">:</span>
+    <span class="s">"""Multi-level caching system for performance optimization."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Level 1: In-memory cache for hot data
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">memory_cache</span> <span class="o">=</span> <span class="n">LRUCache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">1024</span><span class="p">)</span>
+        
+        <span class="c1"># Level 2: Redis cache for shared data
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">redis_cache</span> <span class="o">=</span> <span class="n">Redis</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="s">'localhost'</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">6379</span><span class="p">,</span> <span class="n">db</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="c1"># Level 3: Persistent cache for expensive computations
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">file_cache</span> <span class="o">=</span> <span class="n">DiskCache</span><span class="p">(</span><span class="s">'cache/'</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_multilevel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+        <span class="s">"""Retrieve from cache with fallback strategy."""</span>
+        <span class="c1"># Check memory first
+</span>        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">memory_cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">memory_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+        
+        <span class="c1"># Check Redis
+</span>        <span class="n">redis_value</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">redis_cache</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">redis_value</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">pickle</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">redis_value</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">memory_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>  <span class="c1"># Promote to memory
+</span>            <span class="k">return</span> <span class="n">value</span>
+        
+        <span class="c1"># Check disk cache
+</span>        <span class="n">disk_value</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">file_cache</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">disk_value</span><span class="p">:</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">redis_cache</span><span class="p">.</span><span class="n">setex</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="mi">3600</span><span class="p">,</span> <span class="n">pickle</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">disk_value</span><span class="p">))</span>  <span class="c1"># Promote to Redis
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">memory_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">disk_value</span>  <span class="c1"># Promote to memory
+</span>            <span class="k">return</span> <span class="n">disk_value</span>
+        
+        <span class="k">return</span> <span class="bp">None</span>
+</code></pre></div></div>
+
+<h3 id="security-manager">Security Manager</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SecurityManager</span><span class="p">:</span>
+    <span class="s">"""Handles authentication, authorization, and secure operations."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">api_key_validator</span> <span class="o">=</span> <span class="n">APIKeyValidator</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">rate_limiter</span> <span class="o">=</span> <span class="n">RateLimiter</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">audit_logger</span> <span class="o">=</span> <span class="n">AuditLogger</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">validate_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="s">"""Validate incoming requests for security compliance."""</span>
+        <span class="c1"># Rate limiting
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">rate_limiter</span><span class="p">.</span><span class="n">allow_request</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">client_ip</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">RateLimitExceeded</span><span class="p">()</span>
+        
+        <span class="c1"># API key validation
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">api_key_validator</span><span class="p">.</span><span class="n">validate</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">api_key</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">InvalidAPIKey</span><span class="p">()</span>
+        
+        <span class="c1"># Log for audit
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">audit_logger</span><span class="p">.</span><span class="n">log_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="layer-2-model-interface">Layer 2: Model Interface</h2>
+
+<p>The model interface layer provides unified access to diverse AI models and services.</p>
+
+<h3 id="unified-model-api">Unified Model API</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="k">class</span> <span class="nc">BaseImageModel</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="s">"""Abstract base class for all image generation models."""</span>
+    
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GenerationResult</span><span class="p">:</span>
+        <span class="s">"""Generate image from text prompt."""</span>
+        <span class="k">pass</span>
+    
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">inpaint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">mask</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GenerationResult</span><span class="p">:</span>
+        <span class="s">"""Inpaint masked region of image."""</span>
+        <span class="k">pass</span>
+    
+    <span class="o">@</span><span class="n">abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_capabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModelCapabilities</span><span class="p">:</span>
+        <span class="s">"""Return model capabilities and limitations."""</span>
+        <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">ModelCapabilities</span><span class="p">:</span>
+    <span class="s">"""Defines what a model can do."""</span>
+    
+    <span class="n">max_resolution</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+    <span class="n">supports_inpainting</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">supports_controlnet</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">supports_regional_prompting</span><span class="p">:</span> <span class="nb">bool</span>
+    <span class="n">api_rate_limits</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>
+    <span class="n">cost_per_generation</span><span class="p">:</span> <span class="nb">float</span>
+</code></pre></div></div>
+
+<h3 id="model-implementations">Model Implementations</h3>
+
+<h4 id="dall-e-integration">DALL-E Integration</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DALLEModel</span><span class="p">(</span><span class="n">BaseImageModel</span><span class="p">):</span>
+    <span class="s">"""OpenAI DALL-E model integration."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">model_version</span> <span class="o">=</span> <span class="s">"dall-e-3"</span>
+    
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GenerationResult</span><span class="p">:</span>
+        <span class="s">"""Generate using DALL-E API."""</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">images</span><span class="p">.</span><span class="n">generate</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">model_version</span><span class="p">,</span>
+            <span class="n">prompt</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">_enhance_prompt</span><span class="p">(</span><span class="n">prompt</span><span class="p">),</span>
+            <span class="n">size</span><span class="o">=</span><span class="n">kwargs</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'size'</span><span class="p">,</span> <span class="s">'1024x1024'</span><span class="p">),</span>
+            <span class="n">quality</span><span class="o">=</span><span class="n">kwargs</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'quality'</span><span class="p">,</span> <span class="s">'standard'</span><span class="p">),</span>
+            <span class="n">n</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">GenerationResult</span><span class="p">(</span>
+            <span class="n">image_url</span><span class="o">=</span><span class="n">response</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">url</span><span class="p">,</span>
+            <span class="n">model_used</span><span class="o">=</span><span class="s">"dall-e-3"</span><span class="p">,</span>
+            <span class="n">generation_time</span><span class="o">=</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">(),</span>
+            <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s">"revised_prompt"</span><span class="p">:</span> <span class="n">response</span><span class="p">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">revised_prompt</span><span class="p">}</span>
+        <span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="stable-diffusion-integration">Stable Diffusion Integration</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">StableDiffusionModel</span><span class="p">(</span><span class="n">BaseImageModel</span><span class="p">):</span>
+    <span class="s">"""Local Stable Diffusion model integration."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s">"stabilityai/stable-diffusion-xl-base-1.0"</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">pipe</span> <span class="o">=</span> <span class="n">DiffusionPipeline</span><span class="p">.</span><span class="n">from_pretrained</span><span class="p">(</span>
+            <span class="n">model_id</span><span class="p">,</span>
+            <span class="n">torch_dtype</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">float16</span><span class="p">,</span>
+            <span class="n">variant</span><span class="o">=</span><span class="s">"fp16"</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">pipe</span><span class="p">.</span><span class="n">enable_model_cpu_offload</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GenerationResult</span><span class="p">:</span>
+        <span class="s">"""Generate using local Stable Diffusion."""</span>
+        <span class="k">with</span> <span class="n">torch</span><span class="p">.</span><span class="n">inference_mode</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">pipe</span><span class="p">(</span>
+                <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+                <span class="n">negative_prompt</span><span class="o">=</span><span class="n">kwargs</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'negative_prompt'</span><span class="p">),</span>
+                <span class="n">width</span><span class="o">=</span><span class="n">kwargs</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'width'</span><span class="p">,</span> <span class="mi">1024</span><span class="p">),</span>
+                <span class="n">height</span><span class="o">=</span><span class="n">kwargs</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'height'</span><span class="p">,</span> <span class="mi">1024</span><span class="p">),</span>
+                <span class="n">num_inference_steps</span><span class="o">=</span><span class="n">kwargs</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'steps'</span><span class="p">,</span> <span class="mi">50</span><span class="p">),</span>
+                <span class="n">guidance_scale</span><span class="o">=</span><span class="n">kwargs</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'guidance_scale'</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">),</span>
+                <span class="n">generator</span><span class="o">=</span><span class="n">torch</span><span class="p">.</span><span class="n">Generator</span><span class="p">().</span><span class="n">manual_seed</span><span class="p">(</span><span class="n">kwargs</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'seed'</span><span class="p">,</span> <span class="mi">42</span><span class="p">))</span>
+            <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">GenerationResult</span><span class="p">(</span>
+            <span class="n">image</span><span class="o">=</span><span class="n">result</span><span class="p">.</span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">model_used</span><span class="o">=</span><span class="s">"stable-diffusion-xl"</span><span class="p">,</span>
+            <span class="n">generation_time</span><span class="o">=</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">(),</span>
+            <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s">"seed"</span><span class="p">:</span> <span class="n">kwargs</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'seed'</span><span class="p">,</span> <span class="mi">42</span><span class="p">)}</span>
+        <span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="model-selection-engine">Model Selection Engine</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ModelSelector</span><span class="p">:</span>
+    <span class="s">"""Intelligently selects the best model for each task."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">'dalle-3'</span><span class="p">:</span> <span class="n">DALLEModel</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">'OPENAI_API_KEY'</span><span class="p">)),</span>
+            <span class="s">'stable-diffusion-xl'</span><span class="p">:</span> <span class="n">StableDiffusionModel</span><span class="p">(),</span>
+            <span class="s">'claude-3'</span><span class="p">:</span> <span class="n">ClaudeModel</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">'ANTHROPIC_API_KEY'</span><span class="p">))</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">performance_tracker</span> <span class="o">=</span> <span class="n">ModelPerformanceTracker</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">select_best_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="n">GenerationTask</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="s">"""Select optimal model based on task requirements."""</span>
+        
+        <span class="c1"># Filter by capabilities
+</span>        <span class="n">capable_models</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">capabilities</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">get_capabilities</span><span class="p">()</span>
+            
+            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">_model_can_handle_task</span><span class="p">(</span><span class="n">capabilities</span><span class="p">,</span> <span class="n">task</span><span class="p">):</span>
+                <span class="n">capable_models</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">capable_models</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoCapableModelError</span><span class="p">(</span><span class="sa">f</span><span class="s">"No model can handle task: </span><span class="si">{</span><span class="n">task</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        
+        <span class="c1"># Select based on performance history
+</span>        <span class="n">best_model</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">performance_tracker</span><span class="p">.</span><span class="n">get_best_performer</span><span class="p">(</span>
+            <span class="n">capable_models</span><span class="p">,</span> 
+            <span class="n">task</span><span class="p">.</span><span class="n">task_type</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">best_model</span>
+    
+    <span class="k">def</span> <span class="nf">_model_can_handle_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capabilities</span><span class="p">:</span> <span class="n">ModelCapabilities</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="n">GenerationTask</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="s">"""Check if model can handle the specific task."""</span>
+        
+        <span class="c1"># Resolution check
+</span>        <span class="k">if</span> <span class="n">task</span><span class="p">.</span><span class="n">width</span> <span class="o">&gt;</span> <span class="n">capabilities</span><span class="p">.</span><span class="n">max_resolution</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        <span class="k">if</span> <span class="n">task</span><span class="p">.</span><span class="n">height</span> <span class="o">&gt;</span> <span class="n">capabilities</span><span class="p">.</span><span class="n">max_resolution</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="c1"># Feature support check
+</span>        <span class="k">if</span> <span class="n">task</span><span class="p">.</span><span class="n">requires_inpainting</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">capabilities</span><span class="p">.</span><span class="n">supports_inpainting</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="k">if</span> <span class="n">task</span><span class="p">.</span><span class="n">requires_controlnet</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">capabilities</span><span class="p">.</span><span class="n">supports_controlnet</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="c1"># Rate limit check
+</span>        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">_within_rate_limits</span><span class="p">(</span><span class="n">capabilities</span><span class="p">.</span><span class="n">api_rate_limits</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">False</span>
+        
+        <span class="k">return</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="layer-3-processing-pipeline">Layer 3: Processing Pipeline</h2>
+
+<p>The processing pipeline handles the core image generation and manipulation logic.</p>
+
+<h3 id="canvas-layer">Canvas Layer</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PakatiCanvas</span><span class="p">:</span>
+    <span class="s">"""Core canvas for regional image generation."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">regions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Region</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">base_image</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">generation_history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">GenerationStep</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="c1"># Initialize supporting systems
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">model_selector</span> <span class="o">=</span> <span class="n">ModelSelector</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">region_blender</span> <span class="o">=</span> <span class="n">RegionBlender</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">quality_assessor</span> <span class="o">=</span> <span class="n">QualityAssessor</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">create_region</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">vertices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Region</span><span class="p">:</span>
+        <span class="s">"""Create a new region on the canvas."""</span>
+        <span class="n">region</span> <span class="o">=</span> <span class="n">Region</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">()),</span>
+            <span class="n">vertices</span><span class="o">=</span><span class="n">vertices</span><span class="p">,</span>
+            <span class="n">mask</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">_create_mask_from_vertices</span><span class="p">(</span><span class="n">vertices</span><span class="p">),</span>
+            <span class="n">canvas_size</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">height</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">regions</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">region</span>
+    
+    <span class="k">def</span> <span class="nf">apply_to_region</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">region</span><span class="p">:</span> <span class="n">Region</span><span class="p">,</span> 
+        <span class="n">prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+        <span class="n">model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GenerationResult</span><span class="p">:</span>
+        <span class="s">"""Apply generation to a specific region."""</span>
+        
+        <span class="c1"># Select model if not specified
+</span>        <span class="k">if</span> <span class="n">model_name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">task</span> <span class="o">=</span> <span class="n">GenerationTask</span><span class="p">(</span>
+                <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+                <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">width</span><span class="p">,</span>
+                <span class="n">height</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">height</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+            <span class="n">model_name</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">model_selector</span><span class="p">.</span><span class="n">select_best_model</span><span class="p">(</span><span class="n">task</span><span class="p">)</span>
+        
+        <span class="c1"># Generate for region
+</span>        <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">model_selector</span><span class="p">.</span><span class="n">models</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="n">region</span><span class="p">.</span><span class="n">has_existing_content</span><span class="p">():</span>
+            <span class="c1"># Inpainting mode
+</span>            <span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">inpaint</span><span class="p">(</span>
+                <span class="n">image</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">base_image</span><span class="p">,</span>
+                <span class="n">mask</span><span class="o">=</span><span class="n">region</span><span class="p">.</span><span class="n">mask</span><span class="p">,</span>
+                <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+                <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Generation mode
+</span>            <span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="p">.</span><span class="n">generate</span><span class="p">(</span><span class="n">prompt</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            
+            <span class="c1"># Resize and mask to fit region
+</span>            <span class="n">result</span><span class="p">.</span><span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_fit_to_region</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">image</span><span class="p">,</span> <span class="n">region</span><span class="p">)</span>
+        
+        <span class="c1"># Blend into canvas
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">_blend_region_result</span><span class="p">(</span><span class="n">region</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+        
+        <span class="c1"># Track generation
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">generation_history</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">GenerationStep</span><span class="p">(</span>
+            <span class="n">region_id</span><span class="o">=</span><span class="n">region</span><span class="p">.</span><span class="nb">id</span><span class="p">,</span>
+            <span class="n">prompt</span><span class="o">=</span><span class="n">prompt</span><span class="p">,</span>
+            <span class="n">model_used</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span>
+            <span class="n">timestamp</span><span class="o">=</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="p">))</span>
+        
+        <span class="k">return</span> <span class="n">result</span>
+</code></pre></div></div>
+
+<h3 id="region-management">Region Management</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Region</span><span class="p">:</span>
+    <span class="s">"""Represents a regional area on the canvas."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">vertices</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]],</span> <span class="n">mask</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">canvas_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="nb">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">vertices</span> <span class="o">=</span> <span class="n">vertices</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">mask</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">canvas_size</span> <span class="o">=</span> <span class="n">canvas_size</span>
+        
+        <span class="c1"># Region properties
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">content</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">prompt_history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">generation_metadata</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="c1"># Computed properties
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">bounding_box</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_compute_bounding_box</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">area</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_compute_area</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">center</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_compute_center</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">overlaps_with</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s">'Region'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="s">"""Check if this region overlaps with another."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_masks_overlap</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">other</span><span class="p">.</span><span class="n">mask</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_overlap_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s">'Region'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="s">"""Calculate overlap area with another region."""</span>
+        <span class="n">combined_mask</span> <span class="o">=</span> <span class="n">ImageChops</span><span class="p">.</span><span class="n">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">mask</span><span class="p">,</span> <span class="n">other</span><span class="p">.</span><span class="n">mask</span><span class="p">)</span>
+        <span class="n">overlap_pixels</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="n">combined_mask</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">overlap_pixels</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">canvas_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">canvas_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    
+    <span class="k">def</span> <span class="nf">_compute_bounding_box</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+        <span class="s">"""Compute tight bounding box around region."""</span>
+        <span class="n">mask_array</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">mask</span><span class="p">)</span>
+        <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">where</span><span class="p">(</span><span class="n">mask_array</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        
+        <span class="n">top</span><span class="p">,</span> <span class="n">left</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">min</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">bottom</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">max</span><span class="p">(</span><span class="n">coords</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="iterative-refinement-engine">Iterative Refinement Engine</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">IterativeRefinementEngine</span><span class="p">:</span>
+    <span class="s">"""Autonomous improvement through multiple generation passes."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">canvas_interface</span><span class="p">,</span> <span class="n">reference_understanding_engine</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">canvas_interface</span> <span class="o">=</span> <span class="n">canvas_interface</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">reference_engine</span> <span class="o">=</span> <span class="n">reference_understanding_engine</span>
+        
+        <span class="c1"># Core components
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">evidence_graph</span> <span class="o">=</span> <span class="n">EvidenceGraph</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">delta_analyzer</span> <span class="o">=</span> <span class="n">DeltaAnalyzer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span> <span class="o">=</span> <span class="n">FuzzyLogicEngine</span><span class="p">()</span>
+        
+        <span class="c1"># Analysis models
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">image_analyzer</span> <span class="o">=</span> <span class="n">ImageAnalyzer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">quality_assessor</span> <span class="o">=</span> <span class="n">QualityAssessor</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">refine_iteratively</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">initial_result</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">,</span>
+        <span class="n">target_description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">reference_images</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">ReferenceImage</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="n">max_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">strategy</span><span class="p">:</span> <span class="n">RefinementStrategy</span> <span class="o">=</span> <span class="n">RefinementStrategy</span><span class="p">.</span><span class="n">ADAPTIVE</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RefinementResult</span><span class="p">:</span>
+        <span class="s">"""Perform iterative refinement of generated image."""</span>
+        
+        <span class="n">current_image</span> <span class="o">=</span> <span class="n">initial_result</span>
+        <span class="n">iteration_history</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iterations</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Refinement iteration </span><span class="si">{</span><span class="n">iteration</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">max_iterations</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            
+            <span class="c1"># Multi-source analysis
+</span>            <span class="n">analyses</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_perform_comprehensive_analysis</span><span class="p">(</span>
+                <span class="n">current_image</span><span class="p">,</span> 
+                <span class="n">target_description</span><span class="p">,</span> 
+                <span class="n">reference_images</span>
+            <span class="p">)</span>
+            
+            <span class="c1"># Generate refinement recommendations
+</span>            <span class="n">recommendations</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_generate_refinement_recommendations</span><span class="p">(</span><span class="n">analyses</span><span class="p">)</span>
+            
+            <span class="c1"># Check convergence
+</span>            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">_has_converged</span><span class="p">(</span><span class="n">recommendations</span><span class="p">,</span> <span class="n">iteration_history</span><span class="p">):</span>
+                <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Convergence achieved at iteration </span><span class="si">{</span><span class="n">iteration</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+                <span class="k">break</span>
+            
+            <span class="c1"># Apply refinements
+</span>            <span class="n">refined_image</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_apply_refinements</span><span class="p">(</span>
+                <span class="n">current_image</span><span class="p">,</span> 
+                <span class="n">recommendations</span><span class="p">,</span>
+                <span class="n">strategy</span>
+            <span class="p">)</span>
+            
+            <span class="c1"># Track progress
+</span>            <span class="n">iteration_history</span><span class="p">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s">'iteration'</span><span class="p">:</span> <span class="n">iteration</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s">'analyses'</span><span class="p">:</span> <span class="n">analyses</span><span class="p">,</span>
+                <span class="s">'recommendations'</span><span class="p">:</span> <span class="n">recommendations</span><span class="p">,</span>
+                <span class="s">'image'</span><span class="p">:</span> <span class="n">refined_image</span><span class="p">.</span><span class="n">copy</span><span class="p">(),</span>
+                <span class="s">'improvements'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">_measure_improvements</span><span class="p">(</span><span class="n">current_image</span><span class="p">,</span> <span class="n">refined_image</span><span class="p">)</span>
+            <span class="p">})</span>
+            
+            <span class="n">current_image</span> <span class="o">=</span> <span class="n">refined_image</span>
+        
+        <span class="k">return</span> <span class="n">RefinementResult</span><span class="p">(</span>
+            <span class="n">final_image</span><span class="o">=</span><span class="n">current_image</span><span class="p">,</span>
+            <span class="n">initial_image</span><span class="o">=</span><span class="n">initial_result</span><span class="p">,</span>
+            <span class="n">total_iterations</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">iteration_history</span><span class="p">),</span>
+            <span class="n">iteration_history</span><span class="o">=</span><span class="n">iteration_history</span><span class="p">,</span>
+            <span class="n">convergence_achieved</span><span class="o">=</span><span class="n">iteration</span> <span class="o">&lt;</span> <span class="n">max_iterations</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="layer-4-metacognitive-orchestration">Layer 4: Metacognitive Orchestration</h2>
+
+<p>The orchestration layer provides high-level intelligence and coordination.</p>
+
+<h3 id="reference-understanding-engine">Reference Understanding Engine</h3>
+
+<p>Detailed in <a href="reference_understanding.html">Reference Understanding documentation</a>, this revolutionary component makes AI prove understanding through reconstruction challenges.</p>
+
+<h3 id="context-manager">Context Manager</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ContextManager</span><span class="p">:</span>
+    <span class="s">"""Maintains persistent context across operations."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">project_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">project_id</span> <span class="o">=</span> <span class="n">project_id</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">session_state</span> <span class="o">=</span> <span class="n">SessionState</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">memory_system</span> <span class="o">=</span> <span class="n">ContextualMemory</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">relationship_graph</span> <span class="o">=</span> <span class="n">RelationshipGraph</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">update_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation</span><span class="p">:</span> <span class="n">Operation</span><span class="p">,</span> <span class="n">result</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""Update context based on operation results."""</span>
+        
+        <span class="c1"># Update session state
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">session_state</span><span class="p">.</span><span class="n">record_operation</span><span class="p">(</span><span class="n">operation</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+        
+        <span class="c1"># Store in memory
+</span>        <span class="n">memory_entry</span> <span class="o">=</span> <span class="n">MemoryEntry</span><span class="p">(</span>
+            <span class="n">operation</span><span class="o">=</span><span class="n">operation</span><span class="p">,</span>
+            <span class="n">result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span>
+            <span class="n">timestamp</span><span class="o">=</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">(),</span>
+            <span class="n">importance</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">_calculate_importance</span><span class="p">(</span><span class="n">operation</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">memory_system</span><span class="p">.</span><span class="n">store</span><span class="p">(</span><span class="n">memory_entry</span><span class="p">)</span>
+        
+        <span class="c1"># Update relationships
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">_update_relationships</span><span class="p">(</span><span class="n">operation</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_relevant_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_operation</span><span class="p">:</span> <span class="n">Operation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Context</span><span class="p">:</span>
+        <span class="s">"""Retrieve relevant context for current operation."""</span>
+        
+        <span class="c1"># Get recent operations
+</span>        <span class="n">recent_ops</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">session_state</span><span class="p">.</span><span class="n">get_recent_operations</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        
+        <span class="c1"># Get related memories
+</span>        <span class="n">related_memories</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">memory_system</span><span class="p">.</span><span class="n">retrieve_related</span><span class="p">(</span>
+            <span class="n">current_operation</span><span class="p">,</span> 
+            <span class="n">similarity_threshold</span><span class="o">=</span><span class="mf">0.7</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Get relationship context
+</span>        <span class="n">relationships</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">relationship_graph</span><span class="p">.</span><span class="n">get_related_entities</span><span class="p">(</span>
+            <span class="n">current_operation</span><span class="p">.</span><span class="n">target_entities</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">Context</span><span class="p">(</span>
+            <span class="n">recent_operations</span><span class="o">=</span><span class="n">recent_ops</span><span class="p">,</span>
+            <span class="n">related_memories</span><span class="o">=</span><span class="n">related_memories</span><span class="p">,</span>
+            <span class="n">relationships</span><span class="o">=</span><span class="n">relationships</span><span class="p">,</span>
+            <span class="n">session_metadata</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">session_state</span><span class="p">.</span><span class="n">get_metadata</span><span class="p">()</span>
+        <span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="planner">Planner</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PakatiPlanner</span><span class="p">:</span>
+    <span class="s">"""Converts high-level goals into executable plans."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context_manager</span><span class="p">:</span> <span class="n">ContextManager</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">context_manager</span> <span class="o">=</span> <span class="n">context_manager</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">task_decomposer</span> <span class="o">=</span> <span class="n">TaskDecomposer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">dependency_resolver</span> <span class="o">=</span> <span class="n">DependencyResolver</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">resource_estimator</span> <span class="o">=</span> <span class="n">ResourceEstimator</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">create_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">goal</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">constraints</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExecutionPlan</span><span class="p">:</span>
+        <span class="s">"""Create detailed execution plan from high-level goal."""</span>
+        
+        <span class="c1"># Get current context
+</span>        <span class="n">context</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">context_manager</span><span class="p">.</span><span class="n">get_relevant_context</span><span class="p">(</span>
+            <span class="n">Operation</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">"planning"</span><span class="p">,</span> <span class="n">goal</span><span class="o">=</span><span class="n">goal</span><span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Decompose goal into tasks
+</span>        <span class="n">tasks</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">task_decomposer</span><span class="p">.</span><span class="n">decompose</span><span class="p">(</span><span class="n">goal</span><span class="p">,</span> <span class="n">context</span><span class="p">,</span> <span class="n">constraints</span><span class="p">)</span>
+        
+        <span class="c1"># Resolve dependencies
+</span>        <span class="n">dependency_graph</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">dependency_resolver</span><span class="p">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+        
+        <span class="c1"># Estimate resources
+</span>        <span class="n">resource_requirements</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">resource_estimator</span><span class="p">.</span><span class="n">estimate</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
+        
+        <span class="c1"># Create execution plan
+</span>        <span class="n">plan</span> <span class="o">=</span> <span class="n">ExecutionPlan</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">()),</span>
+            <span class="n">goal</span><span class="o">=</span><span class="n">goal</span><span class="p">,</span>
+            <span class="n">tasks</span><span class="o">=</span><span class="n">tasks</span><span class="p">,</span>
+            <span class="n">dependency_graph</span><span class="o">=</span><span class="n">dependency_graph</span><span class="p">,</span>
+            <span class="n">resource_requirements</span><span class="o">=</span><span class="n">resource_requirements</span><span class="p">,</span>
+            <span class="n">estimated_duration</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">estimated_duration</span> <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">),</span>
+            <span class="n">creation_time</span><span class="o">=</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">plan</span>
+    
+    <span class="k">def</span> <span class="nf">optimize_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plan</span><span class="p">:</span> <span class="n">ExecutionPlan</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExecutionPlan</span><span class="p">:</span>
+        <span class="s">"""Optimize plan for better performance."""</span>
+        
+        <span class="c1"># Identify parallelization opportunities
+</span>        <span class="n">parallel_groups</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_find_parallel_tasks</span><span class="p">(</span><span class="n">plan</span><span class="p">.</span><span class="n">dependency_graph</span><span class="p">)</span>
+        
+        <span class="c1"># Optimize resource usage
+</span>        <span class="n">optimized_allocation</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_optimize_resource_allocation</span><span class="p">(</span>
+            <span class="n">plan</span><span class="p">.</span><span class="n">tasks</span><span class="p">,</span> 
+            <span class="n">plan</span><span class="p">.</span><span class="n">resource_requirements</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Reorder for efficiency
+</span>        <span class="n">optimized_order</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_optimize_execution_order</span><span class="p">(</span>
+            <span class="n">plan</span><span class="p">.</span><span class="n">tasks</span><span class="p">,</span> 
+            <span class="n">plan</span><span class="p">.</span><span class="n">dependency_graph</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Create optimized plan
+</span>        <span class="n">optimized_plan</span> <span class="o">=</span> <span class="n">ExecutionPlan</span><span class="p">(</span>
+            <span class="nb">id</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">()),</span>
+            <span class="n">goal</span><span class="o">=</span><span class="n">plan</span><span class="p">.</span><span class="n">goal</span><span class="p">,</span>
+            <span class="n">tasks</span><span class="o">=</span><span class="n">optimized_order</span><span class="p">,</span>
+            <span class="n">dependency_graph</span><span class="o">=</span><span class="n">plan</span><span class="p">.</span><span class="n">dependency_graph</span><span class="p">,</span>
+            <span class="n">resource_requirements</span><span class="o">=</span><span class="n">optimized_allocation</span><span class="p">,</span>
+            <span class="n">parallel_groups</span><span class="o">=</span><span class="n">parallel_groups</span><span class="p">,</span>
+            <span class="n">estimated_duration</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">_calculate_optimized_duration</span><span class="p">(</span><span class="n">parallel_groups</span><span class="p">),</span>
+            <span class="n">optimization_applied</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+            <span class="n">parent_plan_id</span><span class="o">=</span><span class="n">plan</span><span class="p">.</span><span class="nb">id</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">optimized_plan</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="integration-patterns">Integration Patterns</h2>
+
+<h3 id="event-driven-architecture">Event-Driven Architecture</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">EventBus</span><span class="p">:</span>
+    <span class="s">"""Central event bus for component communication."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">subscribers</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Callable</span><span class="p">]]</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">event_history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Event</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">subscribe</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">handler</span><span class="p">:</span> <span class="n">Callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""Subscribe to events of specific type."""</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">subscribers</span><span class="p">[</span><span class="n">event_type</span><span class="p">].</span><span class="n">append</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">publish</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">Event</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""Publish event to all subscribers."""</span>
+        
+        <span class="c1"># Store in history
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">event_history</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        
+        <span class="c1"># Notify subscribers
+</span>        <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">subscribers</span><span class="p">[</span><span class="n">event</span><span class="p">.</span><span class="nb">type</span><span class="p">]:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">handler</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+            <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Error in event handler: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+<span class="c1"># Example usage
+</span><span class="n">event_bus</span> <span class="o">=</span> <span class="n">EventBus</span><span class="p">()</span>
+
+<span class="c1"># Components subscribe to relevant events
+</span><span class="n">event_bus</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"generation_complete"</span><span class="p">,</span> <span class="n">context_manager</span><span class="p">.</span><span class="n">on_generation_complete</span><span class="p">)</span>
+<span class="n">event_bus</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"understanding_achieved"</span><span class="p">,</span> <span class="n">reference_engine</span><span class="p">.</span><span class="n">on_understanding_achieved</span><span class="p">)</span>
+<span class="n">event_bus</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"refinement_iteration"</span><span class="p">,</span> <span class="n">iterative_engine</span><span class="p">.</span><span class="n">on_refinement_iteration</span><span class="p">)</span>
+
+<span class="c1"># Publish events during operations
+</span><span class="n">event_bus</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="n">Event</span><span class="p">(</span>
+    <span class="nb">type</span><span class="o">=</span><span class="s">"generation_complete"</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s">"region_id"</span><span class="p">:</span> <span class="n">region</span><span class="p">.</span><span class="nb">id</span><span class="p">,</span> <span class="s">"result"</span><span class="p">:</span> <span class="n">result</span><span class="p">},</span>
+    <span class="n">timestamp</span><span class="o">=</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+<span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="plugin-architecture">Plugin Architecture</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PluginManager</span><span class="p">:</span>
+    <span class="s">"""Manages dynamically loaded plugins."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">plugins</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Plugin</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">plugin_registry</span> <span class="o">=</span> <span class="n">PluginRegistry</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">load_plugin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plugin_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Plugin</span><span class="p">:</span>
+        <span class="s">"""Dynamically load and initialize plugin."""</span>
+        
+        <span class="n">plugin_spec</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">plugin_registry</span><span class="p">.</span><span class="n">get_spec</span><span class="p">(</span><span class="n">plugin_name</span><span class="p">)</span>
+        
+        <span class="c1"># Import plugin module
+</span>        <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="p">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">plugin_spec</span><span class="p">.</span><span class="n">module_path</span><span class="p">)</span>
+        
+        <span class="c1"># Instantiate plugin class
+</span>        <span class="n">plugin_class</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">plugin_spec</span><span class="p">.</span><span class="n">class_name</span><span class="p">)</span>
+        <span class="n">plugin</span> <span class="o">=</span> <span class="n">plugin_class</span><span class="p">(</span><span class="n">plugin_spec</span><span class="p">.</span><span class="n">config</span><span class="p">)</span>
+        
+        <span class="c1"># Register with system
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">plugins</span><span class="p">[</span><span class="n">plugin_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">plugin</span>
+        <span class="n">plugin</span><span class="p">.</span><span class="n">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">get_system_interface</span><span class="p">())</span>
+        
+        <span class="k">return</span> <span class="n">plugin</span>
+    
+    <span class="k">def</span> <span class="nf">get_system_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SystemInterface</span><span class="p">:</span>
+        <span class="s">"""Provide interface for plugins to interact with system."""</span>
+        <span class="k">return</span> <span class="n">SystemInterface</span><span class="p">(</span>
+            <span class="n">canvas</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">canvas</span><span class="p">,</span>
+            <span class="n">models</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">model_selector</span><span class="p">,</span>
+            <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">context_manager</span><span class="p">,</span>
+            <span class="n">event_bus</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">event_bus</span>
+        <span class="p">)</span>
+
+<span class="c1"># Example plugin
+</span><span class="k">class</span> <span class="nc">CustomMaskingPlugin</span><span class="p">(</span><span class="n">Plugin</span><span class="p">):</span>
+    <span class="s">"""Plugin that adds custom masking strategies."""</span>
+    
+    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system_interface</span><span class="p">:</span> <span class="n">SystemInterface</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">system</span> <span class="o">=</span> <span class="n">system_interface</span>
+        
+        <span class="c1"># Register custom masking strategies
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">system</span><span class="p">.</span><span class="n">reference_engine</span><span class="p">.</span><span class="n">register_masking_strategy</span><span class="p">(</span>
+            <span class="s">"spiral_reveal"</span><span class="p">,</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">spiral_reveal_mask</span>
+        <span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">spiral_reveal_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">,</span> <span class="n">difficulty</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">:</span>
+        <span class="s">"""Custom spiral reveal masking strategy."""</span>
+        <span class="c1"># Implementation here
+</span>        <span class="k">pass</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="performance-optimizations">Performance Optimizations</h2>
+
+<h3 id="parallel-processing">Parallel Processing</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ParallelExecutor</span><span class="p">:</span>
+    <span class="s">"""Handles parallel execution of independent tasks."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_workers</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">max_workers</span> <span class="o">=</span> <span class="n">max_workers</span> <span class="ow">or</span> <span class="n">os</span><span class="p">.</span><span class="n">cpu_count</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">thread_pool</span> <span class="o">=</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">max_workers</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">process_pool</span> <span class="o">=</span> <span class="n">ProcessPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">max_workers</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">execute_parallel_tasks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tasks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Task</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">TaskResult</span><span class="p">]:</span>
+        <span class="s">"""Execute independent tasks in parallel."""</span>
+        
+        <span class="c1"># Separate CPU-bound and I/O-bound tasks
+</span>        <span class="n">cpu_tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tasks</span> <span class="k">if</span> <span class="n">t</span><span class="p">.</span><span class="n">is_cpu_bound</span><span class="p">()]</span>
+        <span class="n">io_tasks</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tasks</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">t</span><span class="p">.</span><span class="n">is_cpu_bound</span><span class="p">()]</span>
+        
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="c1"># Execute CPU-bound tasks in process pool
+</span>        <span class="k">if</span> <span class="n">cpu_tasks</span><span class="p">:</span>
+            <span class="n">cpu_futures</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">process_pool</span><span class="p">.</span><span class="n">submit</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">execute</span><span class="p">)</span> 
+                <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">cpu_tasks</span>
+            <span class="p">]</span>
+            <span class="n">results</span><span class="p">.</span><span class="n">extend</span><span class="p">([</span><span class="n">f</span><span class="p">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">cpu_futures</span><span class="p">])</span>
+        
+        <span class="c1"># Execute I/O-bound tasks in thread pool
+</span>        <span class="k">if</span> <span class="n">io_tasks</span><span class="p">:</span>
+            <span class="n">io_futures</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">thread_pool</span><span class="p">.</span><span class="n">submit</span><span class="p">(</span><span class="n">task</span><span class="p">.</span><span class="n">execute</span><span class="p">)</span> 
+                <span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">io_tasks</span>
+            <span class="p">]</span>
+            <span class="n">results</span><span class="p">.</span><span class="n">extend</span><span class="p">([</span><span class="n">f</span><span class="p">.</span><span class="n">result</span><span class="p">()</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">io_futures</span><span class="p">])</span>
+        
+        <span class="k">return</span> <span class="n">results</span>
+</code></pre></div></div>
+
+<h3 id="memory-management">Memory Management</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">MemoryManager</span><span class="p">:</span>
+    <span class="s">"""Optimizes memory usage across the system."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">memory_monitor</span> <span class="o">=</span> <span class="n">MemoryMonitor</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">gc_scheduler</span> <span class="o">=</span> <span class="n">GCScheduler</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">image_pool</span> <span class="o">=</span> <span class="n">ImagePool</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">optimize_memory_usage</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="s">"""Perform memory optimization."""</span>
+        
+        <span class="n">current_usage</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">memory_monitor</span><span class="p">.</span><span class="n">get_current_usage</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="n">current_usage</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">:</span>  <span class="c1"># 80% memory usage
+</span>            <span class="c1"># Clear caches
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">_clear_expendable_caches</span><span class="p">()</span>
+            
+            <span class="c1"># Force garbage collection
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">gc_scheduler</span><span class="p">.</span><span class="n">force_collection</span><span class="p">()</span>
+            
+            <span class="c1"># Compress images in pool
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">image_pool</span><span class="p">.</span><span class="n">compress_inactive_images</span><span class="p">()</span>
+            
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Memory optimized: </span><span class="si">{</span><span class="n">current_usage</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="o">%</span><span class="si">}</span><span class="s"> -&gt; </span><span class="si">{</span><span class="bp">self</span><span class="p">.</span><span class="n">memory_monitor</span><span class="p">.</span><span class="n">get_current_usage</span><span class="p">()</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="o">%</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="monitoring-and-observability">Monitoring and Observability</h2>
+
+<h3 id="performance-monitoring">Performance Monitoring</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PerformanceMonitor</span><span class="p">:</span>
+    <span class="s">"""Monitors system performance and health."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">metrics_collector</span> <span class="o">=</span> <span class="n">MetricsCollector</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">alert_manager</span> <span class="o">=</span> <span class="n">AlertManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">dashboard</span> <span class="o">=</span> <span class="n">PerformanceDashboard</span><span class="p">()</span>
+    
+    <span class="o">@</span><span class="n">contextmanager</span>
+    <span class="k">def</span> <span class="nf">monitor_operation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">operation_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="s">"""Context manager for monitoring operations."""</span>
+        
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">start_memory</span> <span class="o">=</span> <span class="n">psutil</span><span class="p">.</span><span class="n">Process</span><span class="p">().</span><span class="n">memory_info</span><span class="p">().</span><span class="n">rss</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">yield</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">end_memory</span> <span class="o">=</span> <span class="n">psutil</span><span class="p">.</span><span class="n">Process</span><span class="p">().</span><span class="n">memory_info</span><span class="p">().</span><span class="n">rss</span>
+            
+            <span class="c1"># Record metrics
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">metrics_collector</span><span class="p">.</span><span class="n">record</span><span class="p">({</span>
+                <span class="s">'operation'</span><span class="p">:</span> <span class="n">operation_name</span><span class="p">,</span>
+                <span class="s">'duration'</span><span class="p">:</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">,</span>
+                <span class="s">'memory_delta'</span><span class="p">:</span> <span class="n">end_memory</span> <span class="o">-</span> <span class="n">start_memory</span><span class="p">,</span>
+                <span class="s">'timestamp'</span><span class="p">:</span> <span class="n">end_time</span>
+            <span class="p">})</span>
+            
+            <span class="c1"># Check for alerts
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">_check_performance_alerts</span><span class="p">(</span><span class="n">operation_name</span><span class="p">,</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span><span class="p">)</span>
+
+<span class="c1"># Usage
+</span><span class="k">with</span> <span class="n">performance_monitor</span><span class="p">.</span><span class="n">monitor_operation</span><span class="p">(</span><span class="s">"reference_understanding"</span><span class="p">):</span>
+    <span class="n">understanding</span> <span class="o">=</span> <span class="n">engine</span><span class="p">.</span><span class="n">learn_reference</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="scalability-considerations">Scalability Considerations</h2>
+
+<h3 id="horizontal-scaling">Horizontal Scaling</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DistributedTaskQueue</span><span class="p">:</span>
+    <span class="s">"""Distributes tasks across multiple workers."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">redis_url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">redis</span> <span class="o">=</span> <span class="n">Redis</span><span class="p">.</span><span class="n">from_url</span><span class="p">(</span><span class="n">redis_url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">task_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">(</span><span class="s">'pakati_tasks'</span><span class="p">,</span> <span class="n">connection</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">redis</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">result_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">(</span><span class="s">'pakati_results'</span><span class="p">,</span> <span class="n">connection</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">redis</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">submit_task</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task</span><span class="p">:</span> <span class="n">Task</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="s">"""Submit task for distributed execution."""</span>
+        
+        <span class="n">task_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">uuid4</span><span class="p">())</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">task_queue</span><span class="p">.</span><span class="n">enqueue</span><span class="p">(</span>
+            <span class="s">'pakati.workers.execute_task'</span><span class="p">,</span>
+            <span class="n">task</span><span class="p">.</span><span class="n">serialize</span><span class="p">(),</span>
+            <span class="n">task_id</span><span class="o">=</span><span class="n">task_id</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="s">'30m'</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">task_id</span>
+    
+    <span class="k">def</span> <span class="nf">get_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">task_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TaskResult</span><span class="p">:</span>
+        <span class="s">"""Retrieve task result."""</span>
+        
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start_time</span> <span class="o">&lt;</span> <span class="n">timeout</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">redis</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s">"result:</span><span class="si">{</span><span class="n">task_id</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">TaskResult</span><span class="p">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        
+        <span class="k">raise</span> <span class="nb">TimeoutError</span><span class="p">(</span><span class="sa">f</span><span class="s">"Task </span><span class="si">{</span><span class="n">task_id</span><span class="si">}</span><span class="s"> did not complete within </span><span class="si">{</span><span class="n">timeout</span><span class="si">}</span><span class="s"> seconds"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="load-balancing">Load Balancing</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">LoadBalancer</span><span class="p">:</span>
+    <span class="s">"""Balances load across multiple model instances."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">model_instances</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">load_monitor</span> <span class="o">=</span> <span class="n">LoadMonitor</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">health_checker</span> <span class="o">=</span> <span class="n">HealthChecker</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">get_best_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModelInstance</span><span class="p">:</span>
+        <span class="s">"""Select least loaded healthy instance."""</span>
+        
+        <span class="n">available_instances</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">instance</span> <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">model_instances</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">health_checker</span><span class="p">.</span><span class="n">is_healthy</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+        <span class="p">]</span>
+        
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">available_instances</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">NoAvailableInstanceError</span><span class="p">(</span><span class="sa">f</span><span class="s">"No healthy instances for </span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        
+        <span class="c1"># Select least loaded
+</span>        <span class="n">best_instance</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span>
+            <span class="n">available_instances</span><span class="p">,</span>
+            <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">i</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">load_monitor</span><span class="p">.</span><span class="n">get_current_load</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">best_instance</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="security-architecture">Security Architecture</h2>
+
+<h3 id="security-layers">Security Layers</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SecurityStack</span><span class="p">:</span>
+    <span class="s">"""Multi-layered security implementation."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Layer 1: Network security
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">firewall</span> <span class="o">=</span> <span class="n">NetworkFirewall</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">ddos_protection</span> <span class="o">=</span> <span class="n">DDOSProtection</span><span class="p">()</span>
+        
+        <span class="c1"># Layer 2: Authentication &amp; Authorization
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">auth_manager</span> <span class="o">=</span> <span class="n">AuthenticationManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">rbac</span> <span class="o">=</span> <span class="n">RoleBasedAccessControl</span><span class="p">()</span>
+        
+        <span class="c1"># Layer 3: Input validation
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">input_validator</span> <span class="o">=</span> <span class="n">InputValidator</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">prompt_sanitizer</span> <span class="o">=</span> <span class="n">PromptSanitizer</span><span class="p">()</span>
+        
+        <span class="c1"># Layer 4: Data protection
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">encryption_manager</span> <span class="o">=</span> <span class="n">EncryptionManager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">data_anonymizer</span> <span class="o">=</span> <span class="n">DataAnonymizer</span><span class="p">()</span>
+        
+        <span class="c1"># Layer 5: Audit &amp; Monitoring
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">audit_logger</span> <span class="o">=</span> <span class="n">AuditLogger</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">security_monitor</span> <span class="o">=</span> <span class="n">SecurityMonitor</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">secure_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Request</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SecureRequest</span><span class="p">:</span>
+        <span class="s">"""Apply security measures to incoming request."""</span>
+        
+        <span class="c1"># Network layer checks
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">firewall</span><span class="p">.</span><span class="n">check_request</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">ddos_protection</span><span class="p">.</span><span class="n">rate_limit_check</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        
+        <span class="c1"># Authentication
+</span>        <span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">auth_manager</span><span class="p">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        
+        <span class="c1"># Authorization
+</span>        <span class="n">permissions</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">get_permissions</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">rbac</span><span class="p">.</span><span class="n">authorize</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">operation</span><span class="p">,</span> <span class="n">permissions</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">UnauthorizedError</span><span class="p">()</span>
+        
+        <span class="c1"># Input validation
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">input_validator</span><span class="p">.</span><span class="n">validate</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'prompt'</span><span class="p">):</span>
+            <span class="n">request</span><span class="p">.</span><span class="n">prompt</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">prompt_sanitizer</span><span class="p">.</span><span class="n">sanitize</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">prompt</span><span class="p">)</span>
+        
+        <span class="c1"># Audit logging
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">audit_logger</span><span class="p">.</span><span class="n">log_request</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">SecureRequest</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">permissions</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="configuration-management">Configuration Management</h2>
+
+<h3 id="environment-based-configuration">Environment-Based Configuration</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ConfigurationManager</span><span class="p">:</span>
+    <span class="s">"""Manages configuration across environments."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environment</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">environment</span> <span class="o">=</span> <span class="n">environment</span> <span class="ow">or</span> <span class="n">os</span><span class="p">.</span><span class="n">getenv</span><span class="p">(</span><span class="s">'PAKATI_ENV'</span><span class="p">,</span> <span class="s">'development'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_load_configuration</span><span class="p">()</span>
+    
+    <span class="k">def</span> <span class="nf">_load_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+        <span class="s">"""Load configuration for current environment."""</span>
+        
+        <span class="c1"># Base configuration
+</span>        <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_load_base_config</span><span class="p">()</span>
+        
+        <span class="c1"># Environment-specific overrides
+</span>        <span class="n">env_config</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_load_env_config</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">environment</span><span class="p">)</span>
+        <span class="n">config</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">env_config</span><span class="p">)</span>
+        
+        <span class="c1"># Secret management
+</span>        <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_inject_secrets</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+        
+        <span class="c1"># Validation
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">_validate_configuration</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">config</span>
+    
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+        <span class="s">"""Get configuration value with dot notation support."""</span>
+        
+        <span class="n">keys</span> <span class="o">=</span> <span class="n">key</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'.'</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">config</span>
+        
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">default</span>
+        
+        <span class="k">return</span> <span class="n">value</span>
+
+<span class="c1"># Example configuration structure
+# config/base.yaml
+</span><span class="n">base_config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'models'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'dalle'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'api_endpoint'</span><span class="p">:</span> <span class="s">'https://api.openai.com/v1/images/generations'</span><span class="p">,</span>
+            <span class="s">'timeout'</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+            <span class="s">'retries'</span><span class="p">:</span> <span class="mi">3</span>
+        <span class="p">},</span>
+        <span class="s">'stable_diffusion'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'model_path'</span><span class="p">:</span> <span class="s">'./models/stable-diffusion-xl'</span><span class="p">,</span>
+            <span class="s">'device'</span><span class="p">:</span> <span class="s">'cuda'</span><span class="p">,</span>
+            <span class="s">'precision'</span><span class="p">:</span> <span class="s">'fp16'</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s">'cache'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'redis'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'host'</span><span class="p">:</span> <span class="s">'localhost'</span><span class="p">,</span>
+            <span class="s">'port'</span><span class="p">:</span> <span class="mi">6379</span><span class="p">,</span>
+            <span class="s">'db'</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">},</span>
+        <span class="s">'memory'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'max_size'</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+            <span class="s">'ttl'</span><span class="p">:</span> <span class="mi">3600</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s">'security'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'rate_limiting'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'requests_per_minute'</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+            <span class="s">'burst_limit'</span><span class="p">:</span> <span class="mi">10</span>
+        <span class="p">},</span>
+        <span class="s">'authentication'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'jwt_secret'</span><span class="p">:</span> <span class="s">'${JWT_SECRET}'</span><span class="p">,</span>
+            <span class="s">'token_expiry'</span><span class="p">:</span> <span class="mi">86400</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>This comprehensive architecture enables Pakati to scale from single-user desktop applications to enterprise-grade distributed systems while maintaining consistency, security, and performance across all deployment scenarios.</p>
+
+<hr />
+
+<p><em>For specific implementation details, see the <a href="api.html">API Documentation</a>. For working examples, visit <a href="examples.html">Examples</a>.</em></p>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Pakati: Regional Control for AI Image Generation</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Pakati: Regional Control for AI Image Generation</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Revolutionary AI image generation system with regional control, metacognitive orchestration, and reference understanding.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

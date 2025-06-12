@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Fuzzy Logic Integration | Pakati: Regional Control for AI Image Generation</title>
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="Fuzzy Logic Integration" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Handling subjective creative concepts with fuzzy logic" />
+<meta property="og:description" content="Handling subjective creative concepts with fuzzy logic" />
+<link rel="canonical" href="http://localhost:4000/fuzzy_logic.html" />
+<meta property="og:url" content="http://localhost:4000/fuzzy_logic.html" />
+<meta property="og:site_name" content="Pakati: Regional Control for AI Image Generation" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Fuzzy Logic Integration" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","description":"Handling subjective creative concepts with fuzzy logic","headline":"Fuzzy Logic Integration","url":"http://localhost:4000/fuzzy_logic.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Pakati: Regional Control for AI Image Generation" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">Pakati: Regional Control for AI Image Generation</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/">Home</a><a class="page-link" href="/architecture.html">System Architecture</a><a class="page-link" href="/reference_understanding.html">Reference Understanding Engine</a><a class="page-link" href="/fuzzy_logic.html">Fuzzy Logic Integration</a><a class="page-link" href="/research.html">Research &amp; Publications</a><a class="page-link" href="/api.html">API Documentation</a><a class="page-link" href="/examples.html">Examples &amp; Tutorials</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <h1 class="fs-9" id="fuzzy-logic-integration">Fuzzy Logic Integration</h1>
+
+<p class="fs-6 fw-300">Handle subjective creative instructions using fuzzy sets, linguistic modifiers, and continuous satisfaction metrics.</p>
+
+<hr />
+
+<h2 class="no_toc text-delta" id="table-of-contents">Table of Contents</h2>
+
+<ol id="markdown-toc">
+  <li><a href="#fuzzy-logic-integration" id="markdown-toc-fuzzy-logic-integration">Fuzzy Logic Integration</a>    <ol>
+      <li><a href="#the-subjectivity-problem" id="markdown-toc-the-subjectivity-problem">The Subjectivity Problem</a></li>
+      <li><a href="#fuzzy-logic-foundation" id="markdown-toc-fuzzy-logic-foundation">Fuzzy Logic Foundation</a>        <ol>
+          <li><a href="#traditional-vs-fuzzy-approach" id="markdown-toc-traditional-vs-fuzzy-approach">Traditional vs Fuzzy Approach</a></li>
+          <li><a href="#fuzzy-set-theory" id="markdown-toc-fuzzy-set-theory">Fuzzy Set Theory</a></li>
+        </ol>
+      </li>
+      <li><a href="#pakatis-fuzzy-logic-engine" id="markdown-toc-pakatis-fuzzy-logic-engine">Pakati’s Fuzzy Logic Engine</a>        <ol>
+          <li><a href="#core-architecture" id="markdown-toc-core-architecture">Core Architecture</a></li>
+          <li><a href="#fuzzy-sets-for-creative-concepts" id="markdown-toc-fuzzy-sets-for-creative-concepts">Fuzzy Sets for Creative Concepts</a>            <ol>
+              <li><a href="#brightness-fuzzy-sets" id="markdown-toc-brightness-fuzzy-sets">Brightness Fuzzy Sets</a></li>
+              <li><a href="#color-warmth-fuzzy-sets" id="markdown-toc-color-warmth-fuzzy-sets">Color Warmth Fuzzy Sets</a></li>
+            </ol>
+          </li>
+          <li><a href="#membership-functions" id="markdown-toc-membership-functions">Membership Functions</a>            <ol>
+              <li><a href="#trapezoidal-membership" id="markdown-toc-trapezoidal-membership">Trapezoidal Membership</a></li>
+              <li><a href="#gaussian-membership" id="markdown-toc-gaussian-membership">Gaussian Membership</a></li>
+              <li><a href="#triangular-membership" id="markdown-toc-triangular-membership">Triangular Membership</a></li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li><a href="#linguistic-modifiers" id="markdown-toc-linguistic-modifiers">Linguistic Modifiers</a>        <ol>
+          <li><a href="#modifier-implementation" id="markdown-toc-modifier-implementation">Modifier Implementation</a></li>
+          <li><a href="#parsing-instructions-with-modifiers" id="markdown-toc-parsing-instructions-with-modifiers">Parsing Instructions with Modifiers</a></li>
+        </ol>
+      </li>
+      <li><a href="#fuzzy-rules-system" id="markdown-toc-fuzzy-rules-system">Fuzzy Rules System</a>        <ol>
+          <li><a href="#rule-structure" id="markdown-toc-rule-structure">Rule Structure</a></li>
+          <li><a href="#creative-rules" id="markdown-toc-creative-rules">Creative Rules</a></li>
+        </ol>
+      </li>
+      <li><a href="#mamdani-inference-method" id="markdown-toc-mamdani-inference-method">Mamdani Inference Method</a>        <ol>
+          <li><a href="#1-fuzzification" id="markdown-toc-1-fuzzification">1. Fuzzification</a></li>
+          <li><a href="#2-rule-evaluation" id="markdown-toc-2-rule-evaluation">2. Rule Evaluation</a></li>
+          <li><a href="#3-output-aggregation" id="markdown-toc-3-output-aggregation">3. Output Aggregation</a></li>
+          <li><a href="#4-defuzzification" id="markdown-toc-4-defuzzification">4. Defuzzification</a></li>
+        </ol>
+      </li>
+      <li><a href="#integration-with-evidence-graph" id="markdown-toc-integration-with-evidence-graph">Integration with Evidence Graph</a>        <ol>
+          <li><a href="#fuzzy-satisfaction-degrees" id="markdown-toc-fuzzy-satisfaction-degrees">Fuzzy Satisfaction Degrees</a></li>
+          <li><a href="#fuzzy-evidence-collection" id="markdown-toc-fuzzy-evidence-collection">Fuzzy Evidence Collection</a></li>
+        </ol>
+      </li>
+      <li><a href="#practical-applications" id="markdown-toc-practical-applications">Practical Applications</a>        <ol>
+          <li><a href="#example-make-it-slightly-warmer" id="markdown-toc-example-make-it-slightly-warmer">Example: “Make it Slightly Warmer”</a></li>
+          <li><a href="#example-more-detailed-but-not-too-sharp" id="markdown-toc-example-more-detailed-but-not-too-sharp">Example: “More Detailed but Not Too Sharp”</a></li>
+        </ol>
+      </li>
+      <li><a href="#performance-optimizations" id="markdown-toc-performance-optimizations">Performance Optimizations</a>        <ol>
+          <li><a href="#fuzzy-set-caching" id="markdown-toc-fuzzy-set-caching">Fuzzy Set Caching</a></li>
+          <li><a href="#parallel-rule-evaluation" id="markdown-toc-parallel-rule-evaluation">Parallel Rule Evaluation</a></li>
+        </ol>
+      </li>
+      <li><a href="#future-enhancements" id="markdown-toc-future-enhancements">Future Enhancements</a>        <ol>
+          <li><a href="#adaptive-fuzzy-sets" id="markdown-toc-adaptive-fuzzy-sets">Adaptive Fuzzy Sets</a></li>
+          <li><a href="#multi-cultural-fuzzy-sets" id="markdown-toc-multi-cultural-fuzzy-sets">Multi-Cultural Fuzzy Sets</a></li>
+        </ol>
+      </li>
+      <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+    </ol>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="the-subjectivity-problem">The Subjectivity Problem</h2>
+
+<p>Traditional AI systems struggle with subjective creative concepts because they treat everything as binary: either a goal is satisfied or it isn’t. But creative concepts exist on spectrums:</p>
+
+<ul>
+  <li>“Make it darker” - How much darker? What constitutes “dark enough”?</li>
+  <li>“More detailed” - What level of detail is sufficient?</li>
+  <li>“Warmer colors” - How warm? Which specific hues?</li>
+  <li>“Slightly more abstract” - How do you quantify “slightly”?</li>
+</ul>
+
+<p><strong>The fundamental issue</strong>: Creative instructions are inherently <strong>fuzzy</strong> - they have degrees of satisfaction rather than binary states.</p>
+
+<hr />
+
+<h2 id="fuzzy-logic-foundation">Fuzzy Logic Foundation</h2>
+
+<h3 id="traditional-vs-fuzzy-approach">Traditional vs Fuzzy Approach</h3>
+
+<pre><code class="language-mermaid">graph TD
+    A[Creative Instruction] --&gt; B{Traditional Approach}
+    B --&gt; C[Binary Interpretation]
+    C --&gt; D[Satisfied: True/False]
+    D --&gt; E[Rigid Results]
+    
+    A --&gt; F{Fuzzy Approach}
+    F --&gt; G[Degree of Membership]
+    G --&gt; H[Satisfaction: 0.0 - 1.0]
+    H --&gt; I[Nuanced Results]
+    
+    style E fill:#ffcccc
+    style I fill:#ccffcc
+</code></pre>
+
+<h3 id="fuzzy-set-theory">Fuzzy Set Theory</h3>
+
+<p>A <strong>fuzzy set</strong> allows partial membership. Instead of asking “Is this image dark?”, we ask “To what degree is this image dark?”</p>
+
+\[\mu_{\text{dark}}(x) = \text{membership degree of } x \text{ in the 'dark' set}\]
+
+<p>Where $\mu_{\text{dark}}(x) \in [0, 1]$</p>
+
+<ul>
+  <li>$\mu_{\text{dark}}(x) = 0.0$ → Not dark at all</li>
+  <li>$\mu_{\text{dark}}(x) = 0.5$ → Moderately dark</li>
+  <li>$\mu_{\text{dark}}(x) = 1.0$ → Completely dark</li>
+</ul>
+
+<hr />
+
+<h2 id="pakatis-fuzzy-logic-engine">Pakati’s Fuzzy Logic Engine</h2>
+
+<h3 id="core-architecture">Core Architecture</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FuzzyLogicEngine</span><span class="p">:</span>
+    <span class="s">"""Complete fuzzy logic system for creative concepts."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Core fuzzy sets for creative concepts
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">creative_fuzzy_sets</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">'brightness'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">_create_brightness_sets</span><span class="p">(),</span>
+            <span class="s">'color_warmth'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">_create_warmth_sets</span><span class="p">(),</span>
+            <span class="s">'detail_level'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">_create_detail_sets</span><span class="p">(),</span>
+            <span class="s">'saturation'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">_create_saturation_sets</span><span class="p">(),</span>
+            <span class="s">'contrast'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">_create_contrast_sets</span><span class="p">(),</span>
+            <span class="s">'satisfaction'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">_create_satisfaction_sets</span><span class="p">()</span>
+        <span class="p">}</span>
+        
+        <span class="c1"># Linguistic modifiers
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">modifiers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">'very'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="s">'extremely'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">3</span><span class="p">,</span>
+            <span class="s">'somewhat'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
+            <span class="s">'slightly'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">0.25</span><span class="p">,</span>
+            <span class="s">'moderately'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">0.75</span><span class="p">,</span>
+            <span class="s">'quite'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">1.25</span><span class="p">,</span>
+            <span class="s">'rather'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">1.5</span>
+        <span class="p">}</span>
+        
+        <span class="c1"># Fuzzy rules
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">rules</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">_initialize_creative_rules</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="fuzzy-sets-for-creative-concepts">Fuzzy Sets for Creative Concepts</h3>
+
+<h4 id="brightness-fuzzy-sets">Brightness Fuzzy Sets</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">_create_brightness_sets</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">FuzzySet</span><span class="p">]:</span>
+    <span class="s">"""Create fuzzy sets for brightness concepts."""</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s">'very_dark'</span><span class="p">:</span> <span class="n">FuzzySet</span><span class="p">(</span><span class="s">'very_dark'</span><span class="p">,</span> 
+            <span class="n">membership_func</span><span class="o">=</span><span class="n">trapezoid_membership</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">]</span>  <span class="c1"># [a, b, c, d] for trapezoid
+</span>        <span class="p">),</span>
+        
+        <span class="s">'dark'</span><span class="p">:</span> <span class="n">FuzzySet</span><span class="p">(</span><span class="s">'dark'</span><span class="p">,</span>
+            <span class="n">membership_func</span><span class="o">=</span><span class="n">trapezoid_membership</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">]</span>
+        <span class="p">),</span>
+        
+        <span class="s">'medium'</span><span class="p">:</span> <span class="n">FuzzySet</span><span class="p">(</span><span class="s">'medium'</span><span class="p">,</span>
+            <span class="n">membership_func</span><span class="o">=</span><span class="n">trapezoid_membership</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">]</span>
+        <span class="p">),</span>
+        
+        <span class="s">'bright'</span><span class="p">:</span> <span class="n">FuzzySet</span><span class="p">(</span><span class="s">'bright'</span><span class="p">,</span>
+            <span class="n">membership_func</span><span class="o">=</span><span class="n">trapezoid_membership</span><span class="p">,</span>  
+            <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="mf">0.55</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">]</span>
+        <span class="p">),</span>
+        
+        <span class="s">'very_bright'</span><span class="p">:</span> <span class="n">FuzzySet</span><span class="p">(</span><span class="s">'very_bright'</span><span class="p">,</span>
+            <span class="n">membership_func</span><span class="o">=</span><span class="n">trapezoid_membership</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">[</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="color-warmth-fuzzy-sets">Color Warmth Fuzzy Sets</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">_create_warmth_sets</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">FuzzySet</span><span class="p">]:</span>
+    <span class="s">"""Create fuzzy sets for color warmth concepts."""</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s">'very_cool'</span><span class="p">:</span> <span class="n">FuzzySet</span><span class="p">(</span><span class="s">'very_cool'</span><span class="p">,</span>
+            <span class="n">membership_func</span><span class="o">=</span><span class="n">gaussian_membership</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'center'</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}</span>  <span class="c1"># Cool blues/cyans
+</span>        <span class="p">),</span>
+        
+        <span class="s">'cool'</span><span class="p">:</span> <span class="n">FuzzySet</span><span class="p">(</span><span class="s">'cool'</span><span class="p">,</span>
+            <span class="n">membership_func</span><span class="o">=</span><span class="n">gaussian_membership</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'center'</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">}</span>  <span class="c1"># Blues/greens
+</span>        <span class="p">),</span>
+        
+        <span class="s">'neutral'</span><span class="p">:</span> <span class="n">FuzzySet</span><span class="p">(</span><span class="s">'neutral'</span><span class="p">,</span>
+            <span class="n">membership_func</span><span class="o">=</span><span class="n">gaussian_membership</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'center'</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">}</span>   <span class="c1"># Balanced colors
+</span>        <span class="p">),</span>
+        
+        <span class="s">'warm'</span><span class="p">:</span> <span class="n">FuzzySet</span><span class="p">(</span><span class="s">'warm'</span><span class="p">,</span>
+            <span class="n">membership_func</span><span class="o">=</span><span class="n">gaussian_membership</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'center'</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="mf">0.15</span><span class="p">}</span>  <span class="c1"># Oranges/yellows
+</span>        <span class="p">),</span>
+        
+        <span class="s">'very_warm'</span><span class="p">:</span> <span class="n">FuzzySet</span><span class="p">(</span><span class="s">'very_warm'</span><span class="p">,</span>
+            <span class="n">membership_func</span><span class="o">=</span><span class="n">gaussian_membership</span><span class="p">,</span>
+            <span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s">'center'</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">}</span>  <span class="c1"># Deep reds/oranges
+</span>        <span class="p">)</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="membership-functions">Membership Functions</h3>
+
+<h4 id="trapezoidal-membership">Trapezoidal Membership</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">trapezoid_membership</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="s">"""Trapezoidal membership function."""</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">params</span>
+    
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">a</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="k">elif</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">c</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">1.0</span>
+    <span class="k">elif</span> <span class="n">c</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">d</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="mf">0.0</span>
+</code></pre></div></div>
+
+<h4 id="gaussian-membership">Gaussian Membership</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">gaussian_membership</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="s">"""Gaussian membership function."""</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">'center'</span><span class="p">]</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s">'width'</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">math</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="n">center</span><span class="p">)</span> <span class="o">/</span> <span class="n">width</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="triangular-membership">Triangular Membership</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">triangular_membership</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="s">"""Triangular membership function."""</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">params</span>
+    
+    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">a</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">c</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.0</span>
+    <span class="k">elif</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">c</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">c</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="mf">0.0</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="linguistic-modifiers">Linguistic Modifiers</h2>
+
+<p>Linguistic modifiers handle words like “very”, “slightly”, “extremely”:</p>
+
+<h3 id="modifier-implementation">Modifier Implementation</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">LinguisticModifier</span><span class="p">:</span>
+    <span class="s">"""Applies linguistic modifiers to fuzzy sets."""</span>
+    
+    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">apply_modifier</span><span class="p">(</span><span class="n">modifier</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">membership_value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="s">"""Apply linguistic modifier to membership value."""</span>
+        
+        <span class="n">modifiers</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="c1"># Intensifiers
+</span>            <span class="s">'very'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span>           <span class="c1"># Concentrate
+</span>            <span class="s">'extremely'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">3</span><span class="p">,</span>      <span class="c1"># Strong concentration
+</span>            <span class="s">'quite'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">1.25</span><span class="p">,</span>       <span class="c1"># Mild concentration
+</span>            <span class="s">'rather'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">1.5</span><span class="p">,</span>       <span class="c1"># Moderate concentration
+</span>            
+            <span class="c1"># Hedges (reduce intensity)
+</span>            <span class="s">'somewhat'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>     <span class="c1"># Dilate
+</span>            <span class="s">'slightly'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">0.25</span><span class="p">,</span>    <span class="c1"># Strong dilation
+</span>            <span class="s">'moderately'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">0.75</span><span class="p">,</span>  <span class="c1"># Mild dilation
+</span>            <span class="s">'kind_of'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mf">0.6</span><span class="p">,</span>      <span class="c1"># Casual dilation
+</span>            
+            <span class="c1"># Approximation
+</span>            <span class="s">'about'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">0.9</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">,</span>  <span class="c1"># Soften boundaries
+</span>            <span class="s">'around'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">0.85</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">,</span> <span class="c1"># More softening
+</span>            
+            <span class="c1"># Negation
+</span>            <span class="s">'not'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">x</span><span class="p">,</span>           <span class="c1"># Complement
+</span>            <span class="s">'not_very'</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Not + intensifier
+</span>        <span class="p">}</span>
+        
+        <span class="k">if</span> <span class="n">modifier</span> <span class="ow">in</span> <span class="n">modifiers</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">[</span><span class="n">modifier</span><span class="p">](</span><span class="n">membership_value</span><span class="p">)))</span>
+        
+        <span class="k">return</span> <span class="n">membership_value</span>
+</code></pre></div></div>
+
+<h3 id="parsing-instructions-with-modifiers">Parsing Instructions with Modifiers</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">parse_fuzzy_instruction</span><span class="p">(</span><span class="n">instruction</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FuzzyInstruction</span><span class="p">:</span>
+    <span class="s">"""Parse natural language instruction into fuzzy components."""</span>
+    
+    <span class="c1"># Example: "make it very slightly warmer and more detailed"
+</span>    <span class="n">parsed</span> <span class="o">=</span> <span class="n">FuzzyInstruction</span><span class="p">()</span>
+    
+    <span class="c1"># Tokenize and analyze
+</span>    <span class="n">tokens</span> <span class="o">=</span> <span class="n">instruction</span><span class="p">.</span><span class="n">lower</span><span class="p">().</span><span class="n">split</span><span class="p">()</span>
+    
+    <span class="n">current_modifiers</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">current_concept</span> <span class="o">=</span> <span class="bp">None</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'very'</span><span class="p">,</span> <span class="s">'extremely'</span><span class="p">,</span> <span class="s">'somewhat'</span><span class="p">,</span> <span class="s">'slightly'</span><span class="p">,</span> <span class="s">'quite'</span><span class="p">,</span> <span class="s">'rather'</span><span class="p">,</span> <span class="s">'moderately'</span><span class="p">]:</span>
+            <span class="n">current_modifiers</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+            
+        <span class="k">elif</span> <span class="n">token</span> <span class="ow">in</span> <span class="p">[</span><span class="s">'darker'</span><span class="p">,</span> <span class="s">'brighter'</span><span class="p">,</span> <span class="s">'warmer'</span><span class="p">,</span> <span class="s">'cooler'</span><span class="p">,</span> <span class="s">'detailed'</span><span class="p">,</span> <span class="s">'saturated'</span><span class="p">]:</span>
+            <span class="n">concept_map</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s">'darker'</span><span class="p">:</span> <span class="p">(</span><span class="s">'brightness'</span><span class="p">,</span> <span class="s">'decrease'</span><span class="p">),</span>
+                <span class="s">'brighter'</span><span class="p">:</span> <span class="p">(</span><span class="s">'brightness'</span><span class="p">,</span> <span class="s">'increase'</span><span class="p">),</span>
+                <span class="s">'warmer'</span><span class="p">:</span> <span class="p">(</span><span class="s">'color_warmth'</span><span class="p">,</span> <span class="s">'increase'</span><span class="p">),</span>
+                <span class="s">'cooler'</span><span class="p">:</span> <span class="p">(</span><span class="s">'color_warmth'</span><span class="p">,</span> <span class="s">'decrease'</span><span class="p">),</span>
+                <span class="s">'detailed'</span><span class="p">:</span> <span class="p">(</span><span class="s">'detail_level'</span><span class="p">,</span> <span class="s">'increase'</span><span class="p">),</span>
+                <span class="s">'saturated'</span><span class="p">:</span> <span class="p">(</span><span class="s">'saturation'</span><span class="p">,</span> <span class="s">'increase'</span><span class="p">)</span>
+            <span class="p">}</span>
+            
+            <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">concept_map</span><span class="p">:</span>
+                <span class="n">concept</span><span class="p">,</span> <span class="n">direction</span> <span class="o">=</span> <span class="n">concept_map</span><span class="p">[</span><span class="n">token</span><span class="p">]</span>
+                
+                <span class="n">fuzzy_component</span> <span class="o">=</span> <span class="n">FuzzyComponent</span><span class="p">(</span>
+                    <span class="n">concept</span><span class="o">=</span><span class="n">concept</span><span class="p">,</span>
+                    <span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">,</span>
+                    <span class="n">modifiers</span><span class="o">=</span><span class="n">current_modifiers</span><span class="p">.</span><span class="n">copy</span><span class="p">(),</span>
+                    <span class="n">strength</span><span class="o">=</span><span class="n">calculate_modifier_strength</span><span class="p">(</span><span class="n">current_modifiers</span><span class="p">)</span>
+                <span class="p">)</span>
+                
+                <span class="n">parsed</span><span class="p">.</span><span class="n">components</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">fuzzy_component</span><span class="p">)</span>
+                <span class="n">current_modifiers</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">return</span> <span class="n">parsed</span>
+
+<span class="c1"># Example result:
+# "make it very slightly warmer" -&gt;
+# FuzzyComponent(concept='color_warmth', direction='increase', 
+#                modifiers=['very', 'slightly'], strength=0.35)
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="fuzzy-rules-system">Fuzzy Rules System</h2>
+
+<h3 id="rule-structure">Rule Structure</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">dataclass</span>
+<span class="k">class</span> <span class="nc">FuzzyRule</span><span class="p">:</span>
+    <span class="s">"""IF-THEN fuzzy rule for creative decisions."""</span>
+    
+    <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">antecedent</span><span class="p">:</span> <span class="n">FuzzyCondition</span>      <span class="c1"># IF part
+</span>    <span class="n">consequent</span><span class="p">:</span> <span class="n">FuzzyAction</span>         <span class="c1"># THEN part
+</span>    <span class="n">weight</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>             <span class="c1"># Rule importance
+</span>    <span class="n">confidence</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span>         <span class="c1"># Rule certainty
+</span>
+<span class="k">class</span> <span class="nc">FuzzyCondition</span><span class="p">:</span>
+    <span class="s">"""Represents the IF part of a fuzzy rule."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">conditions</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]):</span>
+        <span class="c1"># Each condition: (concept, fuzzy_set, membership_threshold)
+</span>        <span class="c1"># Example: [('brightness', 'dark', 0.7), ('saturation', 'low', 0.5)]
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">conditions</span> <span class="o">=</span> <span class="n">conditions</span>
+    
+    <span class="k">def</span> <span class="nf">evaluate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_state</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="s">"""Evaluate condition against current state."""</span>
+        
+        <span class="n">membership_values</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">concept</span><span class="p">,</span> <span class="n">fuzzy_set_name</span><span class="p">,</span> <span class="n">threshold</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">conditions</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">concept</span> <span class="ow">in</span> <span class="n">current_state</span><span class="p">:</span>
+                <span class="n">current_value</span> <span class="o">=</span> <span class="n">current_state</span><span class="p">[</span><span class="n">concept</span><span class="p">]</span>
+                <span class="n">fuzzy_set</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_fuzzy_set</span><span class="p">(</span><span class="n">concept</span><span class="p">,</span> <span class="n">fuzzy_set_name</span><span class="p">)</span>
+                <span class="n">membership</span> <span class="o">=</span> <span class="n">fuzzy_set</span><span class="p">.</span><span class="n">membership</span><span class="p">(</span><span class="n">current_value</span><span class="p">)</span>
+                
+                <span class="c1"># Check if membership meets threshold
+</span>                <span class="k">if</span> <span class="n">membership</span> <span class="o">&gt;=</span> <span class="n">threshold</span><span class="p">:</span>
+                    <span class="n">membership_values</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">membership</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">membership_values</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">membership_values</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+        
+        <span class="c1"># Use minimum (AND operation) for multiple conditions
+</span>        <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">membership_values</span><span class="p">)</span> <span class="k">if</span> <span class="n">membership_values</span> <span class="k">else</span> <span class="mf">0.0</span>
+</code></pre></div></div>
+
+<h3 id="creative-rules">Creative Rules</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">_initialize_creative_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="s">"""Initialize fuzzy rules for creative concepts."""</span>
+    
+    <span class="c1"># Rule 1: If image is very dark, increase brightness significantly
+</span>    <span class="bp">self</span><span class="p">.</span><span class="n">rules</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">FuzzyRule</span><span class="p">(</span>
+        <span class="nb">id</span><span class="o">=</span><span class="s">"dark_brightness_boost"</span><span class="p">,</span>
+        <span class="n">antecedent</span><span class="o">=</span><span class="n">FuzzyCondition</span><span class="p">([</span>
+            <span class="p">(</span><span class="s">'brightness'</span><span class="p">,</span> <span class="s">'very_dark'</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">)</span>
+        <span class="p">]),</span>
+        <span class="n">consequent</span><span class="o">=</span><span class="n">FuzzyAction</span><span class="p">(</span>
+            <span class="n">adjustments</span><span class="o">=</span><span class="p">[(</span><span class="s">'brightness'</span><span class="p">,</span> <span class="s">'increase'</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)]</span>
+        <span class="p">),</span>
+        <span class="n">weight</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+        <span class="n">confidence</span><span class="o">=</span><span class="mf">0.95</span>
+    <span class="p">))</span>
+    
+    <span class="c1"># Rule 2: If image lacks detail and user wants more detail, enhance details
+</span>    <span class="bp">self</span><span class="p">.</span><span class="n">rules</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">FuzzyRule</span><span class="p">(</span>
+        <span class="nb">id</span><span class="o">=</span><span class="s">"detail_enhancement"</span><span class="p">,</span>
+        <span class="n">antecedent</span><span class="o">=</span><span class="n">FuzzyCondition</span><span class="p">([</span>
+            <span class="p">(</span><span class="s">'detail_level'</span><span class="p">,</span> <span class="s">'low'</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">),</span>
+            <span class="p">(</span><span class="s">'user_satisfaction'</span><span class="p">,</span> <span class="s">'low'</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+        <span class="p">]),</span>
+        <span class="n">consequent</span><span class="o">=</span><span class="n">FuzzyAction</span><span class="p">(</span>
+            <span class="n">adjustments</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">(</span><span class="s">'detail_level'</span><span class="p">,</span> <span class="s">'increase'</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">),</span>
+                <span class="p">(</span><span class="s">'sharpness'</span><span class="p">,</span> <span class="s">'increase'</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">),</span>
+        <span class="n">weight</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+        <span class="n">confidence</span><span class="o">=</span><span class="mf">0.85</span>
+    <span class="p">))</span>
+    
+    <span class="c1"># Rule 3: If colors are too cool and user wants warmth, warm them up
+</span>    <span class="bp">self</span><span class="p">.</span><span class="n">rules</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">FuzzyRule</span><span class="p">(</span>
+        <span class="nb">id</span><span class="o">=</span><span class="s">"warmth_adjustment"</span><span class="p">,</span>
+        <span class="n">antecedent</span><span class="o">=</span><span class="n">FuzzyCondition</span><span class="p">([</span>
+            <span class="p">(</span><span class="s">'color_warmth'</span><span class="p">,</span> <span class="s">'cool'</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">),</span>
+            <span class="p">(</span><span class="s">'user_intent'</span><span class="p">,</span> <span class="s">'warmer'</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">)</span>
+        <span class="p">]),</span>
+        <span class="n">consequent</span><span class="o">=</span><span class="n">FuzzyAction</span><span class="p">(</span>
+            <span class="n">adjustments</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">(</span><span class="s">'color_warmth'</span><span class="p">,</span> <span class="s">'increase'</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">),</span>
+                <span class="p">(</span><span class="s">'red_saturation'</span><span class="p">,</span> <span class="s">'increase'</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">),</span>
+                <span class="p">(</span><span class="s">'yellow_saturation'</span><span class="p">,</span> <span class="s">'increase'</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">),</span>
+        <span class="n">weight</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span>
+        <span class="n">confidence</span><span class="o">=</span><span class="mf">0.9</span>
+    <span class="p">))</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="mamdani-inference-method">Mamdani Inference Method</h2>
+
+<p>Pakati uses the complete Mamdani fuzzy inference process:</p>
+
+<h3 id="1-fuzzification">1. Fuzzification</h3>
+
+<p>Convert crisp input values to fuzzy membership degrees:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fuzzify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_values</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
+    <span class="s">"""Convert crisp inputs to fuzzy membership degrees."""</span>
+    
+    <span class="n">fuzzified</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">for</span> <span class="n">concept</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">input_values</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">concept</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">creative_fuzzy_sets</span><span class="p">:</span>
+            <span class="n">fuzzified</span><span class="p">[</span><span class="n">concept</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            
+            <span class="c1"># Calculate membership in each fuzzy set
+</span>            <span class="k">for</span> <span class="n">set_name</span><span class="p">,</span> <span class="n">fuzzy_set</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">creative_fuzzy_sets</span><span class="p">[</span><span class="n">concept</span><span class="p">].</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">membership</span> <span class="o">=</span> <span class="n">fuzzy_set</span><span class="p">.</span><span class="n">membership</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">fuzzified</span><span class="p">[</span><span class="n">concept</span><span class="p">][</span><span class="n">set_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">membership</span>
+    
+    <span class="k">return</span> <span class="n">fuzzified</span>
+
+<span class="c1"># Example:
+# Input: {'brightness': 0.3, 'color_warmth': 0.7}
+# Output: {
+#     'brightness': {'very_dark': 0.2, 'dark': 0.8, 'medium': 0.1, ...},
+#     'color_warmth': {'cool': 0.1, 'neutral': 0.3, 'warm': 0.9, ...}
+# }
+</span></code></pre></div></div>
+
+<h3 id="2-rule-evaluation">2. Rule Evaluation</h3>
+
+<p>Evaluate each rule against fuzzified inputs:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">evaluate_rules</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fuzzified_inputs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">RuleActivation</span><span class="p">]:</span>
+    <span class="s">"""Evaluate all rules and return activations."""</span>
+    
+    <span class="n">activations</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">rules</span><span class="p">:</span>
+        <span class="c1"># Calculate rule activation strength
+</span>        <span class="n">activation_strength</span> <span class="o">=</span> <span class="n">rule</span><span class="p">.</span><span class="n">antecedent</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">fuzzified_inputs</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">activation_strength</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">activations</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">RuleActivation</span><span class="p">(</span>
+                <span class="n">rule</span><span class="o">=</span><span class="n">rule</span><span class="p">,</span>
+                <span class="n">strength</span><span class="o">=</span><span class="n">activation_strength</span> <span class="o">*</span> <span class="n">rule</span><span class="p">.</span><span class="n">weight</span> <span class="o">*</span> <span class="n">rule</span><span class="p">.</span><span class="n">confidence</span>
+            <span class="p">))</span>
+    
+    <span class="k">return</span> <span class="n">activations</span>
+</code></pre></div></div>
+
+<h3 id="3-output-aggregation">3. Output Aggregation</h3>
+
+<p>Combine outputs from all activated rules:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">aggregate_outputs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule_activations</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">RuleActivation</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="s">"""Aggregate rule outputs using maximum aggregation."""</span>
+    
+    <span class="n">aggregated</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">activation</span> <span class="ow">in</span> <span class="n">rule_activations</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">adjustment</span> <span class="ow">in</span> <span class="n">activation</span><span class="p">.</span><span class="n">rule</span><span class="p">.</span><span class="n">consequent</span><span class="p">.</span><span class="n">adjustments</span><span class="p">:</span>
+            <span class="n">concept</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">strength</span> <span class="o">=</span> <span class="n">adjustment</span>
+            
+            <span class="c1"># Apply activation strength to adjustment
+</span>            <span class="n">adjusted_strength</span> <span class="o">=</span> <span class="n">strength</span> <span class="o">*</span> <span class="n">activation</span><span class="p">.</span><span class="n">strength</span>
+            
+            <span class="c1"># Maximum aggregation (take the strongest activation)
+</span>            <span class="n">key</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">concept</span><span class="si">}</span><span class="s">_</span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s">"</span>
+            <span class="n">aggregated</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">aggregated</span><span class="p">[</span><span class="n">key</span><span class="p">],</span> <span class="n">adjusted_strength</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">aggregated</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="4-defuzzification">4. Defuzzification</h3>
+
+<p>Convert fuzzy outputs back to crisp values:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">defuzzify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aggregated_outputs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s">'centroid'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+    <span class="s">"""Convert fuzzy outputs to crisp adjustment values."""</span>
+    
+    <span class="n">crisp_outputs</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">for</span> <span class="n">output_key</span><span class="p">,</span> <span class="n">strength</span> <span class="ow">in</span> <span class="n">aggregated_outputs</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s">'centroid'</span><span class="p">:</span>
+            <span class="n">crisp_value</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_centroid_defuzzification</span><span class="p">(</span><span class="n">output_key</span><span class="p">,</span> <span class="n">strength</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s">'maximum'</span><span class="p">:</span>
+            <span class="n">crisp_value</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_maximum_defuzzification</span><span class="p">(</span><span class="n">output_key</span><span class="p">,</span> <span class="n">strength</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s">'mean_of_maximum'</span><span class="p">:</span>
+            <span class="n">crisp_value</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_mean_of_maximum_defuzzification</span><span class="p">(</span><span class="n">output_key</span><span class="p">,</span> <span class="n">strength</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">crisp_value</span> <span class="o">=</span> <span class="n">strength</span>  <span class="c1"># Simple passthrough
+</span>        
+        <span class="n">crisp_outputs</span><span class="p">[</span><span class="n">output_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">crisp_value</span>
+    
+    <span class="k">return</span> <span class="n">crisp_outputs</span>
+
+<span class="k">def</span> <span class="nf">_centroid_defuzzification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">output_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">strength</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="s">"""Centroid defuzzification method."""</span>
+    
+    <span class="c1"># Create output membership function based on strength
+</span>    <span class="n">x_values</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">y_values</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">strength</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get_output_membership</span><span class="p">(</span><span class="n">output_key</span><span class="p">,</span> <span class="n">x_values</span><span class="p">))</span>
+    
+    <span class="c1"># Calculate centroid
+</span>    <span class="k">if</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">y_values</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">centroid</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">x_values</span> <span class="o">*</span> <span class="n">y_values</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="p">.</span><span class="nb">sum</span><span class="p">(</span><span class="n">y_values</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">centroid</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">0.5</span>  <span class="c1"># Default middle value
+</span></code></pre></div></div>
+
+<hr />
+
+<h2 id="integration-with-evidence-graph">Integration with Evidence Graph</h2>
+
+<h3 id="fuzzy-satisfaction-degrees">Fuzzy Satisfaction Degrees</h3>
+
+<p>Instead of binary satisfied/not satisfied, objectives use fuzzy satisfaction:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Objective</span><span class="p">:</span>
+    <span class="s">"""Enhanced objective with fuzzy satisfaction."""</span>
+    
+    <span class="k">def</span> <span class="nf">evaluate_fuzzy_satisfaction</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">current_image</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">,</span> 
+        <span class="n">fuzzy_engine</span><span class="p">:</span> <span class="n">FuzzyLogicEngine</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="s">"""Calculate fuzzy satisfaction degree (0-1)."""</span>
+        
+        <span class="c1"># Extract current image features
+</span>        <span class="n">current_features</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_extract_features</span><span class="p">(</span><span class="n">current_image</span><span class="p">)</span>
+        
+        <span class="c1"># Compare with target using fuzzy logic
+</span>        <span class="n">satisfaction_components</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">for</span> <span class="n">aspect</span><span class="p">,</span> <span class="n">target_value</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">target_features</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">current_value</span> <span class="o">=</span> <span class="n">current_features</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">aspect</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+            
+            <span class="c1"># Calculate fuzzy satisfaction for this aspect
+</span>            <span class="k">if</span> <span class="n">aspect</span> <span class="ow">in</span> <span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">creative_fuzzy_sets</span><span class="p">:</span>
+                <span class="c1"># Find best matching fuzzy set
+</span>                <span class="n">best_match_satisfaction</span> <span class="o">=</span> <span class="mf">0.0</span>
+                
+                <span class="k">for</span> <span class="n">set_name</span><span class="p">,</span> <span class="n">fuzzy_set</span> <span class="ow">in</span> <span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">creative_fuzzy_sets</span><span class="p">[</span><span class="n">aspect</span><span class="p">].</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">target_membership</span> <span class="o">=</span> <span class="n">fuzzy_set</span><span class="p">.</span><span class="n">membership</span><span class="p">(</span><span class="n">target_value</span><span class="p">)</span>
+                    <span class="n">current_membership</span> <span class="o">=</span> <span class="n">fuzzy_set</span><span class="p">.</span><span class="n">membership</span><span class="p">(</span><span class="n">current_value</span><span class="p">)</span>
+                    
+                    <span class="c1"># Satisfaction is how close current is to target
+</span>                    <span class="n">satisfaction</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="nb">abs</span><span class="p">(</span><span class="n">target_membership</span> <span class="o">-</span> <span class="n">current_membership</span><span class="p">)</span>
+                    <span class="n">best_match_satisfaction</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best_match_satisfaction</span><span class="p">,</span> <span class="n">satisfaction</span><span class="p">)</span>
+                
+                <span class="n">satisfaction_components</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">best_match_satisfaction</span><span class="p">)</span>
+        
+        <span class="c1"># Aggregate using weighted average
+</span>        <span class="k">if</span> <span class="n">satisfaction_components</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">satisfaction_components</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">satisfaction_components</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mf">0.5</span>  <span class="c1"># Neutral satisfaction
+</span></code></pre></div></div>
+
+<h3 id="fuzzy-evidence-collection">Fuzzy Evidence Collection</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">collect_fuzzy_evidence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_image</span><span class="p">:</span> <span class="n">Image</span><span class="p">.</span><span class="n">Image</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="s">"""Collect evidence with fuzzy confidence weighting."""</span>
+    
+    <span class="n">evidence</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">for</span> <span class="n">objective</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">objectives</span><span class="p">:</span>
+        <span class="c1"># Get fuzzy satisfaction
+</span>        <span class="n">satisfaction</span> <span class="o">=</span> <span class="n">objective</span><span class="p">.</span><span class="n">evaluate_fuzzy_satisfaction</span><span class="p">(</span><span class="n">current_image</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">fuzzy_engine</span><span class="p">)</span>
+        
+        <span class="c1"># Weight evidence by confidence
+</span>        <span class="n">confidence</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_calculate_confidence</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">current_image</span><span class="p">)</span>
+        <span class="n">weighted_satisfaction</span> <span class="o">=</span> <span class="n">satisfaction</span> <span class="o">*</span> <span class="n">confidence</span>
+        
+        <span class="n">evidence</span><span class="p">[</span><span class="n">objective</span><span class="p">.</span><span class="nb">id</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">'satisfaction'</span><span class="p">:</span> <span class="n">satisfaction</span><span class="p">,</span>
+            <span class="s">'confidence'</span><span class="p">:</span> <span class="n">confidence</span><span class="p">,</span>
+            <span class="s">'weighted_satisfaction'</span><span class="p">:</span> <span class="n">weighted_satisfaction</span><span class="p">,</span>
+            <span class="s">'is_fuzzy'</span><span class="p">:</span> <span class="bp">True</span>
+        <span class="p">}</span>
+    
+    <span class="k">return</span> <span class="n">evidence</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="practical-applications">Practical Applications</h2>
+
+<h3 id="example-make-it-slightly-warmer">Example: “Make it Slightly Warmer”</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">process_warmth_instruction</span><span class="p">():</span>
+    <span class="s">"""Example of processing 'make it slightly warmer'."""</span>
+    
+    <span class="c1"># 1. Parse instruction
+</span>    <span class="n">instruction</span> <span class="o">=</span> <span class="s">"make it slightly warmer"</span>
+    <span class="n">parsed</span> <span class="o">=</span> <span class="n">parse_fuzzy_instruction</span><span class="p">(</span><span class="n">instruction</span><span class="p">)</span>
+    <span class="c1"># Result: FuzzyComponent(concept='color_warmth', direction='increase', 
+</span>    <span class="c1">#                        modifiers=['slightly'], strength=0.25)
+</span>    
+    <span class="c1"># 2. Analyze current image
+</span>    <span class="n">current_features</span> <span class="o">=</span> <span class="n">image_analyzer</span><span class="p">.</span><span class="n">extract_features</span><span class="p">(</span><span class="n">current_image</span><span class="p">)</span>
+    <span class="n">current_warmth</span> <span class="o">=</span> <span class="n">current_features</span><span class="p">[</span><span class="s">'color_warmth'</span><span class="p">]</span>  <span class="c1"># e.g., 0.4
+</span>    
+    <span class="c1"># 3. Fuzzify current state
+</span>    <span class="n">fuzzified</span> <span class="o">=</span> <span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">fuzzify</span><span class="p">({</span><span class="s">'color_warmth'</span><span class="p">:</span> <span class="n">current_warmth</span><span class="p">})</span>
+    <span class="c1"># Result: {'color_warmth': {'cool': 0.8, 'neutral': 0.3, 'warm': 0.1}}
+</span>    
+    <span class="c1"># 4. Apply fuzzy rules
+</span>    <span class="n">rule_activations</span> <span class="o">=</span> <span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">evaluate_rules</span><span class="p">(</span><span class="n">fuzzified</span><span class="p">)</span>
+    
+    <span class="c1"># 5. Generate adjustment
+</span>    <span class="n">adjustments</span> <span class="o">=</span> <span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">aggregate_outputs</span><span class="p">(</span><span class="n">rule_activations</span><span class="p">)</span>
+    <span class="n">crisp_adjustments</span> <span class="o">=</span> <span class="n">fuzzy_engine</span><span class="p">.</span><span class="n">defuzzify</span><span class="p">(</span><span class="n">adjustments</span><span class="p">)</span>
+    
+    <span class="c1"># 6. Apply "slightly" modifier
+</span>    <span class="n">final_adjustment</span> <span class="o">=</span> <span class="n">apply_modifier</span><span class="p">(</span><span class="s">'slightly'</span><span class="p">,</span> <span class="n">crisp_adjustments</span><span class="p">[</span><span class="s">'color_warmth_increase'</span><span class="p">])</span>
+    <span class="c1"># Result: 0.15 (instead of 0.6 for full warmth increase)
+</span>    
+    <span class="c1"># 7. Generate new image with subtle warmth increase
+</span>    <span class="n">new_target_warmth</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">current_warmth</span> <span class="o">+</span> <span class="n">final_adjustment</span><span class="p">)</span>
+    <span class="n">enhanced_prompt</span> <span class="o">=</span> <span class="n">enhance_prompt_for_warmth</span><span class="p">(</span><span class="n">original_prompt</span><span class="p">,</span> <span class="n">new_target_warmth</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">generate_image</span><span class="p">(</span><span class="n">enhanced_prompt</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="example-more-detailed-but-not-too-sharp">Example: “More Detailed but Not Too Sharp”</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">process_complex_instruction</span><span class="p">():</span>
+    <span class="s">"""Handle complex instruction with multiple fuzzy concepts."""</span>
+    
+    <span class="n">instruction</span> <span class="o">=</span> <span class="s">"more detailed but not too sharp"</span>
+    
+    <span class="c1"># Parse into components
+</span>    <span class="n">components</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">FuzzyComponent</span><span class="p">(</span><span class="n">concept</span><span class="o">=</span><span class="s">'detail_level'</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s">'increase'</span><span class="p">,</span> <span class="n">strength</span><span class="o">=</span><span class="mf">0.7</span><span class="p">),</span>
+        <span class="n">FuzzyComponent</span><span class="p">(</span><span class="n">concept</span><span class="o">=</span><span class="s">'sharpness'</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s">'decrease'</span><span class="p">,</span> <span class="n">modifiers</span><span class="o">=</span><span class="p">[</span><span class="s">'not_too'</span><span class="p">],</span> <span class="n">strength</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="p">]</span>
+    
+    <span class="c1"># Process each component
+</span>    <span class="n">adjustments</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">components</span><span class="p">:</span>
+        <span class="n">current_value</span> <span class="o">=</span> <span class="n">current_features</span><span class="p">[</span><span class="n">component</span><span class="p">.</span><span class="n">concept</span><span class="p">]</span>
+        
+        <span class="c1"># Calculate fuzzy adjustment
+</span>        <span class="k">if</span> <span class="n">component</span><span class="p">.</span><span class="n">direction</span> <span class="o">==</span> <span class="s">'increase'</span><span class="p">:</span>
+            <span class="n">target_membership</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">current_value</span> <span class="o">+</span> <span class="n">component</span><span class="p">.</span><span class="n">strength</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">target_membership</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">current_value</span> <span class="o">-</span> <span class="n">component</span><span class="p">.</span><span class="n">strength</span><span class="p">)</span>
+        
+        <span class="n">adjustments</span><span class="p">[</span><span class="n">component</span><span class="p">.</span><span class="n">concept</span><span class="p">]</span> <span class="o">=</span> <span class="n">target_membership</span>
+    
+    <span class="c1"># Balance conflicting requirements
+</span>    <span class="c1"># Detail increase: 0.7, Sharpness constraint: -0.3
+</span>    <span class="c1"># Result: Increase detail moderately while slightly reducing sharpness
+</span>    
+    <span class="k">return</span> <span class="n">generate_balanced_adjustment</span><span class="p">(</span><span class="n">adjustments</span><span class="p">)</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="performance-optimizations">Performance Optimizations</h2>
+
+<h3 id="fuzzy-set-caching">Fuzzy Set Caching</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FuzzySetCache</span><span class="p">:</span>
+    <span class="s">"""Cache membership function evaluations for performance."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cache_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">cache</span> <span class="o">=</span> <span class="n">LRUCache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="n">cache_size</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">get_membership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fuzzy_set_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="s">"""Get membership with caching."""</span>
+        
+        <span class="n">cache_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">fuzzy_set_id</span><span class="si">}</span><span class="s">:</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="p">.</span><span class="mi">4</span><span class="n">f</span><span class="si">}</span><span class="s">"</span>
+        
+        <span class="k">if</span> <span class="n">cache_key</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">cache</span><span class="p">[</span><span class="n">cache_key</span><span class="p">]</span>
+        
+        <span class="c1"># Calculate membership
+</span>        <span class="n">fuzzy_set</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_fuzzy_set</span><span class="p">(</span><span class="n">fuzzy_set_id</span><span class="p">)</span>
+        <span class="n">membership</span> <span class="o">=</span> <span class="n">fuzzy_set</span><span class="p">.</span><span class="n">membership</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        
+        <span class="c1"># Cache result
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">cache</span><span class="p">[</span><span class="n">cache_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">membership</span>
+        
+        <span class="k">return</span> <span class="n">membership</span>
+</code></pre></div></div>
+
+<h3 id="parallel-rule-evaluation">Parallel Rule Evaluation</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">evaluate_rules_parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fuzzified_inputs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">RuleActivation</span><span class="p">]:</span>
+    <span class="s">"""Evaluate rules in parallel for performance."""</span>
+    
+    <span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+    
+    <span class="k">def</span> <span class="nf">evaluate_single_rule</span><span class="p">(</span><span class="n">rule</span><span class="p">):</span>
+        <span class="n">activation_strength</span> <span class="o">=</span> <span class="n">rule</span><span class="p">.</span><span class="n">antecedent</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">fuzzified_inputs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">activation_strength</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">RuleActivation</span><span class="p">(</span><span class="n">rule</span><span class="o">=</span><span class="n">rule</span><span class="p">,</span> <span class="n">strength</span><span class="o">=</span><span class="n">activation_strength</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    
+    <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+        <span class="n">future_to_rule</span> <span class="o">=</span> <span class="p">{</span><span class="n">executor</span><span class="p">.</span><span class="n">submit</span><span class="p">(</span><span class="n">evaluate_single_rule</span><span class="p">,</span> <span class="n">rule</span><span class="p">):</span> <span class="n">rule</span> <span class="k">for</span> <span class="n">rule</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">rules</span><span class="p">}</span>
+        
+        <span class="n">activations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">future_to_rule</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">future</span><span class="p">.</span><span class="n">result</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">activations</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">activations</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="future-enhancements">Future Enhancements</h2>
+
+<h3 id="adaptive-fuzzy-sets">Adaptive Fuzzy Sets</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AdaptiveFuzzySet</span><span class="p">(</span><span class="n">FuzzySet</span><span class="p">):</span>
+    <span class="s">"""Fuzzy set that adapts based on user feedback."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">initial_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]):</span>
+        <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">initial_params</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">feedback_history</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">adaptation_rate</span> <span class="o">=</span> <span class="mf">0.1</span>
+    
+    <span class="k">def</span> <span class="nf">receive_feedback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">expected_membership</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="s">"""Adapt fuzzy set based on user feedback."""</span>
+        
+        <span class="n">current_membership</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">membership</span><span class="p">(</span><span class="n">input_value</span><span class="p">)</span>
+        <span class="n">error</span> <span class="o">=</span> <span class="n">expected_membership</span> <span class="o">-</span> <span class="n">current_membership</span>
+        
+        <span class="c1"># Adjust parameters to reduce error
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">_adjust_parameters</span><span class="p">(</span><span class="n">input_value</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+        
+        <span class="c1"># Store feedback
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">feedback_history</span><span class="p">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s">'input'</span><span class="p">:</span> <span class="n">input_value</span><span class="p">,</span>
+            <span class="s">'expected'</span><span class="p">:</span> <span class="n">expected_membership</span><span class="p">,</span>
+            <span class="s">'actual'</span><span class="p">:</span> <span class="n">current_membership</span><span class="p">,</span>
+            <span class="s">'error'</span><span class="p">:</span> <span class="n">error</span><span class="p">,</span>
+            <span class="s">'timestamp'</span><span class="p">:</span> <span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="p">})</span>
+    
+    <span class="k">def</span> <span class="nf">_adjust_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_value</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">error</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="s">"""Adjust fuzzy set parameters based on error."""</span>
+        
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">membership_func</span> <span class="o">==</span> <span class="n">gaussian_membership</span><span class="p">:</span>
+            <span class="c1"># Adjust center towards input if positive error
+</span>            <span class="n">center_adjustment</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">adaptation_rate</span> <span class="o">*</span> <span class="n">error</span> <span class="o">*</span> <span class="p">(</span><span class="n">input_value</span> <span class="o">-</span> <span class="bp">self</span><span class="p">.</span><span class="n">params</span><span class="p">[</span><span class="s">'center'</span><span class="p">])</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">params</span><span class="p">[</span><span class="s">'center'</span><span class="p">]</span> <span class="o">+=</span> <span class="n">center_adjustment</span>
+            
+            <span class="c1"># Adjust width based on error magnitude
+</span>            <span class="n">width_adjustment</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">adaptation_rate</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.1</span>
+            <span class="k">if</span> <span class="n">error</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">params</span><span class="p">[</span><span class="s">'width'</span><span class="p">]</span> <span class="o">+=</span> <span class="n">width_adjustment</span>  <span class="c1"># Widen for more inclusion
+</span>            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">params</span><span class="p">[</span><span class="s">'width'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">params</span><span class="p">[</span><span class="s">'width'</span><span class="p">]</span> <span class="o">-</span> <span class="n">width_adjustment</span><span class="p">)</span>  <span class="c1"># Narrow
+</span></code></pre></div></div>
+
+<h3 id="multi-cultural-fuzzy-sets">Multi-Cultural Fuzzy Sets</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">CulturalFuzzySetManager</span><span class="p">:</span>
+    <span class="s">"""Manages fuzzy sets adapted for different cultural contexts."""</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">cultural_sets</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s">'western'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">_create_western_fuzzy_sets</span><span class="p">(),</span>
+            <span class="s">'eastern'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">_create_eastern_fuzzy_sets</span><span class="p">(),</span>
+            <span class="s">'african'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">_create_african_fuzzy_sets</span><span class="p">(),</span>
+            <span class="s">'latin'</span><span class="p">:</span> <span class="bp">self</span><span class="p">.</span><span class="n">_create_latin_fuzzy_sets</span><span class="p">()</span>
+        <span class="p">}</span>
+    
+    <span class="k">def</span> <span class="nf">get_cultural_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">concept</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">culture</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">FuzzySet</span><span class="p">]:</span>
+        <span class="s">"""Get culturally-adapted fuzzy sets."""</span>
+        
+        <span class="k">if</span> <span class="n">culture</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">cultural_sets</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">cultural_sets</span><span class="p">[</span><span class="n">culture</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="n">concept</span><span class="p">,</span> <span class="p">{})</span>
+        
+        <span class="c1"># Fall back to universal sets
+</span>        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">cultural_sets</span><span class="p">[</span><span class="s">'western'</span><span class="p">].</span><span class="n">get</span><span class="p">(</span><span class="n">concept</span><span class="p">,</span> <span class="p">{})</span>
+    
+    <span class="k">def</span> <span class="nf">_create_eastern_fuzzy_sets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""Create fuzzy sets adapted for Eastern aesthetic preferences."""</span>
+        
+        <span class="c1"># Eastern aesthetics often prefer subtlety and balance
+</span>        <span class="k">return</span> <span class="p">{</span>
+            <span class="s">'brightness'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s">'dark'</span><span class="p">:</span> <span class="n">FuzzySet</span><span class="p">(</span><span class="s">'dark'</span><span class="p">,</span> <span class="n">gaussian_membership</span><span class="p">,</span> 
+                               <span class="p">{</span><span class="s">'center'</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">}),</span>  <span class="c1"># Wider tolerance for darkness
+</span>                <span class="s">'balanced'</span><span class="p">:</span> <span class="n">FuzzySet</span><span class="p">(</span><span class="s">'balanced'</span><span class="p">,</span> <span class="n">gaussian_membership</span><span class="p">,</span>
+                                   <span class="p">{</span><span class="s">'center'</span><span class="p">:</span> <span class="mf">0.45</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="mf">0.25</span><span class="p">})</span>  <span class="c1"># Emphasis on balance
+</span>            <span class="p">},</span>
+            <span class="s">'color_warmth'</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s">'harmonious'</span><span class="p">:</span> <span class="n">FuzzySet</span><span class="p">(</span><span class="s">'harmonious'</span><span class="p">,</span> <span class="n">gaussian_membership</span><span class="p">,</span>
+                                     <span class="p">{</span><span class="s">'center'</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s">'width'</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">})</span>  <span class="c1"># Prefer balanced warmth
+</span>            <span class="p">}</span>
+        <span class="p">}</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Fuzzy logic integration in Pakati represents a fundamental advancement in handling subjective creative concepts. By moving from binary satisfaction to continuous degrees of membership, the system can:</p>
+
+<ol>
+  <li><strong>Handle Subjectivity</strong>: Process “slightly”, “very”, “somewhat” naturally</li>
+  <li><strong>Provide Nuanced Control</strong>: Fine-grained adjustments based on fuzzy satisfaction</li>
+  <li><strong>Improve User Experience</strong>: More intuitive creative instructions</li>
+  <li><strong>Enable Adaptive Behavior</strong>: Learn from user preferences over time</li>
+</ol>
+
+<p>This fuzzy approach makes Pakati more aligned with how humans naturally think about and express creative concepts.</p>
+
+<hr />
+
+<p><em>For implementation details, see the <a href="api.html">API Documentation</a>. For working examples, visit <a href="examples.html">Examples</a>.</em></p>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">Pakati: Regional Control for AI Image Generation</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">Pakati: Regional Control for AI Image Generation</li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Revolutionary AI image generation system with regional control, metacognitive orchestration, and reference understanding.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
