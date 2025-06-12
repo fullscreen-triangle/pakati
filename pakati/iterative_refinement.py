@@ -2,7 +2,8 @@
 Iterative refinement engine for Pakati.
 
 This module implements the core iterative refinement system that autonomously
-improves generated images through multiple passes, guided by reference deltas.
+improves generated images through multiple passes, guided by reference deltas,
+evidence graphs, and fuzzy logic for handling subjective creative instructions.
 """
 
 import os
@@ -18,8 +19,7 @@ from PIL import Image
 from .references import ReferenceLibrary, ReferenceImage
 from .delta_analysis import DeltaAnalyzer, Delta, DeltaType
 from .canvas import PakatiCanvas, Region
-from .orchestration.context import Context
-from .orchestration.planner import Planner
+from .evidence_graph import EvidenceGraph, ObjectiveType, Objective
 
 
 class RefinementStrategy(Enum):
@@ -28,6 +28,311 @@ class RefinementStrategy(Enum):
     AGGRESSIVE = "aggressive"     # Larger adjustments, faster convergence
     ADAPTIVE = "adaptive"         # Adjust strategy based on progress
     TARGETED = "targeted"         # Focus on specific aspects
+
+
+class FuzzySet:
+    """
+    Represents a fuzzy set for handling subjective creative concepts.
+    
+    Creative instructions like "darker", "more detailed", "warmer colors" are
+    inherently fuzzy - they exist on a spectrum, not as binary states.
+    """
+    
+    def __init__(self, name: str, membership_function: Callable[[float], float]):
+        """
+        Initialize a fuzzy set.
+        
+        Args:
+            name: Name of the fuzzy concept (e.g., "dark", "detailed", "warm")
+            membership_function: Function that returns membership degree (0.0 to 1.0)
+                                for a given input value
+        """
+        self.name = name
+        self.membership_function = membership_function
+    
+    def membership_degree(self, value: float) -> float:
+        """Calculate membership degree for a given value."""
+        return max(0.0, min(1.0, self.membership_function(value)))
+    
+    def __str__(self):
+        return f"FuzzySet({self.name})"
+
+
+class FuzzyRule:
+    """
+    Represents a fuzzy rule for creative adjustments.
+    
+    Example: "IF color is too_cold AND user wants warmer THEN increase warmth by medium_amount"
+    """
+    
+    def __init__(self, antecedent: Dict[str, Tuple[FuzzySet, float]], 
+                 consequent: Dict[str, float], confidence: float = 1.0):
+        """
+        Initialize a fuzzy rule.
+        
+        Args:
+            antecedent: Dictionary of conditions {parameter: (fuzzy_set, current_value)}
+            consequent: Dictionary of actions {parameter: adjustment_amount}
+            confidence: Confidence in this rule (0.0 to 1.0)
+        """
+        self.antecedent = antecedent
+        self.consequent = consequent
+        self.confidence = confidence
+    
+    def evaluate_antecedent(self) -> float:
+        """Evaluate the antecedent (condition) part of the rule."""
+        if not self.antecedent:
+            return 0.0
+        
+        # Use minimum (AND operation) for multiple conditions
+        membership_degrees = []
+        for param, (fuzzy_set, current_value) in self.antecedent.items():
+            degree = fuzzy_set.membership_degree(current_value)
+            membership_degrees.append(degree)
+        
+        return min(membership_degrees) if membership_degrees else 0.0
+    
+    def get_consequent_strength(self) -> Dict[str, float]:
+        """Get the consequent actions weighted by antecedent strength."""
+        antecedent_strength = self.evaluate_antecedent()
+        weighted_consequent = {}
+        
+        for param, adjustment in self.consequent.items():
+            weighted_consequent[param] = adjustment * antecedent_strength * self.confidence
+        
+        return weighted_consequent
+
+
+class FuzzyLogicEngine:
+    """
+    Handles fuzzy logic for subjective creative instructions.
+    
+    This solves the problem that creative concepts like "darker", "more detailed",
+    "warmer colors" are not binary but exist on a spectrum with subjective boundaries.
+    """
+    
+    def __init__(self):
+        """Initialize the fuzzy logic engine with creative concept definitions."""
+        self.fuzzy_sets = self._initialize_fuzzy_sets()
+        self.fuzzy_rules = self._initialize_fuzzy_rules()
+    
+    def _initialize_fuzzy_sets(self) -> Dict[str, Dict[str, FuzzySet]]:
+        """Initialize fuzzy sets for common creative concepts."""
+        
+        # Define membership functions for various creative concepts
+        def trapezoidal(a, b, c, d):
+            """Create a trapezoidal membership function."""
+            def membership(x):
+                if x <= a or x >= d:
+                    return 0.0
+                elif a < x <= b:
+                    return (x - a) / (b - a)
+                elif b < x <= c:
+                    return 1.0
+                else:  # c < x < d
+                    return (d - x) / (d - c)
+            return membership
+        
+        def triangular(a, b, c):
+            """Create a triangular membership function."""
+            def membership(x):
+                if x <= a or x >= c:
+                    return 0.0
+                elif a < x <= b:
+                    return (x - a) / (b - a)
+                else:  # b < x < c
+                    return (c - x) / (c - b)
+            return membership
+        
+        def gaussian(center, sigma):
+            """Create a Gaussian membership function."""
+            def membership(x):
+                return np.exp(-0.5 * ((x - center) / sigma) ** 2)
+            return membership
+        
+        fuzzy_sets = {
+            # Brightness concepts (0.0 = very dark, 1.0 = very bright)
+            "brightness": {
+                "very_dark": FuzzySet("very_dark", trapezoidal(0.0, 0.0, 0.1, 0.25)),
+                "dark": FuzzySet("dark", triangular(0.1, 0.25, 0.4)),
+                "medium": FuzzySet("medium", triangular(0.3, 0.5, 0.7)),
+                "bright": FuzzySet("bright", triangular(0.6, 0.75, 0.9)),
+                "very_bright": FuzzySet("very_bright", trapezoidal(0.75, 0.9, 1.0, 1.0))
+            },
+            
+            # Color warmth (0.0 = very cool, 1.0 = very warm)
+            "warmth": {
+                "very_cool": FuzzySet("very_cool", trapezoidal(0.0, 0.0, 0.1, 0.3)),
+                "cool": FuzzySet("cool", triangular(0.1, 0.3, 0.45)),
+                "neutral": FuzzySet("neutral", triangular(0.35, 0.5, 0.65)),
+                "warm": FuzzySet("warm", triangular(0.55, 0.7, 0.9)),
+                "very_warm": FuzzySet("very_warm", trapezoidal(0.7, 0.9, 1.0, 1.0))
+            },
+            
+            # Detail level (0.0 = minimal detail, 1.0 = maximum detail)
+            "detail": {
+                "minimal": FuzzySet("minimal", trapezoidal(0.0, 0.0, 0.15, 0.3)),
+                "low": FuzzySet("low", triangular(0.15, 0.3, 0.45)),
+                "medium": FuzzySet("medium", triangular(0.35, 0.5, 0.65)),
+                "high": FuzzySet("high", triangular(0.55, 0.7, 0.85)),
+                "maximum": FuzzySet("maximum", trapezoidal(0.7, 0.85, 1.0, 1.0))
+            },
+            
+            # Saturation (0.0 = grayscale, 1.0 = highly saturated)
+            "saturation": {
+                "desaturated": FuzzySet("desaturated", trapezoidal(0.0, 0.0, 0.2, 0.35)),
+                "low": FuzzySet("low", triangular(0.2, 0.35, 0.5)),
+                "medium": FuzzySet("medium", triangular(0.4, 0.55, 0.7)),
+                "high": FuzzySet("high", triangular(0.6, 0.75, 0.9)),
+                "vivid": FuzzySet("vivid", trapezoidal(0.75, 0.9, 1.0, 1.0))
+            },
+            
+            # Contrast (0.0 = flat, 1.0 = high contrast)
+            "contrast": {
+                "flat": FuzzySet("flat", trapezoidal(0.0, 0.0, 0.1, 0.25)),
+                "low": FuzzySet("low", triangular(0.15, 0.3, 0.45)),
+                "medium": FuzzySet("medium", triangular(0.35, 0.5, 0.65)),
+                "high": FuzzySet("high", triangular(0.55, 0.7, 0.85)),
+                "dramatic": FuzzySet("dramatic", trapezoidal(0.7, 0.85, 1.0, 1.0))
+            }
+        }
+        
+        return fuzzy_sets
+    
+    def _initialize_fuzzy_rules(self) -> List[FuzzyRule]:
+        """Initialize fuzzy rules for creative adjustments."""
+        rules = []
+        
+        # Example fuzzy rules for creative adjustments
+        # These would be expanded based on domain knowledge and user feedback
+        
+        # Brightness adjustment rules
+        rules.append(FuzzyRule(
+            antecedent={"brightness": (self.fuzzy_sets["brightness"]["very_dark"], 0.0)},
+            consequent={"brightness_adjustment": 0.3, "contrast_adjustment": 0.1},
+            confidence=0.9
+        ))
+        
+        rules.append(FuzzyRule(
+            antecedent={"brightness": (self.fuzzy_sets["brightness"]["very_bright"], 0.0)},
+            consequent={"brightness_adjustment": -0.2, "contrast_adjustment": 0.05},
+            confidence=0.8
+        ))
+        
+        # Warmth adjustment rules
+        rules.append(FuzzyRule(
+            antecedent={"warmth": (self.fuzzy_sets["warmth"]["very_cool"], 0.0)},
+            consequent={"warmth_adjustment": 0.4, "saturation_adjustment": 0.1},
+            confidence=0.85
+        ))
+        
+        # Detail enhancement rules
+        rules.append(FuzzyRule(
+            antecedent={"detail": (self.fuzzy_sets["detail"]["minimal"], 0.0)},
+            consequent={"detail_prompt_boost": 0.5, "guidance_scale_adjustment": 2.0},
+            confidence=0.9
+        ))
+        
+        return rules
+    
+    def evaluate_creative_instruction(self, instruction: str, current_state: Dict[str, float]) -> Dict[str, float]:
+        """
+        Evaluate a creative instruction and return fuzzy adjustments.
+        
+        Args:
+            instruction: Creative instruction like "make it darker", "more detailed", etc.
+            current_state: Current state values {parameter: current_value}
+            
+        Returns:
+            Dictionary of adjustments {parameter: adjustment_amount}
+        """
+        
+        # Parse instruction to identify intent
+        instruction_lower = instruction.lower()
+        
+        # Map instruction keywords to fuzzy concepts
+        concept_mapping = {
+            "darker": ("brightness", "dark"),
+            "brighter": ("brightness", "bright"),
+            "warmer": ("warmth", "warm"),
+            "cooler": ("warmth", "cool"),
+            "more detailed": ("detail", "high"),
+            "less detailed": ("detail", "low"),
+            "more saturated": ("saturation", "high"),
+            "less saturated": ("saturation", "low"),
+            "more contrast": ("contrast", "high"),
+            "less contrast": ("contrast", "low")
+        }
+        
+        adjustments = {}
+        
+        for keyword, (concept, target_level) in concept_mapping.items():
+            if keyword in instruction_lower:
+                # Calculate fuzzy adjustment for this concept
+                current_value = current_state.get(concept, 0.5)  # Default to medium
+                target_fuzzy_set = self.fuzzy_sets[concept][target_level]
+                
+                # Calculate desired adjustment based on membership and current state
+                target_membership = target_fuzzy_set.membership_degree(current_value)
+                
+                # If current state has low membership in target concept, increase adjustment
+                if target_membership < 0.5:
+                    # Find the center of the target fuzzy set (simplified)
+                    target_center = self._get_fuzzy_set_center(target_fuzzy_set)
+                    adjustment_amount = (target_center - current_value) * 0.5  # Moderate adjustment
+                    
+                    adjustments[f"{concept}_adjustment"] = adjustment_amount
+        
+        # Apply fuzzy rules for additional context-aware adjustments
+        rule_adjustments = self._apply_fuzzy_rules(current_state)
+        
+        # Combine direct instruction adjustments with rule-based adjustments
+        for param, adjustment in rule_adjustments.items():
+            if param in adjustments:
+                adjustments[param] += adjustment * 0.3  # Weight rule adjustments lower
+            else:
+                adjustments[param] = adjustment * 0.3
+        
+        return adjustments
+    
+    def _get_fuzzy_set_center(self, fuzzy_set: FuzzySet) -> float:
+        """Get the approximate center of a fuzzy set (simplified)."""
+        # Sample the membership function to find the center
+        x_values = np.linspace(0, 1, 101)
+        memberships = [fuzzy_set.membership_degree(x) for x in x_values]
+        
+        # Find the centroid
+        if sum(memberships) > 0:
+            weighted_sum = sum(x * m for x, m in zip(x_values, memberships))
+            total_membership = sum(memberships)
+            return weighted_sum / total_membership
+        else:
+            return 0.5  # Default to middle
+    
+    def _apply_fuzzy_rules(self, current_state: Dict[str, float]) -> Dict[str, float]:
+        """Apply fuzzy rules to get additional adjustments."""
+        combined_adjustments = {}
+        
+        for rule in self.fuzzy_rules:
+            # Update rule antecedent with current state
+            updated_antecedent = {}
+            for param, (fuzzy_set, _) in rule.antecedent.items():
+                current_value = current_state.get(param, 0.5)
+                updated_antecedent[param] = (fuzzy_set, current_value)
+            
+            rule.antecedent = updated_antecedent
+            
+            # Get weighted consequent
+            weighted_consequent = rule.get_consequent_strength()
+            
+            # Combine with existing adjustments
+            for param, adjustment in weighted_consequent.items():
+                if param in combined_adjustments:
+                    combined_adjustments[param] += adjustment
+                else:
+                    combined_adjustments[param] = adjustment
+        
+        return combined_adjustments
 
 
 @dataclass
@@ -39,7 +344,9 @@ class RefinementPass:
     timestamp: float = field(default_factory=time.time)
     deltas_detected: List[Delta] = field(default_factory=list)
     adjustments_made: Dict[str, Any] = field(default_factory=dict)
+    fuzzy_adjustments: Dict[str, float] = field(default_factory=dict)
     improvement_score: float = 0.0  # How much this pass improved the image
+    objective_scores: Dict[str, float] = field(default_factory=dict)  # Individual objective scores
     image_before: Optional[Image.Image] = None
     image_after: Optional[Image.Image] = None
     execution_time: float = 0.0
@@ -57,23 +364,27 @@ class RefinementSession:
     passes: List[RefinementPass] = field(default_factory=list)
     references: List[ReferenceImage] = field(default_factory=list)
     current_canvas: Optional[PakatiCanvas] = None
+    evidence_graph: Optional[EvidenceGraph] = None  # The objective function and evidence tracking
     is_complete: bool = False
     total_improvement: float = 0.0
+    user_instructions: List[str] = field(default_factory=list)  # Fuzzy creative instructions
 
 
 class IterativeRefinementEngine:
     """
-    Main engine for iterative refinement with reference-based guidance.
+    Main engine for iterative refinement with reference-based guidance,
+    evidence graph optimization, and fuzzy logic for creative instructions.
     
     This engine autonomously improves generated images through multiple passes,
-    learning from each iteration and adapting its strategy.
+    learning from each iteration and adapting its strategy based on measurable
+    objectives and fuzzy creative guidance.
     """
     
     def __init__(self, reference_library: ReferenceLibrary):
         """Initialize the refinement engine."""
         self.reference_library = reference_library
         self.delta_analyzer = DeltaAnalyzer()
-        self.planner = Planner()
+        self.fuzzy_engine = FuzzyLogicEngine()
         self.active_sessions: Dict[UUID, RefinementSession] = {}
         
         # Learning parameters
@@ -91,17 +402,19 @@ class IterativeRefinementEngine:
         canvas: PakatiCanvas,
         goal: str,
         references: List[ReferenceImage],
+        user_instructions: List[str] = None,
         strategy: RefinementStrategy = RefinementStrategy.ADAPTIVE,
         max_passes: int = 10,
         target_quality: float = 0.8
     ) -> RefinementSession:
         """
-        Create a new iterative refinement session.
+        Create a new iterative refinement session with evidence graph and fuzzy logic.
         
         Args:
             canvas: The canvas to refine
             goal: High-level goal for the refinement
             references: Reference images to guide the refinement
+            user_instructions: List of fuzzy creative instructions (e.g., "make it darker", "more detailed")
             strategy: Refinement strategy to use
             max_passes: Maximum number of refinement passes
             target_quality: Target quality threshold (0.0 to 1.0)
@@ -109,16 +422,28 @@ class IterativeRefinementEngine:
         Returns:
             The created refinement session
         """
+        
+        # Initialize evidence graph with structured objectives
+        evidence_graph = EvidenceGraph(goal)
+        objectives = evidence_graph.decompose_goal(goal, references)
+        
         session = RefinementSession(
             goal=goal,
             target_quality_threshold=target_quality,
             max_passes=max_passes,
             strategy=strategy,
             references=references,
-            current_canvas=canvas
+            current_canvas=canvas,
+            evidence_graph=evidence_graph,
+            user_instructions=user_instructions or []
         )
         
         self.active_sessions[session.id] = session
+        
+        print(f"Created refinement session with {len(objectives)} measurable objectives")
+        if user_instructions:
+            print(f"Fuzzy instructions: {user_instructions}")
+        
         return session
     
     def execute_refinement_session(
@@ -127,7 +452,7 @@ class IterativeRefinementEngine:
         progress_callback: Optional[Callable[[RefinementPass], None]] = None
     ) -> RefinementSession:
         """
-        Execute a complete refinement session.
+        Execute a complete refinement session using evidence-guided optimization.
         
         Args:
             session_id: ID of the session to execute
@@ -141,10 +466,10 @@ class IterativeRefinementEngine:
         
         session = self.active_sessions[session_id]
         
-        print(f"Starting refinement session: {session.goal}")
+        print(f"Starting evidence-guided refinement session: {session.goal}")
         print(f"Strategy: {session.strategy.value}, Max passes: {session.max_passes}")
         
-        # Execute refinement passes
+        # Execute refinement passes with evidence tracking
         for pass_num in range(session.max_passes):
             if session.is_complete:
                 break
@@ -157,37 +482,44 @@ class IterativeRefinementEngine:
             if progress_callback:
                 progress_callback(refinement_pass)
             
-            # Check if we've reached our quality threshold
-            if refinement_pass.improvement_score >= session.target_quality_threshold:
+            # Check termination conditions using evidence graph
+            if session.evidence_graph:
+                should_continue, reason = session.evidence_graph.should_continue_optimization()
+                
+                if not should_continue:
+                    session.is_complete = True
+                    print(f"Optimization complete: {reason}")
+                    break
+            
+            # Legacy check for backwards compatibility
+            elif refinement_pass.improvement_score >= session.target_quality_threshold:
                 session.is_complete = True
                 print(f"Target quality reached! Score: {refinement_pass.improvement_score:.3f}")
                 break
-            
-            # Check for convergence (no significant improvement)
-            if len(session.passes) >= 2:
-                recent_improvements = [p.improvement_score for p in session.passes[-3:]]
-                if all(abs(recent_improvements[i] - recent_improvements[i-1]) < self.convergence_threshold 
-                       for i in range(1, len(recent_improvements))):
-                    print("Convergence detected - no significant improvement in recent passes")
-                    session.is_complete = True
-                    break
             
             # Adapt strategy if needed
             if session.strategy == RefinementStrategy.ADAPTIVE:
                 self._adapt_strategy(session)
         
-        # Calculate total improvement
-        if session.passes:
+        # Calculate final results
+        if session.evidence_graph:
+            session.total_improvement = session.evidence_graph.calculate_global_objective_function()
+        elif session.passes:
             session.total_improvement = session.passes[-1].improvement_score
         
         print(f"\nRefinement session complete!")
         print(f"Total passes: {len(session.passes)}")
-        print(f"Final quality score: {session.total_improvement:.3f}")
+        print(f"Final global score: {session.total_improvement:.3f}")
+        
+        # Print final evidence report
+        if session.evidence_graph:
+            report = session.evidence_graph.get_progress_report()
+            print(f"Objectives satisfied: {report['objective_summary']['satisfied']}/{report['objective_summary']['total']}")
         
         return session
     
     def _execute_single_pass(self, session: RefinementSession, pass_number: int) -> RefinementPass:
-        """Execute a single refinement pass."""
+        """Execute a single refinement pass with evidence collection and fuzzy logic."""
         start_time = time.time()
         
         refinement_pass = RefinementPass(
@@ -195,10 +527,14 @@ class IterativeRefinementEngine:
             image_before=session.current_canvas.current_image.copy() if session.current_canvas else None
         )
         
-        # Analyze current image against references
-        print("Analyzing deltas...")
+        # 1. Analyze current image against references (collect evidence)
+        print("Analyzing deltas and collecting evidence...")
         deltas = self._analyze_current_state(session)
         refinement_pass.deltas_detected = deltas
+        
+        # Update evidence graph with delta analysis results
+        if session.evidence_graph:
+            session.evidence_graph.update_from_deltas(deltas)
         
         if not deltas:
             print("No significant deltas detected - refinement complete")
@@ -207,18 +543,102 @@ class IterativeRefinementEngine:
         
         print(f"Found {len(deltas)} deltas to address")
         
-        # Apply improvements based on deltas
-        print("Applying improvements...")
-        self._apply_improvements(session, deltas)
+        # 2. Get actionable recommendations from evidence graph
+        recommendations = []
+        if session.evidence_graph:
+            recommendations = session.evidence_graph.get_actionable_recommendations()
+            print(f"Evidence graph provided {len(recommendations)} actionable recommendations")
+        
+        # 3. Process user's fuzzy creative instructions
+        fuzzy_adjustments = {}
+        if session.user_instructions:
+            current_state = self._extract_current_state(session.current_canvas)
+            
+            for instruction in session.user_instructions:
+                instruction_adjustments = self.fuzzy_engine.evaluate_creative_instruction(
+                    instruction, current_state
+                )
+                # Combine fuzzy adjustments
+                for param, adjustment in instruction_adjustments.items():
+                    if param in fuzzy_adjustments:
+                        fuzzy_adjustments[param] += adjustment
+                    else:
+                        fuzzy_adjustments[param] = adjustment
+            
+            print(f"Fuzzy logic produced {len(fuzzy_adjustments)} parameter adjustments")
+            refinement_pass.fuzzy_adjustments = fuzzy_adjustments
+        
+        # 4. Apply evidence-guided and fuzzy improvements
+        print("Applying evidence-guided and fuzzy improvements...")
+        self._apply_evidence_guided_improvements(session, deltas, recommendations, fuzzy_adjustments)
+        
+        # 5. Record optimization step in evidence graph
+        if session.evidence_graph:
+            actions_taken = [f"addressed_{delta.delta_type.value}" for delta in deltas[:3]]
+            if fuzzy_adjustments:
+                actions_taken.extend([f"fuzzy_{param}" for param in fuzzy_adjustments.keys()])
+            
+            optimization_step = session.evidence_graph.record_optimization_step(
+                actions_taken=actions_taken
+            )
+            
+            refinement_pass.improvement_score = session.evidence_graph.calculate_global_objective_function()
+            refinement_pass.objective_scores = {
+                obj.name: obj.satisfaction_score 
+                for obj in session.evidence_graph.objectives.values()
+            }
+        else:
+            refinement_pass.improvement_score = 0.7  # Fallback
         
         refinement_pass.image_after = session.current_canvas.current_image.copy() if session.current_canvas else None
-        refinement_pass.improvement_score = 0.7  # Placeholder score
-        
         refinement_pass.execution_time = time.time() - start_time
         
-        print(f"Pass complete - Improvement score: {refinement_pass.improvement_score:.3f}")
+        print(f"Pass complete - Global Score: {refinement_pass.improvement_score:.3f}")
         
         return refinement_pass
+    
+    def _extract_current_state(self, canvas: PakatiCanvas) -> Dict[str, float]:
+        """Extract current state parameters for fuzzy logic evaluation."""
+        if not canvas or not canvas.current_image:
+            return {}
+        
+        # Analyze current image to extract fuzzy parameters
+        import numpy as np
+        from PIL import ImageStat
+        
+        img_array = np.array(canvas.current_image)
+        
+        # Calculate brightness (average luminance)
+        brightness = np.mean(img_array) / 255.0
+        
+        # Calculate warmth (R+Y vs B+C ratio, simplified)
+        r_channel = img_array[:, :, 0]
+        g_channel = img_array[:, :, 1] 
+        b_channel = img_array[:, :, 2]
+        
+        warm_components = np.mean(r_channel) + np.mean(g_channel) * 0.5
+        cool_components = np.mean(b_channel) + np.mean(g_channel) * 0.5
+        warmth = warm_components / (warm_components + cool_components) if (warm_components + cool_components) > 0 else 0.5
+        
+        # Calculate saturation (simplified using standard deviation)
+        saturation = np.std(img_array) / 128.0  # Normalize to 0-1
+        
+        # Calculate contrast (simplified using range)
+        contrast = (np.max(img_array) - np.min(img_array)) / 255.0
+        
+        # Estimate detail level (edge density)
+        gray = np.mean(img_array, axis=2)
+        edges = np.abs(np.gradient(gray)[0]) + np.abs(np.gradient(gray)[1])
+        detail = np.mean(edges) / 100.0  # Normalize
+        detail = min(detail, 1.0)
+        
+        return {
+            "brightness": brightness,
+            "warmth": warmth,
+            "saturation": saturation,
+            "contrast": contrast,
+            "detail": detail
+        }
     
     def _analyze_current_state(self, session: RefinementSession) -> List[Delta]:
         """Analyze the current state of the canvas against references."""
@@ -235,40 +655,142 @@ class IterativeRefinementEngine:
         
         all_deltas.extend(deltas)
         
-        # Sort by severity
-        all_deltas.sort(key=lambda d: d.severity, reverse=True)
+        # Sort by weighted importance (severity * confidence)
+        all_deltas.sort(key=lambda d: d.severity * d.confidence, reverse=True)
         
         return all_deltas[:5]  # Return top 5 deltas
     
-    def _apply_improvements(self, session: RefinementSession, deltas: List[Delta]):
-        """Apply improvements based on detected deltas."""
+    def _apply_evidence_guided_improvements(
+        self, 
+        session: RefinementSession, 
+        deltas: List[Delta],
+        recommendations: List[Dict[str, Any]],
+        fuzzy_adjustments: Dict[str, float]
+    ):
+        """Apply improvements based on evidence graph recommendations and fuzzy logic."""
         if not session.current_canvas:
             return
+        
+        # Priority 1: Address evidence graph recommendations (highest priority)
+        for recommendation in recommendations[:3]:  # Top 3 recommendations
+            objective_type = recommendation.get("objective_type", "")
+            action_type = recommendation.get("action_type", "")
+            suggestions = recommendation.get("suggestions", [])
             
-        for delta in deltas:
-            # Apply suggested adjustments from the delta
-            adjustments = delta.suggested_adjustments
+            print(f"  Applying recommendation: {recommendation['objective_name']} ({action_type})")
             
-            # Find regions to modify (simplified approach)
+            # Apply evidence-based improvements to relevant regions
             for region in session.current_canvas.regions.values():
                 if region.prompt:
-                    # Enhance prompt based on delta type
-                    if delta.delta_type == DeltaType.COLOR_MISMATCH:
-                        region.prompt = f"{region.prompt}, vibrant colors, color correction"
-                    elif delta.delta_type == DeltaType.TEXTURE_DIFFERENCE:
-                        region.prompt = f"{region.prompt}, detailed textures, high quality"
-                    elif delta.delta_type == DeltaType.LIGHTING_DIFFERENCE:
-                        region.prompt = f"{region.prompt}, professional lighting, well lit"
+                    original_prompt = region.prompt
                     
-                    # Regenerate the region
-                    session.current_canvas.apply_to_region(
-                        region,
-                        prompt=region.prompt,
-                        model_name=region.model_name,
-                        seed=region.seed
+                    # Apply objective-specific improvements
+                    if "color" in objective_type.lower():
+                        if any("color" in suggestion.lower() for suggestion in suggestions):
+                            region.prompt += ", vibrant colors, accurate color palette"
+                    
+                    elif "composition" in objective_type.lower():
+                        if any("balance" in suggestion.lower() for suggestion in suggestions):
+                            region.prompt += ", well-composed, balanced layout"
+                    
+                    elif "detail" in objective_type.lower():
+                        if any("detail" in suggestion.lower() for suggestion in suggestions):
+                            region.prompt += ", highly detailed, intricate, sharp focus"
+                    
+                    # Apply fuzzy adjustments to prompt
+                    region.prompt = self._apply_fuzzy_adjustments_to_prompt(
+                        region.prompt, fuzzy_adjustments
                     )
+                    
+                    if region.prompt != original_prompt:
+                        print(f"    Enhanced prompt: ...{region.prompt[-50:]}")
+        
+        # Priority 2: Address deltas with fuzzy-enhanced adjustments
+        for delta in deltas[:2]:  # Top 2 deltas after evidence recommendations
+            adjustments = delta.suggested_adjustments
+            
+            # Find regions to modify
+            for region in session.current_canvas.regions.values():
+                if region.prompt:
+                    original_prompt = region.prompt
+                    
+                    # Apply delta-based improvements with fuzzy enhancement
+                    if delta.delta_type == DeltaType.COLOR_MISMATCH:
+                        enhancement = "color correction"
+                        if "warmth_adjustment" in fuzzy_adjustments:
+                            if fuzzy_adjustments["warmth_adjustment"] > 0:
+                                enhancement += ", warmer tones"
+                            else:
+                                enhancement += ", cooler tones"
+                        region.prompt += f", {enhancement}"
+                        
+                    elif delta.delta_type == DeltaType.TEXTURE_DIFFERENCE:
+                        enhancement = "detailed textures"
+                        if "detail_adjustment" in fuzzy_adjustments:
+                            if fuzzy_adjustments["detail_adjustment"] > 0:
+                                enhancement += ", intricate details"
+                        region.prompt += f", {enhancement}"
+                        
+                    elif delta.delta_type == DeltaType.LIGHTING_DIFFERENCE:
+                        enhancement = "professional lighting"
+                        if "brightness_adjustment" in fuzzy_adjustments:
+                            if fuzzy_adjustments["brightness_adjustment"] > 0:
+                                enhancement += ", bright lighting"
+                            else:
+                                enhancement += ", dramatic shadows"
+                        region.prompt += f", {enhancement}"
+                    
+                    # Regenerate the region with enhanced prompt
+                    if region.prompt != original_prompt:
+                        session.current_canvas.apply_to_region(
+                            region,
+                            prompt=region.prompt,
+                            model_name=region.model_name,
+                            seed=region.seed
+                        )
     
-    # Helper methods
+    def _apply_fuzzy_adjustments_to_prompt(self, prompt: str, fuzzy_adjustments: Dict[str, float]) -> str:
+        """Apply fuzzy logic adjustments to enhance a prompt."""
+        enhanced_prompt = prompt
+        
+        # Convert fuzzy adjustments to prompt enhancements
+        for param, adjustment in fuzzy_adjustments.items():
+            if abs(adjustment) < 0.1:  # Skip small adjustments
+                continue
+            
+            if param == "brightness_adjustment":
+                if adjustment > 0:
+                    enhanced_prompt += ", bright, well-lit"
+                else:
+                    enhanced_prompt += ", dark, moody"
+            
+            elif param == "warmth_adjustment":
+                if adjustment > 0:
+                    enhanced_prompt += ", warm colors, golden tones"
+                else:
+                    enhanced_prompt += ", cool colors, blue tones"
+            
+            elif param == "detail_adjustment":
+                if adjustment > 0:
+                    enhanced_prompt += ", highly detailed, intricate"
+                else:
+                    enhanced_prompt += ", simple, clean"
+            
+            elif param == "saturation_adjustment":
+                if adjustment > 0:
+                    enhanced_prompt += ", vibrant, saturated colors"
+                else:
+                    enhanced_prompt += ", muted colors, subtle tones"
+            
+            elif param == "contrast_adjustment":
+                if adjustment > 0:
+                    enhanced_prompt += ", high contrast, dramatic"
+                else:
+                    enhanced_prompt += ", soft, low contrast"
+        
+        return enhanced_prompt
+    
+    # Helper methods (keeping existing ones and adding new)
     
     def _create_region_mask(self, region: Region, canvas: PakatiCanvas) -> np.ndarray:
         """Create a mask for a specific region."""
@@ -313,26 +835,50 @@ class IterativeRefinementEngine:
             return 0.7  # Default adaptive intensity
     
     def _adapt_strategy(self, session: RefinementSession):
-        """Adapt strategy based on progress."""
+        """Adapt strategy based on evidence graph progress."""
         if len(session.passes) < 2:
             return
         
-        # Check if recent passes are showing improvement
-        recent_scores = [p.improvement_score for p in session.passes[-2:]]
-        
-        if recent_scores[-1] > recent_scores[-2]:
-            # Improving - continue current approach
-            pass
-        else:
-            # Not improving - try different strategy
-            if session.strategy == RefinementStrategy.CONSERVATIVE:
-                session.strategy = RefinementStrategy.AGGRESSIVE
-            elif session.strategy == RefinementStrategy.AGGRESSIVE:
-                session.strategy = RefinementStrategy.TARGETED
-            else:
-                session.strategy = RefinementStrategy.CONSERVATIVE
+        # Use evidence graph for smarter strategy adaptation
+        if session.evidence_graph:
+            recent_scores = [
+                step.global_score for step in session.evidence_graph.optimization_steps[-2:]
+            ]
             
-            print(f"Adapted strategy to: {session.strategy.value}")
+            if len(recent_scores) >= 2:
+                improvement = recent_scores[-1] - recent_scores[-2]
+                
+                if improvement > 0.05:  # Good progress
+                    # Keep current strategy
+                    pass
+                elif improvement < -0.02:  # Getting worse
+                    # Switch to conservative
+                    session.strategy = RefinementStrategy.CONSERVATIVE
+                    print(f"Adapted strategy to: {session.strategy.value} (preventing degradation)")
+                else:  # Stalled
+                    # Try more aggressive approach
+                    if session.strategy == RefinementStrategy.CONSERVATIVE:
+                        session.strategy = RefinementStrategy.AGGRESSIVE
+                    elif session.strategy == RefinementStrategy.AGGRESSIVE:
+                        session.strategy = RefinementStrategy.TARGETED
+                    else:
+                        session.strategy = RefinementStrategy.CONSERVATIVE
+                    
+                    print(f"Adapted strategy to: {session.strategy.value} (breaking stagnation)")
+        else:
+            # Fallback to legacy adaptation
+            recent_scores = [p.improvement_score for p in session.passes[-2:]]
+            
+            if recent_scores[-1] <= recent_scores[-2]:
+                # Cycle through strategies
+                if session.strategy == RefinementStrategy.CONSERVATIVE:
+                    session.strategy = RefinementStrategy.AGGRESSIVE
+                elif session.strategy == RefinementStrategy.AGGRESSIVE:
+                    session.strategy = RefinementStrategy.TARGETED
+                else:
+                    session.strategy = RefinementStrategy.CONSERVATIVE
+                
+                print(f"Adapted strategy to: {session.strategy.value}")
     
     def _colors_to_description(self, colors: List[Tuple[int, int, int]]) -> str:
         """Convert RGB colors to descriptive text."""
@@ -351,4 +897,53 @@ class IterativeRefinementEngine:
             else:
                 color_descs.append("neutral tones")
         
-        return ", ".join(color_descs) 
+        return ", ".join(color_descs)
+    
+    def add_user_instruction(self, session_id: UUID, instruction: str) -> None:
+        """Add a fuzzy creative instruction to an active session."""
+        if session_id in self.active_sessions:
+            session = self.active_sessions[session_id]
+            session.user_instructions.append(instruction)
+            print(f"Added fuzzy instruction: '{instruction}' to session {session.goal}")
+    
+    def get_session_report(self, session_id: UUID) -> Dict[str, Any]:
+        """Get a comprehensive report for a refinement session."""
+        if session_id not in self.active_sessions:
+            return {}
+        
+        session = self.active_sessions[session_id]
+        
+        report = {
+            "session_id": str(session_id),
+            "goal": session.goal,
+            "strategy": session.strategy.value,
+            "total_passes": len(session.passes),
+            "is_complete": session.is_complete,
+            "user_instructions": session.user_instructions,
+            "references_count": len(session.references)
+        }
+        
+        # Add evidence graph report if available
+        if session.evidence_graph:
+            evidence_report = session.evidence_graph.get_progress_report()
+            report.update({
+                "evidence_graph": evidence_report,
+                "final_global_score": session.evidence_graph.calculate_global_objective_function(),
+                "objectives_satisfied": evidence_report["objective_summary"]["satisfied"],
+                "total_objectives": evidence_report["objective_summary"]["total"]
+            })
+        
+        # Add pass-by-pass breakdown
+        report["pass_history"] = [
+            {
+                "pass_number": p.pass_number,
+                "deltas_found": len(p.deltas_detected),
+                "fuzzy_adjustments": len(p.fuzzy_adjustments),
+                "improvement_score": p.improvement_score,
+                "execution_time": p.execution_time,
+                "objective_scores": p.objective_scores
+            }
+            for p in session.passes
+        ]
+        
+        return report 

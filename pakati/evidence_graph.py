@@ -3,7 +3,8 @@ Evidence Graph module for Pakati.
 
 This module implements a knowledge/evidence graph that tracks tasks, objectives,
 and evidence to provide measurable optimization targets for the metacognitive
-orchestrator. This enables the system to know if it's moving in the right direction.
+orchestrator. This solves the fundamental problem: how does the AI know it's
+moving in the right direction toward the goal?
 """
 
 import os
@@ -21,15 +22,15 @@ from .delta_analysis import Delta, DeltaType
 
 
 class ObjectiveType(Enum):
-    """Types of objectives that can be tracked."""
-    VISUAL_SIMILARITY = "visual_similarity"      # How similar to reference
-    COMPOSITION_QUALITY = "composition_quality"  # Layout and arrangement
-    COLOR_HARMONY = "color_harmony"              # Color relationships
-    DETAIL_RICHNESS = "detail_richness"          # Level of detail
-    STYLE_CONSISTENCY = "style_consistency"      # Style adherence
+    """Types of objectives that can be tracked and optimized."""
+    VISUAL_SIMILARITY = "visual_similarity"      # Match reference images
+    COMPOSITION_QUALITY = "composition_quality"  # Layout and spatial arrangement
+    COLOR_HARMONY = "color_harmony"              # Color relationships and palette
+    DETAIL_RICHNESS = "detail_richness"          # Level of detail and complexity
+    STYLE_CONSISTENCY = "style_consistency"      # Artistic/photographic style
     SEMANTIC_ACCURACY = "semantic_accuracy"      # Content correctness
     GLOBAL_COHERENCE = "global_coherence"        # Overall image coherence
-    CONSTRAINT_SATISFACTION = "constraint_satisfaction"  # Meeting constraints
+    CONSTRAINT_SATISFACTION = "constraint_satisfaction"  # Meeting hard constraints
 
 
 class EvidenceType(Enum):
@@ -44,20 +45,25 @@ class EvidenceType(Enum):
 
 @dataclass
 class Objective:
-    """Represents a measurable objective with success criteria."""
+    """
+    Represents a measurable objective with success criteria.
+    
+    This is a key component that provides tangible optimization targets
+    instead of vague goals like "make it better".
+    """
     
     id: UUID = field(default_factory=uuid4)
     name: str = ""
     objective_type: ObjectiveType = ObjectiveType.VISUAL_SIMILARITY
     description: str = ""
-    target_value: float = 1.0  # Target score (0.0 to 1.0)
+    target_value: float = 1.0  # What score we're trying to achieve (0.0 to 1.0)
     current_value: float = 0.0  # Current achievement score
-    weight: float = 1.0  # Importance weight in global optimization
-    measurement_function: Optional[Callable] = None  # How to measure this objective
-    dependencies: List[UUID] = field(default_factory=list)  # Other objectives this depends on
-    constraints: Dict[str, Any] = field(default_factory=dict)  # Constraints for this objective
+    weight: float = 1.0  # Importance in global optimization
     is_critical: bool = False  # Must be satisfied for success
-    progress_history: List[float] = field(default_factory=list)  # Historical progress
+    measurement_function: Optional[Callable] = None  # How to measure this
+    progress_history: List[float] = field(default_factory=list)
+    region_id: Optional[UUID] = None  # Which region this applies to
+    reference_ids: List[UUID] = field(default_factory=list)  # Relevant references
     
     @property
     def satisfaction_score(self) -> float:
@@ -68,8 +74,22 @@ class Objective:
     
     @property
     def is_satisfied(self) -> bool:
-        """Check if objective is satisfied."""
-        return self.satisfaction_score >= 0.8  # 80% threshold
+        """Check if objective is satisfied (>= 80% of target)."""
+        return self.satisfaction_score >= 0.8
+    
+    @property
+    def improvement_velocity(self) -> float:
+        """Calculate recent improvement rate."""
+        if len(self.progress_history) < 2:
+            return 0.0
+        
+        # Calculate average improvement over last 3 steps
+        recent = self.progress_history[-3:]
+        if len(recent) < 2:
+            return 0.0
+        
+        improvements = [recent[i] - recent[i-1] for i in range(1, len(recent))]
+        return np.mean(improvements)
     
     def update_progress(self, new_value: float) -> float:
         """Update progress and return improvement delta."""
@@ -79,23 +99,21 @@ class Objective:
         return new_value - old_value
 
 
-@dataclass 
+@dataclass
 class Evidence:
-    """Represents a piece of evidence collected during generation."""
+    """
+    Represents a piece of evidence collected during generation.
+    
+    Evidence accumulates over time to inform the optimization process.
+    """
     
     id: UUID = field(default_factory=uuid4)
-    evidence_type: EvidenceType = EvidenceType.MEASUREMENT
-    objective_id: UUID = field(default_factory=uuid4)  # Which objective this supports
+    objective_id: UUID = field(default_factory=uuid4)
     timestamp: float = field(default_factory=time.time)
-    value: Any = None  # The evidence value
-    confidence: float = 1.0  # Confidence in this evidence (0.0 to 1.0)
+    value: Any = None  # The measured value
+    confidence: float = 1.0  # How confident we are in this measurement
     source: str = ""  # Where this evidence came from
     metadata: Dict[str, Any] = field(default_factory=dict)
-    
-    def __post_init__(self):
-        """Validate evidence after creation."""
-        if self.confidence < 0.0 or self.confidence > 1.0:
-            raise ValueError("Evidence confidence must be between 0.0 and 1.0")
 
 
 @dataclass
@@ -130,14 +148,35 @@ class Task:
         return 1.0  # Placeholder
 
 
+@dataclass 
+class OptimizationStep:
+    """Represents one step in the optimization process."""
+    
+    step_number: int = 0
+    timestamp: float = field(default_factory=time.time)
+    global_score: float = 0.0
+    objective_scores: Dict[str, float] = field(default_factory=dict)
+    actions_taken: List[str] = field(default_factory=list)
+    evidence_collected: List[UUID] = field(default_factory=list)
+    improvement_delta: float = 0.0
+
+
 class EvidenceGraph:
     """
-    Knowledge/Evidence graph that tracks tasks, objectives, and evidence
-    to provide measurable optimization targets for iterative refinement.
+    Knowledge/Evidence graph that provides structured optimization targets.
+    
+    This is the missing piece that gives the metacognitive orchestrator
+    tangible objectives to optimize, rather than blindly making adjustments.
+    
+    Think of it as a GPS for image generation - it knows:
+    1. Where we are (current scores)
+    2. Where we want to go (target objectives)  
+    3. How to measure progress (evidence collection)
+    4. What actions to prioritize (optimization function)
     """
     
     def __init__(self, goal: str = ""):
-        """Initialize the evidence graph."""
+        """Initialize the evidence graph with a high-level goal."""
         self.goal = goal
         self.graph = nx.DiGraph()  # Directed graph for dependencies
         
@@ -148,10 +187,10 @@ class EvidenceGraph:
         
         # Optimization state
         self.global_objective_function: Optional[Callable] = None
-        self.optimization_history: List[Dict[str, float]] = []
-        self.convergence_threshold = 0.01
-        self.stagnation_counter = 0
-        self.max_stagnation = 3
+        self.optimization_steps: List[OptimizationStep] = []
+        self.convergence_threshold = 0.02  # When to consider converged
+        self.stagnation_tolerance = 3  # Steps without improvement before adapting
+        self.critical_objective_penalty = 0.5  # Penalty for unsatisfied critical objectives
         
         # Initialize graph structure
         self._initialize_graph()
@@ -161,40 +200,121 @@ class EvidenceGraph:
         # Add nodes and edges will be added as objectives and tasks are created
         pass
     
+    def decompose_goal(self, goal: str, references: List[ReferenceImage] = None) -> List[Objective]:
+        """
+        Decompose a high-level goal into measurable objectives.
+        
+        This is crucial - it transforms vague goals like "make a beautiful landscape"
+        into specific, measurable targets like "achieve 0.85 color harmony with 
+        mountain reference".
+        """
+        objectives = []
+        
+        # Basic objectives that apply to most goals
+        objectives.append(self.add_objective(
+            "Global Coherence",
+            ObjectiveType.GLOBAL_COHERENCE,
+            target_value=0.8,
+            weight=2.0,
+            is_critical=True,
+            description="Overall image should be coherent and well-composed"
+        ))
+        
+        # Add reference-based objectives if references provided
+        if references:
+            for ref in references:
+                for annotation in ref.annotations:
+                    if annotation.aspect == "color":
+                        objectives.append(self.add_objective(
+                            f"Color Match: {annotation.description}",
+                            ObjectiveType.COLOR_HARMONY,
+                            target_value=0.85,
+                            weight=1.5,
+                            description=f"Match colors from: {annotation.description}",
+                            reference_ids=[ref.id]
+                        ))
+                    
+                    elif annotation.aspect == "composition":
+                        objectives.append(self.add_objective(
+                            f"Composition: {annotation.description}",
+                            ObjectiveType.COMPOSITION_QUALITY,
+                            target_value=0.8,
+                            weight=1.8,
+                            description=f"Match composition from: {annotation.description}",
+                            reference_ids=[ref.id]
+                        ))
+                    
+                    elif annotation.aspect == "style":
+                        objectives.append(self.add_objective(
+                            f"Style: {annotation.description}",
+                            ObjectiveType.STYLE_CONSISTENCY,
+                            target_value=0.75,
+                            weight=1.2,
+                            description=f"Match style from: {annotation.description}",
+                            reference_ids=[ref.id]
+                        ))
+                    
+                    elif annotation.aspect == "lighting":
+                        objectives.append(self.add_objective(
+                            f"Lighting: {annotation.description}",
+                            ObjectiveType.VISUAL_SIMILARITY,
+                            target_value=0.8,
+                            weight=1.4,
+                            description=f"Match lighting from: {annotation.description}",
+                            reference_ids=[ref.id]
+                        ))
+        
+        # Goal-specific objectives based on keywords
+        goal_lower = goal.lower()
+        
+        if any(word in goal_lower for word in ["detailed", "intricate", "complex"]):
+            objectives.append(self.add_objective(
+                "Detail Richness",
+                ObjectiveType.DETAIL_RICHNESS,
+                target_value=0.85,
+                weight=1.3,
+                description="Generate rich detail and complexity"
+            ))
+        
+        if any(word in goal_lower for word in ["portrait", "person", "face"]):
+            objectives.append(self.add_objective(
+                "Facial Accuracy", 
+                ObjectiveType.SEMANTIC_ACCURACY,
+                target_value=0.9,
+                weight=2.0,
+                is_critical=True,
+                description="Accurate facial features and proportions"
+            ))
+        
+        print(f"Decomposed goal '{goal}' into {len(objectives)} measurable objectives")
+        return objectives
+    
     def add_objective(
         self,
         name: str,
         objective_type: ObjectiveType,
-        description: str = "",
         target_value: float = 1.0,
         weight: float = 1.0,
         is_critical: bool = False,
-        measurement_function: Optional[Callable] = None,
-        constraints: Optional[Dict[str, Any]] = None
+        description: str = "",
+        region_id: Optional[UUID] = None,
+        reference_ids: List[UUID] = None
     ) -> Objective:
-        """Add a new objective to the graph."""
+        """Add a new measurable objective to the graph."""
         
         objective = Objective(
             name=name,
             objective_type=objective_type,
-            description=description,
             target_value=target_value,
             weight=weight,
             is_critical=is_critical,
-            measurement_function=measurement_function,
-            constraints=constraints or {}
+            description=description,
+            region_id=region_id,
+            reference_ids=reference_ids or []
         )
         
         self.objectives[objective.id] = objective
-        
-        # Add to graph
-        self.graph.add_node(
-            f"obj_{objective.id}",
-            type="objective",
-            data=objective
-        )
-        
-        print(f"Added objective: {name} (target: {target_value:.2f}, weight: {weight:.2f})")
+        print(f"  + Objective: {name} (target: {target_value:.2f}, weight: {weight:.1f})")
         return objective
     
     def add_task(
@@ -263,16 +383,18 @@ class EvidenceGraph:
     def collect_evidence(
         self,
         objective_id: UUID,
-        evidence_type: EvidenceType,
         value: Any,
         confidence: float = 1.0,
         source: str = "",
-        metadata: Optional[Dict[str, Any]] = None
+        metadata: Dict[str, Any] = None
     ) -> Evidence:
-        """Collect evidence for an objective."""
+        """
+        Collect evidence for an objective.
+        
+        This is how the system learns what's working and what isn't.
+        """
         
         evidence = Evidence(
-            evidence_type=evidence_type,
             objective_id=objective_id,
             value=value,
             confidence=confidence,
@@ -288,220 +410,317 @@ class EvidenceGraph:
         
         return evidence
     
-    def _update_objective_from_evidence(self, objective_id: UUID, evidence: Evidence) -> None:
+    def _update_objective_from_evidence(self, objective_id: UUID, evidence: Evidence):
         """Update an objective's current value based on new evidence."""
         objective = self.objectives[objective_id]
         
-        # Simple weighted update (could be more sophisticated)
-        if evidence.evidence_type == EvidenceType.MEASUREMENT:
-            if isinstance(evidence.value, (int, float)):
-                # Weighted average with confidence
-                current_weight = len(objective.progress_history) + 1
-                new_weight = evidence.confidence
-                total_weight = current_weight + new_weight
-                
+        if isinstance(evidence.value, (int, float)):
+            # Weighted update considering confidence
+            history_weight = len(objective.progress_history) * 0.1 + 0.5  # Diminishing returns
+            evidence_weight = evidence.confidence
+            
+            if objective.current_value == 0.0:  # First measurement
+                new_value = evidence.value
+            else:
+                # Weighted average
+                total_weight = history_weight + evidence_weight
                 new_value = (
-                    (objective.current_value * current_weight) + 
-                    (evidence.value * new_weight)
+                    (objective.current_value * history_weight) + 
+                    (evidence.value * evidence_weight)
                 ) / total_weight
-                
-                objective.update_progress(new_value)
+            
+            improvement = objective.update_progress(new_value)
+            
+            if improvement > 0.05:  # Significant improvement
+                print(f"    ✓ {objective.name}: {objective.current_value:.3f} (+{improvement:.3f})")
+            elif improvement < -0.05:  # Significant degradation
+                print(f"    ✗ {objective.name}: {objective.current_value:.3f} ({improvement:.3f})")
     
-    def calculate_global_score(self) -> float:
-        """Calculate the global optimization score."""
+    def update_from_deltas(self, deltas: List[Delta]) -> None:
+        """
+        Update evidence graph based on delta analysis results.
+        
+        This converts delta analysis into structured evidence.
+        """
+        
+        for delta in deltas:
+            # Convert severity to achievement score (inverted)
+            evidence_value = max(0.0, 1.0 - delta.severity)
+            
+            # Map delta types to relevant objectives
+            relevant_objectives = self._get_objectives_for_delta_type(delta.delta_type)
+            
+            for obj in relevant_objectives:
+                self.collect_evidence(
+                    obj.id,
+                    evidence_value,
+                    confidence=delta.confidence,
+                    source="delta_analysis",
+                    metadata={
+                        "delta_type": delta.delta_type.value,
+                        "description": delta.description,
+                        "severity": delta.severity
+                    }
+                )
+    
+    def _get_objectives_for_delta_type(self, delta_type: DeltaType) -> List[Objective]:
+        """Get objectives relevant to a specific delta type."""
+        relevant = []
+        
+        type_mapping = {
+            DeltaType.COLOR_MISMATCH: [ObjectiveType.COLOR_HARMONY, ObjectiveType.VISUAL_SIMILARITY],
+            DeltaType.TEXTURE_DIFFERENCE: [ObjectiveType.DETAIL_RICHNESS, ObjectiveType.VISUAL_SIMILARITY],
+            DeltaType.COMPOSITION_ISSUE: [ObjectiveType.COMPOSITION_QUALITY, ObjectiveType.GLOBAL_COHERENCE],
+            DeltaType.LIGHTING_DIFFERENCE: [ObjectiveType.VISUAL_SIMILARITY, ObjectiveType.GLOBAL_COHERENCE],
+            DeltaType.STYLE_MISMATCH: [ObjectiveType.STYLE_CONSISTENCY, ObjectiveType.VISUAL_SIMILARITY],
+            DeltaType.DETAIL_MISSING: [ObjectiveType.DETAIL_RICHNESS, ObjectiveType.SEMANTIC_ACCURACY]
+        }
+        
+        target_types = type_mapping.get(delta_type, [])
+        
+        for obj in self.objectives.values():
+            if obj.objective_type in target_types:
+                relevant.append(obj)
+        
+        return relevant
+    
+    def calculate_global_objective_function(self) -> float:
+        """
+        Calculate the global objective function value.
+        
+        This is THE key metric that tells us how well we're doing overall.
+        It's what the optimization process tries to maximize.
+        """
         if not self.objectives:
             return 0.0
         
         total_weighted_score = 0.0
         total_weight = 0.0
-        critical_satisfied = True
+        critical_penalty = 1.0
         
         for objective in self.objectives.values():
-            weighted_score = objective.satisfaction_score * objective.weight
+            satisfaction = objective.satisfaction_score
+            weighted_score = satisfaction * objective.weight
+            
             total_weighted_score += weighted_score
             total_weight += objective.weight
             
-            # Check critical objectives
+            # Penalty for unsatisfied critical objectives
             if objective.is_critical and not objective.is_satisfied:
-                critical_satisfied = False
+                critical_penalty *= self.critical_objective_penalty
         
-        # If critical objectives not satisfied, heavily penalize
         base_score = total_weighted_score / total_weight if total_weight > 0 else 0.0
+        final_score = base_score * critical_penalty
         
-        if not critical_satisfied:
-            base_score *= 0.3  # Heavy penalty for unsatisfied critical objectives
-        
-        return base_score
+        return final_score
     
-    def get_optimization_priorities(self) -> List[Tuple[UUID, float]]:
-        """Get prioritized list of objectives to focus on next."""
+    def get_optimization_priorities(self) -> List[Tuple[UUID, float, str]]:
+        """
+        Get prioritized list of objectives to focus on next.
+        
+        This tells the system what to work on for maximum impact.
+        """
         priorities = []
         
         for obj_id, objective in self.objectives.items():
-            # Calculate priority based on:
-            # 1. How far from target (higher gap = higher priority)
+            # Calculate priority score based on:
+            # 1. Gap from target (bigger gap = higher priority)
             # 2. Weight/importance
-            # 3. Whether it's critical
-            # 4. Recent progress trend
+            # 3. Critical status
+            # 4. Recent velocity (prioritize stalled objectives)
             
             gap = max(0, objective.target_value - objective.current_value)
-            criticality_multiplier = 2.0 if objective.is_critical else 1.0
+            criticality_boost = 3.0 if objective.is_critical else 1.0
             
-            # Recent progress trend (negative if getting worse)
-            trend = 0.0
-            if len(objective.progress_history) >= 2:
-                recent = objective.progress_history[-3:]
-                trend = (recent[-1] - recent[0]) / len(recent) if len(recent) > 1 else 0.0
+            # Boost priority for stalled objectives
+            velocity_penalty = 1.0
+            if objective.improvement_velocity < -0.01:  # Getting worse
+                velocity_penalty = 2.0
+            elif objective.improvement_velocity < 0.01:  # Stalled
+                velocity_penalty = 1.5
             
-            # Higher priority for: large gaps, high weight, critical, negative trends
-            priority_score = (
-                gap * objective.weight * criticality_multiplier * 
-                (1.0 + max(0, -trend))  # Boost priority if trending down
-            )
+            priority_score = gap * objective.weight * criticality_boost * velocity_penalty
             
-            priorities.append((obj_id, priority_score))
+            # Determine recommended action
+            if gap > 0.3:
+                action = "major_improvement"
+            elif gap > 0.1:
+                action = "minor_improvement" 
+            elif objective.improvement_velocity < -0.01:
+                action = "fix_degradation"
+            else:
+                action = "maintain"
+            
+            priorities.append((obj_id, priority_score, action))
         
-        # Sort by priority (highest first)
+        # Sort by priority score (highest first)
         priorities.sort(key=lambda x: x[1], reverse=True)
         return priorities
     
-    def get_next_tasks(self, max_tasks: int = 3) -> List[Task]:
-        """Get the next tasks to execute based on priorities and dependencies."""
-        # Get ready tasks (dependencies satisfied)
-        ready_tasks = [task for task in self.tasks.values() if task.is_ready]
+    def should_continue_optimization(self) -> Tuple[bool, str]:
+        """
+        Determine if optimization should continue.
         
-        # Get optimization priorities
-        obj_priorities = dict(self.get_optimization_priorities())
+        Returns (should_continue, reason)
+        """
+        global_score = self.calculate_global_objective_function()
         
-        # Score tasks based on:
-        # 1. Priority of objectives they optimize
-        # 2. Task priority
-        # 3. Efficiency history
-        task_scores = []
+        # Check if all critical objectives are satisfied
+        critical_satisfied = all(
+            obj.is_satisfied for obj in self.objectives.values() 
+            if obj.is_critical
+        )
         
-        for task in ready_tasks:
-            score = task.priority
+        if not critical_satisfied:
+            return True, "critical_objectives_unsatisfied"
+        
+        # Check convergence
+        if len(self.optimization_steps) >= 3:
+            recent_scores = [step.global_score for step in self.optimization_steps[-3:]]
+            score_variance = np.var(recent_scores)
             
-            # Add score from objectives this task optimizes
-            for obj_id in task.objectives:
-                if obj_id in obj_priorities:
-                    score += obj_priorities[obj_id]
-            
-            # Factor in efficiency
-            score *= task.efficiency_score if task.efficiency_score > 0 else 0.5
-            
-            task_scores.append((task, score))
+            if score_variance < self.convergence_threshold:
+                return False, "converged"
         
-        # Sort by score and return top tasks
-        task_scores.sort(key=lambda x: x[1], reverse=True)
-        return [task for task, score in task_scores[:max_tasks]]
+        # Check if we're making progress
+        if len(self.optimization_steps) >= self.stagnation_tolerance:
+            recent_improvements = [
+                step.improvement_delta for step in self.optimization_steps[-self.stagnation_tolerance:]
+            ]
+            
+            if all(imp <= 0.01 for imp in recent_improvements):
+                return False, "stagnation"
+        
+        # Check if target score reached
+        if global_score >= 0.9:
+            return False, "target_achieved"
+        
+        return True, "optimization_continuing"
     
-    def update_from_deltas(self, deltas: List[Delta]) -> None:
-        """Update evidence graph based on delta analysis results."""
-        for delta in deltas:
-            # Convert delta to evidence for relevant objectives
-            
-            if delta.delta_type == DeltaType.COLOR_MISMATCH:
-                # Find color-related objectives
-                color_objectives = [
-                    obj for obj in self.objectives.values()
-                    if obj.objective_type in [ObjectiveType.COLOR_HARMONY, ObjectiveType.VISUAL_SIMILARITY]
-                ]
-                
-                for obj in color_objectives:
-                    # Convert severity to evidence (inverted - high severity = low achievement)
-                    evidence_value = max(0, 1.0 - delta.severity)
-                    self.collect_evidence(
-                        obj.id,
-                        EvidenceType.MEASUREMENT,
-                        evidence_value,
-                        confidence=delta.confidence,
-                        source="delta_analysis",
-                        metadata={"delta_type": delta.delta_type.value, "description": delta.description}
-                    )
-            
-            elif delta.delta_type == DeltaType.COMPOSITION_ISSUE:
-                comp_objectives = [
-                    obj for obj in self.objectives.values()
-                    if obj.objective_type == ObjectiveType.COMPOSITION_QUALITY
-                ]
-                
-                for obj in comp_objectives:
-                    evidence_value = max(0, 1.0 - delta.severity)
-                    self.collect_evidence(
-                        obj.id,
-                        EvidenceType.MEASUREMENT,
-                        evidence_value,
-                        confidence=delta.confidence,
-                        source="delta_analysis"
-                    )
-            
-            # Add more delta type mappings as needed
-    
-    def check_convergence(self) -> bool:
-        """Check if optimization has converged."""
-        if len(self.optimization_history) < 3:
-            return False
+    def record_optimization_step(
+        self,
+        actions_taken: List[str] = None,
+        evidence_collected: List[UUID] = None
+    ) -> OptimizationStep:
+        """Record an optimization step for tracking progress."""
         
-        # Check if recent scores are stable
-        recent_scores = [h["global_score"] for h in self.optimization_history[-3:]]
-        score_variance = np.var(recent_scores)
+        current_score = self.calculate_global_objective_function()
+        previous_score = self.optimization_steps[-1].global_score if self.optimization_steps else 0.0
+        improvement = current_score - previous_score
         
-        if score_variance < self.convergence_threshold:
-            self.stagnation_counter += 1
-        else:
-            self.stagnation_counter = 0
+        step = OptimizationStep(
+            step_number=len(self.optimization_steps) + 1,
+            global_score=current_score,
+            objective_scores={obj.name: obj.satisfaction_score for obj in self.objectives.values()},
+            actions_taken=actions_taken or [],
+            evidence_collected=evidence_collected or [],
+            improvement_delta=improvement
+        )
         
-        return self.stagnation_counter >= self.max_stagnation
-    
-    def record_optimization_step(self, step_info: Dict[str, Any]) -> None:
-        """Record information about an optimization step."""
-        step_info["timestamp"] = time.time()
-        step_info["global_score"] = self.calculate_global_score()
+        self.optimization_steps.append(step)
         
-        # Add individual objective scores
-        step_info["objective_scores"] = {
-            obj.name: obj.satisfaction_score 
-            for obj in self.objectives.values()
-        }
+        print(f"Optimization Step {step.step_number}: Global Score = {current_score:.3f} ({improvement:+.3f})")
         
-        self.optimization_history.append(step_info)
+        return step
     
     def get_progress_report(self) -> Dict[str, Any]:
-        """Generate a progress report for the current state."""
+        """Generate a comprehensive progress report."""
+        
+        global_score = self.calculate_global_objective_function()
+        continue_opt, reason = self.should_continue_optimization()
+        
+        # Categorize objectives by status
+        satisfied = [obj for obj in self.objectives.values() if obj.is_satisfied]
+        critical_unsatisfied = [obj for obj in self.objectives.values() if obj.is_critical and not obj.is_satisfied]
+        needs_work = [obj for obj in self.objectives.values() if not obj.is_satisfied and not obj.is_critical]
+        
         report = {
             "goal": self.goal,
-            "global_score": self.calculate_global_score(),
-            "optimization_steps": len(self.optimization_history),
-            "objectives": {},
-            "tasks": {},
-            "convergence_status": {
-                "converged": self.check_convergence(),
-                "stagnation_counter": self.stagnation_counter
-            }
+            "global_score": global_score,
+            "optimization_steps": len(self.optimization_steps),
+            "should_continue": continue_opt,
+            "stop_reason": reason,
+            
+            "objective_summary": {
+                "total": len(self.objectives),
+                "satisfied": len(satisfied),
+                "critical_unsatisfied": len(critical_unsatisfied),
+                "needs_work": len(needs_work)
+            },
+            
+            "objectives": {
+                obj.name: {
+                    "current": obj.current_value,
+                    "target": obj.target_value,
+                    "satisfaction": obj.satisfaction_score,
+                    "is_satisfied": obj.is_satisfied,
+                    "is_critical": obj.is_critical,
+                    "velocity": obj.improvement_velocity,
+                    "weight": obj.weight
+                }
+                for obj in self.objectives.values()
+            },
+            
+            "priorities": [
+                {
+                    "objective": self.objectives[obj_id].name,
+                    "priority_score": score,
+                    "action": action
+                }
+                for obj_id, score, action in self.get_optimization_priorities()[:5]
+            ]
         }
         
-        # Objective details
-        for obj in self.objectives.values():
-            report["objectives"][obj.name] = {
-                "current_value": obj.current_value,
-                "target_value": obj.target_value,
-                "satisfaction_score": obj.satisfaction_score,
-                "is_satisfied": obj.is_satisfied,
-                "is_critical": obj.is_critical,
-                "weight": obj.weight
-            }
-        
-        # Task details
-        for task in self.tasks.values():
-            report["tasks"][task.name] = {
-                "status": task.status,
-                "priority": task.priority,
-                "efficiency_score": task.efficiency_score,
-                "objectives_count": len(task.objectives)
-            }
-        
         return report
+    
+    def get_actionable_recommendations(self) -> List[Dict[str, Any]]:
+        """
+        Get specific, actionable recommendations for the next optimization step.
+        
+        This is what the metacognitive orchestrator uses to decide what to do next.
+        """
+        recommendations = []
+        priorities = self.get_optimization_priorities()
+        
+        for obj_id, priority_score, action in priorities[:3]:  # Top 3 priorities
+            objective = self.objectives[obj_id]
+            
+            recommendation = {
+                "objective_name": objective.name,
+                "objective_type": objective.objective_type.value,
+                "priority_score": priority_score,
+                "action_type": action,
+                "current_score": objective.current_value,
+                "target_score": objective.target_value,
+                "gap": objective.target_value - objective.current_value,
+                "region_id": objective.region_id,
+                "reference_ids": objective.reference_ids,
+                "is_critical": objective.is_critical
+            }
+            
+            # Add specific suggestions based on objective type
+            if objective.objective_type == ObjectiveType.COLOR_HARMONY:
+                recommendation["suggestions"] = [
+                    "Adjust color saturation and hue",
+                    "Apply color correction based on reference",
+                    "Enhance color relationships"
+                ]
+            elif objective.objective_type == ObjectiveType.COMPOSITION_QUALITY:
+                recommendation["suggestions"] = [
+                    "Reposition key elements",
+                    "Adjust region boundaries",
+                    "Improve spatial balance"
+                ]
+            elif objective.objective_type == ObjectiveType.DETAIL_RICHNESS:
+                recommendation["suggestions"] = [
+                    "Increase prompt detail and specificity",
+                    "Add texture and complexity terms",
+                    "Use higher guidance scale"
+                ]
+            
+            recommendations.append(recommendation)
+        
+        return recommendations
     
     def save_graph(self, filepath: str) -> None:
         """Save the evidence graph to disk."""
@@ -510,7 +729,7 @@ class EvidenceGraph:
             "objectives": {},
             "tasks": {},
             "evidence": {},
-            "optimization_history": self.optimization_history
+            "optimization_history": [step.__dict__ for step in self.optimization_steps]
         }
         
         # Serialize objectives
@@ -582,6 +801,6 @@ class EvidenceGraph:
         return {
             "nodes": nodes,
             "edges": edges,
-            "global_score": self.calculate_global_score(),
-            "optimization_history": self.optimization_history[-20:]  # Last 20 steps
+            "global_score": self.calculate_global_objective_function(),
+            "optimization_history": [step.__dict__ for step in self.optimization_steps[-20:]]  # Last 20 steps
         } 
