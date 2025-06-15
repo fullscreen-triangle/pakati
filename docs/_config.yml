@@ -6,22 +6,19 @@ baseurl: ""
 url: "https://fullscreen-triangle.github.io"
 repository: "fullscreen-triangle/pakati"
 
-# Theme configuration
-remote_theme: just-the-docs/just-the-docs
-color_scheme: pakati_modern
-search_enabled: true
-search:
-  heading_level: 2
-  previews: 3
-  preview_words_before: 5
-  preview_words_after: 10
-  tokenizer_separator: '/[\s/]+/'
-  rel_url: true
-  button: false
+# Theme configuration - using minima with custom styling
+theme: minima
+minima:
+  skin: dark
 
-# Navigation
-nav_fold: false
-nav_sort: case_insensitive
+# Search and navigation
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-gist
+  - jekyll-include-cache
 
 # Build settings
 markdown: kramdown
@@ -31,25 +28,13 @@ permalink: pretty
 # Kramdown settings for scientific content
 kramdown:
   math_engine: mathjax
-  math_engine_opts:
-    preview: true
-    preview_as_code: false
   syntax_highlighter: rouge
-  syntax_highlighter_opts:
-    default_lang: python
-    css_class: 'syntax-highlight'
-    span:
-      line_numbers: false
-    block:
-      line_numbers: true
-      start_line: 1
   input: GFM
   auto_ids: true
   footnote_nr: 1
   entity_output: as_char
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
-  enable_coderay: false
 
 # Collections for organized content
 collections:
@@ -63,53 +48,21 @@ collections:
     output: true
     permalink: /guides/:name/
 
-# Essential plugins
-plugins:
-  - jekyll-feed
-  - jekyll-sitemap
-  - jekyll-seo-tag
-  - jekyll-paginate
-  - jekyll-gist
-  - jekyll-include-cache
-  - jekyll-optional-front-matter
-  - jekyll-readme-index
-  - jekyll-default-layout
-  - jekyll-titles-from-headings
-
 # Math support
 mathjax: true
 
+# Header navigation
+header_pages:
+  - index.md
+  - architecture.md
+  - reference_understanding.md
+  - fuzzy_logic.md
+  - research.md
+  - api.md
+  - examples.md
+
 # Footer content
 footer_content: "Copyright &copy; 2024 Pakati Project. Revolutionary AI Image Generation with Regional Control."
-
-# Social links
-gh_edit_link: true
-gh_edit_link_text: "Edit this page on GitHub"
-gh_edit_repository: "https://github.com/fullscreen-triangle/pakati"
-gh_edit_branch: "main"
-gh_edit_source: docs
-gh_edit_view_mode: "tree"
-
-# Aux links for the upper right navigation
-aux_links:
-  "Pakati on GitHub":
-    - "https://github.com/fullscreen-triangle/pakati"
-  "Download Release":
-    - "https://github.com/fullscreen-triangle/pakati/releases"
-
-# Makes Aux links open in a new tab
-aux_links_new_tab: true
-
-# Back to top link
-back_to_top: true
-back_to_top_text: "Back to top"
-
-# Heading anchors
-heading_anchors: true
-
-# Last edit timestamp
-last_edit_timestamp: true
-last_edit_time_format: "%b %e %Y at %I:%M %p"
 
 # Exclude from processing
 exclude:

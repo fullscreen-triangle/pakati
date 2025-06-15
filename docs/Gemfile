@@ -1,26 +1,19 @@
 source "https://rubygems.org"
 
-# Use the beautiful just-the-docs theme for professional documentation
-gem "just-the-docs", "0.8.2"
-
-# Jekyll and GitHub Pages compatibility
+# GitHub Pages compatibility
 gem "github-pages", group: :jekyll_plugins
 
-# Essential plugins for a modern documentation site
+# Essential plugins
 group :jekyll_plugins do
   gem "jekyll-feed"
-  gem "jekyll-sitemap"
+  gem "jekyll-sitemap"  
   gem "jekyll-seo-tag"
   gem "jekyll-paginate"
   gem "jekyll-gist"
   gem "jekyll-include-cache"
-  gem "jekyll-optional-front-matter"
-  gem "jekyll-readme-index"
-  gem "jekyll-default-layout"
-  gem "jekyll-titles-from-headings"
 end
 
-# Math rendering with modern KaTeX
+# Math rendering
 gem "kramdown-math-katex"
 
 # Development dependencies
@@ -35,7 +28,4 @@ platforms :mingw, :x64_mingw, :mswin, :jruby do
 end
 
 # Performance booster for watching directories on Windows
-gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
-
-# Lock Jekyll to version compatible with GitHub Pages
-gem "jekyll", "~> 3.9.3" 
+gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin] 
