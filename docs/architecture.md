@@ -2,14 +2,14 @@
 layout: default
 title: System Architecture
 nav_order: 2
-description: "Complete technical architecture of the Pakati system"
+description: "Complete technical architecture of the Pakati system - layered modular design for scalability and performance"
 ---
 
-# System Architecture
-{: .fs-9 }
+# 🏗️ System Architecture
+{: .text-purple-700 }
 
-Deep dive into Pakati's layered modular architecture and technical components.
-{: .fs-6 .fw-300 }
+Deep dive into Pakati's sophisticated layered modular architecture and technical components.
+{: .fs-5 .fw-300 }
 
 ---
 
@@ -21,9 +21,13 @@ Deep dive into Pakati's layered modular architecture and technical components.
 
 ---
 
-## Overview
+## 🔍 Overview
+{: .text-blue-600 }
 
-Pakati employs a sophisticated **layered modular architecture** designed for scalability, maintainability, and extensibility. The system is built around the principle of **separation of concerns**, with each layer handling specific aspects of the image generation pipeline.
+Pakati employs a sophisticated **layered modular architecture** designed for maximum scalability, maintainability, and extensibility. The system is built around the principle of **separation of concerns**, with each layer handling specific aspects of the image generation pipeline.
+
+{: .highlight-note }
+**Design Philosophy**: Each layer is independent and communicates through well-defined interfaces, enabling easy testing, modification, and scaling of individual components.
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐

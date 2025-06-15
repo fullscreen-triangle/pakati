@@ -1,9 +1,12 @@
 source "https://rubygems.org"
 
-# Jekyll and GitHub Pages
+# Use the beautiful just-the-docs theme for professional documentation
+gem "just-the-docs", "0.8.2"
+
+# Jekyll and GitHub Pages compatibility
 gem "github-pages", group: :jekyll_plugins
 
-# Additional plugins for scientific documentation
+# Essential plugins for a modern documentation site
 group :jekyll_plugins do
   gem "jekyll-feed"
   gem "jekyll-sitemap"
@@ -11,9 +14,13 @@ group :jekyll_plugins do
   gem "jekyll-paginate"
   gem "jekyll-gist"
   gem "jekyll-include-cache"
+  gem "jekyll-optional-front-matter"
+  gem "jekyll-readme-index"
+  gem "jekyll-default-layout"
+  gem "jekyll-titles-from-headings"
 end
 
-# Math rendering
+# Math rendering with modern KaTeX
 gem "kramdown-math-katex"
 
 # Development dependencies
