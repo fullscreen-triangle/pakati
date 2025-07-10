@@ -9,6 +9,11 @@ use crate::turbulance_comic::{
     audio_integration::{AudioComicIntegration, AudioSegment, FirePattern, HeihachiConfig, ComicAudioGenerationResult},
 };
 
+use crate::turbulance_comic::environmental_audio::{
+    EnvironmentalAudioSystem, EnvironmentalContext, AudioImageComposition,
+    ProductionAudioSystem, AcousticCharacteristics, FrequencyResponse
+};
+
 /// High-level interface for the complete Turbulance comic generation pipeline
 pub struct ComicGenerationPipeline {
     compiler: TurbulanceComicCompiler,
