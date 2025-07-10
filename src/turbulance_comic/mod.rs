@@ -4,6 +4,7 @@ pub mod evidence_network;
 pub mod comic_extensions;
 pub mod polyglot_bridge;
 pub mod reconstruction_seeding;
+pub mod audio_integration;
 
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
@@ -11,6 +12,7 @@ use tokio::sync::RwLock;
 use std::sync::Arc;
 
 use reconstruction_seeding::{ReconstructionSeedingSystem, SeedImage, SeedCategory, LearningProgress};
+use audio_integration::{AudioComicIntegration, AudioSegment, FirePattern, HeihachiConfig};
 
 /// Bayesian Evidence Network for Turbulance script execution
 #[derive(Debug, Clone, Serialize, Deserialize)]
